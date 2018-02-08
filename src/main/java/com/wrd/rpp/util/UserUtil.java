@@ -11,9 +11,11 @@ public class UserUtil {
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(userRegistryForm, userInfo);
         userInfo.setState(UserAccontStatusEnum.ACCOUNT_INACTIVATED.getCode());
-        userInfo.setSalt(userRegistryForm.getUsername());
+        String randomSalt = SaltUtil.getRandomSalt();
+        String salt = randomSalt.concat(userRegistryForm.getUsername());
+        userInfo.setSalt(salt);
         //MD5加盐两次散列 new Md5Hash(origin password, salt, times)
-        userInfo.setPassword(new Md5Hash(userRegistryForm.getPassword(), userRegistryForm.getUsername(), 2).toString());
+        userInfo.setPassword(new Md5Hash(userRegistryForm.getPassword(), salt, 2).toString());
         return userInfo;
     }
 }
