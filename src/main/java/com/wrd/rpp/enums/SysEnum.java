@@ -11,7 +11,11 @@ public enum SysEnum {
     OPERATION_SUCCESS(1, "操作正常！"),
 
     DATA_CALLBACK_SUCCESS(100, "数据成功返回"),
-    DATA_CALLBACK_FAILED(101, "数据返回错误")
+    DATA_CALLBACK_FAILED(101, "数据返回错误"),
+
+    REGISTRY_PARAM_ERROR(200, "账号注册错误"),
+    REGISTRY_DUPLICATED_ACCOUNTNAME(201, "所注册账号名称已被他人使用，请换个账号名重试"),
+    SIGNIN_PARAM_ERROR(210, "账号登录错误")
     ;
 
     private Integer code;

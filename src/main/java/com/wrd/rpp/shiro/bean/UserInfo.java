@@ -14,8 +14,12 @@ public class UserInfo {
     private String userName;
     private String accountPassword;
     private String accountSalt;
-    private byte accountStatus;
+    private byte accountStatus; //0 未激活 1激活 2挂起
     @ManyToMany(mappedBy = "userInfoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<RoleInfo> roleInfoList;
 
+    //为了密码更安全，使用username + salt
+    public String fetchUsernameAndSalt() {
+        return this.accountName + this.accountSalt;
+    }
 }
