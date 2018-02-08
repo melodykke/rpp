@@ -41,30 +41,41 @@ public class ShiroConfiguration {
 		//2. 设置securityManager
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		//3. 配置拦截器: 使用map进行配置,LinkedHashMap是有序的,shiro会根据添加的顺序进行拦截
-		Map<String, String> filterChainMap = new LinkedHashMap<>();
-		//4. 配置退出 过滤器：logout 由shiro实现
-		filterChainMap.put("/user/logout", "logout");
-		//配置记住我 只有认证通过的才可以访问 ;	//这里没有配置userbean/userAdd or Del 所以如果要使用这些url，必须重新登陆
-		//filterChainMap.put("/back/index", "user");
-		//filterChainMap.put("/back/", "user");
-		//允许favicon.ico可以匿名访问（anon）
-		//filterChainMap.put("/media/**","anon");
-        filterChainMap.put("/assets/**","anon");
-        filterChainMap.put("/pages/**","authc");
-		//5. 所有的url都必须验证通过
-/*		filterChainMap.put("/userbean/register", "anon");
-		filterChainMap.put("/back/**", "authc");
-		filterChainMap.put("/userbean/exportTe", "authc,perms[userbean:exportTe]");
+		//拦截器.
+		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
+		// 配置不会被拦截的链接 顺序判断
+		filterChainDefinitionMap.put("/assets/**","anon");
+		filterChainDefinitionMap.put("/pages/**","anon");
+        filterChainDefinitionMap.put("/loginUI", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/register", "anon");
+        filterChainDefinitionMap.put("/user/index", "anon");
+		//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
+		filterChainDefinitionMap.put("/logout", "logout");
+		//<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
+		//<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
+		filterChainDefinitionMap.put("/**", "authc");
+		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
+		shiroFilterFactoryBean.setLoginUrl("/loginUI");
+		// 登录成功后要跳转的链接
+		shiroFilterFactoryBean.setSuccessUrl("/user/index");
+/*
+
+		filterChainDefinitionMap.put("/assets/**","anon");
+		filterChainDefinitionMap.put("/pages/**","anon");
+		filterChainDefinitionMap.put("/user/**","authc");*/
+
+		/*	filterChainMap.put("/userbean/exportTe", "authc,perms[userbean:exportTe]");
 		filterChainMap.put("/userbean/exportSt", "authc,perms[userbean:exportSt]");
 		filterChainMap.put("/userbean/**", "authc");*/
 		//6. 设置默认登陆的url
-		shiroFilterFactoryBean.setLoginUrl("/login");
+		shiroFilterFactoryBean.setLoginUrl("/loginUI");
 		//7. 设置成功之后要跳转的链接
-		shiroFilterFactoryBean.setSuccessUrl("/index");
+		shiroFilterFactoryBean.setSuccessUrl("/user/index");
 		//8. 设置未授权界面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 		//9. 把配置的filterChainMap配置到shiroFilterFactoryBean里
-		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
+		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		//10. 返回一个shiroFilterFactoryBean
 		return shiroFilterFactoryBean;
 	}

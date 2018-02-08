@@ -66,20 +66,16 @@ CREATE TABLE `power_plant_base_info`(
 	KEY `index_plant_code` (`plant_code`)
 	) ENGINE=INNODB DEFAULT CHARSET=utf8
 
-CREATE TABLE `user_info` (
-    `user_id` INT NOT NULL AUTO_INCREMENT,
-    `account_name` VARCHAR(32) NOT NULL COMMENT `账户名`,
-    `user_name` VARCHAR(32) NOT NULL COMMENT `用户名`,
-    `account_password` VARCHAR(32) NOT NULL COMMENT `账户密码`,
-    `account_salt` VARCHAR(32) DEFAULT NULL COMMENT `账户盐`,
-    `account_status` TINYINT NOT NULL COMMENT `账户状态`,
-    PRIMARY KEY ("user_id")
-)ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT  CHARSET=utf8
 
-CREATE TABLE `role_info` (
-    `role_id` INT NOT NULL AUTO_INCREMENT,
-    `available` BIT DEFAULT NULL,
-    `description` VARCHAR(255) DEFAULT NULL ,
-    `mark` VARCHAR(32) DEFAULT NULL ,
-    PRIMARY KEY (`role_id`)
-)ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+INSERT INTO `user_info` (`user_id`,`username`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', 'd3c59d25033dbf980d29554025c23a75', '8d78869f470951332959580424d4bf4f', 0);
+INSERT INTO `sys_permission` (`permission_id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (1,0,'用户管理',0,'0/','userInfo:view','menu','userInfo/userList');
+INSERT INTO `sys_permission` (`permission_id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (2,0,'用户添加',1,'0/1','userInfo:add','button','userInfo/userAdd');
+INSERT INTO `sys_permission` (`permission_id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (3,0,'用户删除',1,'0/1','userInfo:del','button','userInfo/userDel');
+INSERT INTO `sys_role` (`role_id`,`available`,`description`,`mark`) VALUES (1,0,'管理员','admin');
+INSERT INTO `sys_role` (`role_id`,`available`,`description`,`mark`) VALUES (2,0,'VIP会员','vip');
+INSERT INTO `sys_role` (`role_id`,`available`,`description`,`mark`) VALUES (3,1,'test','test');
+INSERT INTO `sys_role_permission` VALUES ('1', '1');
+INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (1,1);
+INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (2,1);
+INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (3,2);
+INSERT INTO `sys_user_role` (`role_id`,`user_id`) VALUES (1,1);

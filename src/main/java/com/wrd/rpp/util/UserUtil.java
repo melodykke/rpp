@@ -10,10 +10,10 @@ public class UserUtil {
     public static UserInfo createDefaultUser(UserRegistryForm userRegistryForm){
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(userRegistryForm, userInfo);
-        userInfo.setAccountStatus(UserAccontStatusEnum.ACCOUNT_INACTIVATED.getCode());
-        userInfo.setAccountSalt(userRegistryForm.getAccountName());
+        userInfo.setState(UserAccontStatusEnum.ACCOUNT_INACTIVATED.getCode());
+        userInfo.setSalt(userRegistryForm.getUsername());
         //MD5加盐两次散列 new Md5Hash(origin password, salt, times)
-        userInfo.setAccountPassword(new Md5Hash(userRegistryForm.getAccountPassword(), userRegistryForm.getAccountName(), 2).toString());
+        userInfo.setPassword(new Md5Hash(userRegistryForm.getPassword(), userRegistryForm.getUsername(), 2).toString());
         return userInfo;
     }
 }

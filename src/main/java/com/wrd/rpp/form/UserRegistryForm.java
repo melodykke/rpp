@@ -6,9 +6,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Data
 public class UserRegistryForm {
     @NotEmpty(message = "账号名必填")
-    private String accountName;
+    private String username;
     @NotEmpty(message = "账号密码必填")
-    private String accountPassword;
+    private String password;
     @NotEmpty(message = "账号昵称必填")
-    private String userName;
+    private String name;
 }

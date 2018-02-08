@@ -10,16 +10,18 @@ public class UserInfo {
     @Id
     @GeneratedValue
     private Integer userId;
-    private String accountName;
-    private String userName;
-    private String accountPassword;
-    private String accountSalt;
-    private byte accountStatus; //0 未激活 1激活 2挂起
-    @ManyToMany(mappedBy = "userInfoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<RoleInfo> roleInfoList;
+    @Column(unique = true)
+    private String username;
+    private String name;
+    private String password;
+    private String salt;
+    private byte state; //0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "sys_user_role", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
+    private List<SysRole> sysRoleList;
 
     //为了密码更安全，使用username + salt
     public String fetchUsernameAndSalt() {
-        return this.accountName + this.accountSalt;
+        return this.username + this.salt;
     }
 }

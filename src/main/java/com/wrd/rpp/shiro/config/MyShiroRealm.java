@@ -1,8 +1,8 @@
 package com.wrd.rpp.shiro.config;
 
 import com.wrd.rpp.service.UserService;
-import com.wrd.rpp.shiro.bean.PermissionInfo;
-import com.wrd.rpp.shiro.bean.RoleInfo;
+import com.wrd.rpp.shiro.bean.SysPermission;
+import com.wrd.rpp.shiro.bean.SysRole;
 import com.wrd.rpp.shiro.bean.UserInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -35,15 +35,17 @@ public class MyShiroRealm extends AuthorizingRealm{
 		 * 4. 返回身份处理对象
 		 */
 		// 1. 获取用户输入的账号
-		String accountName = (String)token.getPrincipal();
+		String username = (String)token.getPrincipal();
+        System.out.println(username);
+        System.out.println("token.getCredentials:"+token.getCredentials());
 		// 2. 通过accountName 从数据库中查找，获取userInfo对象
-		UserInfo userInfo = userService.findByAccountName(accountName); //这里取到以后，自动放进principals里，下面认证直接取。
+		UserInfo userInfo = userService.findByUsername(username); //这里取到以后，自动放进principals里，下面认证直接取。
 		// 判断是否有userInfo
 		if(userInfo == null){
 			return null;
 		}
 		// 3. 加密， 使用SimpleAuthenticationInfo 进行身份处理
-		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userInfo, userInfo.getAccountPassword(), ByteSource.Util.bytes(userInfo.fetchUsernameAndSalt()), this.getName());
+		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userInfo, userInfo.getPassword(), ByteSource.Util.bytes(userInfo.fetchUsernameAndSalt()), this.getName());
 		return simpleAuthenticationInfo;
 	}
 	
@@ -60,12 +62,12 @@ public class MyShiroRealm extends AuthorizingRealm{
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 		//获取用户的权限信息
 		UserInfo userInfo = (UserInfo)principals.getPrimaryPrincipal();
-		for(RoleInfo roleInfo : userInfo.getRoleInfoList()){
+		for(SysRole sysRole : userInfo.getSysRoleList()){
 			//添加角色
-			simpleAuthorizationInfo.addRole(roleInfo.getMark());
+			simpleAuthorizationInfo.addRole(sysRole.getMark());
 			//添加权限
-			for(PermissionInfo permissionInfo : roleInfo.getPermissionInfoList()){
-				simpleAuthorizationInfo.addStringPermission(permissionInfo.getPermission());
+			for(SysPermission sysPermission : sysRole.getSysPermissionList()){
+				simpleAuthorizationInfo.addStringPermission(sysPermission.getPermission());
 			}
 		}
 		return simpleAuthorizationInfo;
