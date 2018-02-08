@@ -10,8 +10,10 @@ import com.wrd.rpp.util.ResultUtil;
 import com.wrd.rpp.util.UserUtil;
 import com.wrd.rpp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,11 +34,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/index"})
-    public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
-    }
 
 
 

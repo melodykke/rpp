@@ -10,21 +10,25 @@ import com.wrd.rpp.util.ResultUtil;
 import com.wrd.rpp.util.UserUtil;
 import com.wrd.rpp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.ManyToMany;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/")
 @Slf4j
 public class MainController {
@@ -32,28 +36,39 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/loginUI"})
-    public ModelAndView loginUI(){
-        ModelAndView modelAndView = new ModelAndView("login");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = {"/403"})
-    public ModelAndView To403(){
-        ModelAndView modelAndView = new ModelAndView("403");
-        return modelAndView;
+    @RequestMapping(value = {"/index"})
+    public String index(Map<String, Object> map){
+    /*    ModelAndView modelAndView = new ModelAndView("index");*/
+        Subject subject = SecurityUtils.getSubject();
+        UserInfo userInfo = (UserInfo)subject.getPrincipal();
+       /* modelAndView.getModel().put("userInfo", userInfo);*/
+        map.put("userInfo", userInfo);
+        return "index";
     }
 
     /**
-     * 用户账号登录
+     * 用户账号登录页面 *******个人经验 shiro机制，在登录时，登录页面路径和登录动作路径一直，均为login，页面登录为RequestMethod.GET
+     *                        而登录动作为RequestMethod.Post,以此区分。*******
+     * @param userSigninForm
+     * @param bindingResult
+     * @return
+     */
+    @GetMapping(value = {"/login"})
+    public String loginUI(){
+        /*ModelAndView modelAndView = new ModelAndView("login");
+        return modelAndView;*/
+        return "login";
+    }
+    /**
+     * 用户账号登录 若在realm中的doAuthentication判断为非法，则出发该方法，否则顺利按照shiroConfiguration中配置的setSuccessUrl跳转。
      * @param userSigninForm
      * @param bindingResult
      * @return
      */
     @PostMapping("/login")
-    public ModelAndView login (@Valid UserSigninForm userSigninForm, BindingResult bindingResult, HttpServletRequest request,
+    public String login (@Valid UserSigninForm userSigninForm, BindingResult bindingResult, HttpServletRequest request,
                          Map<String, Object> map){
-        ModelAndView modelAndView = new ModelAndView("login");
+      /*  ModelAndView modelAndView = new ModelAndView("login");*/
         if(bindingResult.hasErrors()){
             log.error("【账号错误】 账号登录错误， 参数不正确 userSigninForm = {}", userSigninForm);
             throw new SysException(SysEnum.SIGNIN_PARAM_ERROR);
@@ -78,8 +93,15 @@ public class MainController {
         }
         map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理
-        return modelAndView;
+        return "login";
     }
+    @RequestMapping(value = {"/403"})
+    public String To403(){
+    /*    ModelAndView modelAndView = new ModelAndView("403");*/
+        return "403";
+    }
+
+
 
     /**
      * 用户账户注册

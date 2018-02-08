@@ -46,32 +46,22 @@ public class ShiroConfiguration {
 		// 配置不会被拦截的链接 顺序判断
 		filterChainDefinitionMap.put("/assets/**","anon");
 		filterChainDefinitionMap.put("/pages/**","anon");
-        filterChainDefinitionMap.put("/loginUI", "anon");
-        filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/register", "anon");
-        filterChainDefinitionMap.put("/user/index", "anon");
+        filterChainDefinitionMap.put("/index", "anon");
 		//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 		//<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
 		//<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**", "authc");
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-		shiroFilterFactoryBean.setLoginUrl("/loginUI");
+		shiroFilterFactoryBean.setLoginUrl("/login");       // 在拦截器中不设置对login路径的anon，由shiro去拦截，自动将请求
+                                                             // 交由realm去操作。以此判别login post进来的用户是否合法。这一步主要是执行doAuthentication方法。
 		// 登录成功后要跳转的链接
-		shiroFilterFactoryBean.setSuccessUrl("/user/index");
-/*
-
-		filterChainDefinitionMap.put("/assets/**","anon");
-		filterChainDefinitionMap.put("/pages/**","anon");
-		filterChainDefinitionMap.put("/user/**","authc");*/
+		shiroFilterFactoryBean.setSuccessUrl("/index");
 
 		/*	filterChainMap.put("/userbean/exportTe", "authc,perms[userbean:exportTe]");
 		filterChainMap.put("/userbean/exportSt", "authc,perms[userbean:exportSt]");
 		filterChainMap.put("/userbean/**", "authc");*/
-		//6. 设置默认登陆的url
-		shiroFilterFactoryBean.setLoginUrl("/loginUI");
-		//7. 设置成功之后要跳转的链接
-		shiroFilterFactoryBean.setSuccessUrl("/user/index");
 		//8. 设置未授权界面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 		//9. 把配置的filterChainMap配置到shiroFilterFactoryBean里

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserSigninForm {
     @NotNull(message = "账号名必填")
-    private String accountName;
+    private String username;
     @NotNull(message = "密码必填")
-    private String accountPassword;
+    private String password;
 }
