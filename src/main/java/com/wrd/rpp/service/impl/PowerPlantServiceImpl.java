@@ -1,20 +1,17 @@
 package com.wrd.rpp.service.impl;
 
-import com.wrd.rpp.dataobject.PowerPlantBaseInfo;
-import com.wrd.rpp.dataobject.PowerPlantGeneratingEquipment;
-import com.wrd.rpp.dataobject.PowerPlantLocationInfo;
-import com.wrd.rpp.dataobject.PowerPlantPowerInfo;
+import com.wrd.rpp.dataobject.*;
 import com.wrd.rpp.dto.PowerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTO;
 import com.wrd.rpp.enums.SysEnum;
 import com.wrd.rpp.exception.SysException;
+import com.wrd.rpp.form.PowerPlantBaseInfoForm;
 import com.wrd.rpp.msg.SysMsg;
-import com.wrd.rpp.repository.PowerPlantBaseInfoRepository;
-import com.wrd.rpp.repository.PowerPlantGeneratingEquipmentRepository;
-import com.wrd.rpp.repository.PowerPlantLocationInfoRepository;
-import com.wrd.rpp.repository.PowerPlantPowerInfoRepository;
+import com.wrd.rpp.repository.*;
 import com.wrd.rpp.service.PowerPlantService;
+import com.wrd.rpp.util.KeyUtil;
 import com.wrd.rpp.util.PowerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTO2PowerPlantLocationInfoUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +33,8 @@ public class PowerPlantServiceImpl implements PowerPlantService {
     private PowerPlantLocationInfoRepository powerPlantLocationInfoRepository;
     @Autowired
     private PowerPlantGeneratingEquipmentRepository powerPlantGeneratingEquipmentRepository;
-
+    @Autowired
+    private PowerPlantBaseInfoUploadRepository powerPlantBaseInfoUploadRepository;
     @Override //存储电站基本数据
     public SysMsg savePowerPlantBaseInfoList(List<PowerPlantBaseInfo> powerPlantBaseInfoList){
         List<PowerPlantBaseInfo> powerPlantBaseInfoListReturn = powerPlantBaseInfoRepository.save(powerPlantBaseInfoList);
@@ -84,6 +82,21 @@ public class PowerPlantServiceImpl implements PowerPlantService {
         }
         return new SysMsg(SysEnum.OPERATION_SUCCESS);
     }
+
+    @Override
+    public SysMsg savePowerPlantBaseInfoUpload(PowerPlantBaseInfoForm powerPlantBaseInfoForm) {
+        PowerPlantBaseInfoUpload powerPlantBaseInfoUpload = new PowerPlantBaseInfoUpload();
+        BeanUtils.copyProperties(powerPlantBaseInfoForm, powerPlantBaseInfoUpload);
+        powerPlantBaseInfoUpload.setPlantId(KeyUtil.genUniqueKey());
+        PowerPlantBaseInfoUpload powerPlantBaseInfoUploadReturn = powerPlantBaseInfoUploadRepository.save(powerPlantBaseInfoUpload);
+        if(powerPlantBaseInfoUploadReturn == null){
+            log.error("【数据存储】 数据存储错误，powerPlantBaseInfoUpload = {}", powerPlantBaseInfoUpload);
+            throw new SysException(SysEnum.DATA_STORE_ERROR);
+        }
+        return new SysMsg(SysEnum.OPERATION_SUCCESS, powerPlantBaseInfoUploadReturn);
+    }
+
+
 
 
     //出现储存错误时调用

@@ -1,9 +1,11 @@
 package com.wrd.rpp.service;
 
 import com.wrd.rpp.dataobject.PowerPlantBaseInfo;
+import com.wrd.rpp.dataobject.PowerPlantBaseInfoUpload;
 import com.wrd.rpp.dataobject.PowerPlantLocationInfo;
 import com.wrd.rpp.dataobject.PowerPlantPowerInfo;
 import com.wrd.rpp.dto.PowerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTO;
+import com.wrd.rpp.form.PowerPlantBaseInfoForm;
 import com.wrd.rpp.msg.SysMsg;
 import java.util.List;
 
@@ -18,4 +20,6 @@ public interface PowerPlantService {
     //存储电站位置和装备情况表
     public SysMsg savePowerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTOList(
             List<PowerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTO> powerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTOList);
+    //提交电站基础信息上报信息
+    public SysMsg savePowerPlantBaseInfoUpload(PowerPlantBaseInfoForm powerPlantBaseInfoForm);
 }

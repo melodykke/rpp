@@ -44,7 +44,7 @@ public class MainController {
     }
 
     /**
-     * 用户账号登录页面 *******个人经验 shiro机制，在登录时，登录页面路径和登录动作路径一直，均为login，页面登录为RequestMethod.GET
+     * 用户账号登录页面 *******个人经验 shiro机制，在登录时，登录页面路径和登录动作路径一致，均为login，页面登录为RequestMethod.GET
      *                        而登录动作为RequestMethod.Post,以此区分。*******
      * @param userSigninForm
      * @param bindingResult
@@ -75,17 +75,17 @@ public class MainController {
         String msg = "";
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
-                System.out.println("UnknownAccountException -- > 账号不存在：");
-                msg = "UnknownAccountException -- > 账号不存在：";
+                log.error("UnknownAccountException -- > 账号不存在  userSigninForm = {}", userSigninForm);
+                msg = "账号不存在，请重新输入！";
             } else if (IncorrectCredentialsException.class.getName().equals(exception)) {
-                System.out.println("IncorrectCredentialsException -- > 密码不正确：");
-                msg = "IncorrectCredentialsException -- > 密码不正确：";
+                log.error("IncorrectCredentialsException -- > 密码不正确：", userSigninForm);
+                msg = "密码不正确，请重新输入！";
             } else if ("kaptchaValidateFailed".equals(exception)) {
-                System.out.println("kaptchaValidateFailed -- > 验证码错误");
-                msg = "kaptchaValidateFailed -- > 验证码错误";
+                log.error("kaptchaValidateFailed -- > 验证码错误", userSigninForm);
+                msg = "验证码错误，请重新输入！";
             } else {
-                msg = "else >> "+exception;
-                System.out.println("else -- >" + exception);
+                log.error("else -- >" + exception);
+                msg = "未知错误，请稍后重试 ";
             }
         }
         map.put("msg", msg);

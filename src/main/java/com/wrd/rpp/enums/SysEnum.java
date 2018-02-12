@@ -8,6 +8,7 @@ public enum SysEnum {
     IO_EXCEL(11, "IO错误，未能有效读取指定EXCEL！"),
     CONVERT_ERROR(20, "属性转换错误！"),
     DATA_STORE_ERROR(30, "数据存储错误！"),
+    PARAM_ERROR(40, "参数错误！"),
     OPERATION_SUCCESS(1, "操作正常！"),
 
     DATA_CALLBACK_SUCCESS(100, "数据成功返回"),
