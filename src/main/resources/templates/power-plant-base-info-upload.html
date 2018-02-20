@@ -23,7 +23,9 @@
     <link th:href="@{/assets/plugins/select2/css/select2.min.css}" rel="stylesheet" type="text/css" media="screen" />
     <link th:href="@{/assets/plugins/switchery/css/switchery.min.css}" rel="stylesheet" type="text/css" media="screen" />
     <link th:href="@{/pages/css/pages-icons.css}" rel="stylesheet" type="text/css" />
-    <link class="main-stylesheet" th:href="@{/pages/css/pages.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/pages/css/pages.css}" class="main-stylesheet"  rel="stylesheet" type="text/css" />
+    <link th:href="@{/assets/plugins/bootstrap-datepicker/css/datepicker3.css}" rel="stylesheet" type="text/css" media="screen" />
+    <link th:href="@{/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css}" rel="stylesheet" type="text/css" media="screen" />
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -58,7 +60,7 @@
                 </li>
               </ul>
               <!-- Tab panes -->
-              <form class="tab-content">
+              <form id="powerPlantBaseInfoForm" class="tab-content" th:action="@{/power-plant/power-plant-base-info-upload}" method="post">
                 <div class="tab-pane padding-20 sm-no-padding active slide-left" id="tab1">
                   <div class="row row-same-height">
                     <div class=" col-md-6 b-r b-dashed b-grey sm-b-b">
@@ -153,13 +155,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>生态流量</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="ecoFlow" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>发电引用流量</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="flowForPower" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -174,13 +176,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>调节性能</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="regulationPerformance" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>坝间河道长度</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="damIntervalLength" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -188,13 +190,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>多年平均流量</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="averageFlowForYears" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>堤坝控制流域面积</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="damContralWatershedArea" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -202,13 +204,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>正常蓄水位</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="normalStorageLevel" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>死水位</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="deadWaterLevel" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -216,13 +218,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>防洪限制水位</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="limitingLevelDuringFloodSeason" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>总库容</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="totalStorage" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -230,14 +232,14 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>正常蓄水位相应库容</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="normalWaterLevelStorage" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>建站状态</label>
                                           <div class="input-group-addon d-flex">
-                                              <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                              <select name="plantStatus" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
                                                   <option value="在建" selected="selected">在建</option>
                                                   <option value="已建">已建</option>
                                                   <option value="停运">停运</option>
@@ -250,13 +252,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>死库容</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="deadStorage" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>调节库容</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="adjustStorage" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -275,13 +277,13 @@
                                   <div class="bg-master-light col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>发电厂房形式</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="powerFactoryForm" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>综合利用</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="integratedUtilization" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -289,13 +291,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>水库淹没耕地</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="submergedCultivatedLand" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>水库淹没林地</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="submergedForest" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -303,13 +305,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>坝高</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="damHight" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>主坝类型</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="mainDamType" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -317,31 +319,20 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>迁移人口</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="migrantedPopulation" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>静态总投资</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="staticTotalInvestment" class="form-control" />
                                       </div>
                                   </div>
                               </div>
                           </div>
                       </div>
                     </div>
-
-
-                <!--      <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab2">
-                          <div class="row row-same-height">
-                              <div class="col-md-6 b-r b-dashed b-grey ">
-                                  <div class="padding-30 sm-padding-5 sm-m-t-15 m-t-50">
-                                      <p> Ⅲ </p>
-                                      <div class="form-group-attached">
-                                          <div class="row clearfix">-->
-
                     <div class="col-md-6">
-
                         <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
                           <h2> Ⅳ </h2>
                           <div class="form-group-attached">
@@ -349,13 +340,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>建设开始时间</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input name="constructionTime"  class="form-control" placeholder="选取时间" id="constructionTime"  />
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>建设结束时间</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input name="constructionEndTime"  class="form-control" placeholder="选取时间" id="constructionEndTime"  />
                                       </div>
                                   </div>
                               </div>
@@ -363,13 +354,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>投产时间</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input name="productionTime"  class="form-control" placeholder="选取时间" id="productionTime"  />
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>竣工验收时间</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input name="completionAcceptanceTime"  class="form-control" placeholder="选取时间" id="completionAcceptanceTime"  />
                                       </div>
                                   </div>
                               </div>
@@ -377,13 +368,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>编制时间</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input name="compileTime"  class="form-control" placeholder="选取时间" id="compileTime"  />
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>编制单位</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="compileUnit" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -402,13 +393,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>项目法人</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="compileLegalPerson" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>联系人</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="contact" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -416,13 +407,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>联系电话</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="tel" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>使用权证编号</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="useWarrantNumber" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -430,13 +421,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>证书编号</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="certificateNumber" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>水库大坝登记注册号码</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="registrationNumber" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -444,13 +435,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>安全鉴定情况(类别)</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="safetyAppraisalType" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
-                                          <label>安全鉴定情况(时间)</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <label>安全鉴定情况(时间,格式：年/月/日)</label>
+                                          <input type="text" name="safetyAppraisalTime" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -458,13 +449,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>安全生产建设(等级)</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="safetyProductionLevel" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
-                                          <label>安全生产建设(时间)</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <label>安全生产建设(时间,格式：年/月/日)</label>
+                                          <input type="text" name="safetyProductionTime" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -480,13 +471,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>安全生产生产主体</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="safetyProductionProductionSubject" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>安全生产监管主体</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="safetyProductionSupervisingSubject" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -494,13 +485,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>绿色小水电建设</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="greenSmallHydropowerConstruction" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>资料来源</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="dataSource" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -508,13 +499,13 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>填报单位</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="fillFormUnit" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>填报人员</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input type="text" name="fillFormPerson" class="form-control" />
                                       </div>
                                   </div>
                               </div>
@@ -522,17 +513,20 @@
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default required">
                                           <label>填报人员电话</label>
-                                          <input type="text" name="longitude" class="form-control" required="required"/>
+                                          <input type="text" name="fillFormPersonTel" class="form-control" required="required"/>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group form-group-default">
                                           <label>填报时间</label>
-                                          <input type="text" name="latitude" class="form-control" />
+                                          <input name="fillFormTime"  class="form-control" placeholder="选取时间" id="fillFormTime"  />
                                       </div>
                                   </div>
                               </div>
-
+                                  <div class="form-group form-group-default m-t-25">
+                                      <label>备  注</label>
+                                      <input type="text" name="marks" class="form-control" placeholder="备注" />
+                                  </div>
                               </div>
                           </div>
                     </div>
@@ -548,8 +542,8 @@
                         <span>下一步</span>
                       </button>
                     </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                    <li class="finish hidden">
+                      <button id="submitForm" class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
                         <span>完 成</span>
                       </button>
                     </li>
@@ -756,6 +750,7 @@
     <script th:src="@{/assets/plugins/moment/moment.min.js}"></script>
     <script th:src="@{/assets/plugins/bootstrap-daterangepicker/daterangepicker.js}"></script>
     <script th:src="@{/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js}"></script>
+    <script th:src="@{/assets/js/form_elements.js}" type="text/javascript"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script th:src="@{/pages/js/pages.min.js}"></script>
@@ -764,5 +759,9 @@
     <script th:src="@{/assets/js/form_wizard.js}" type="text/javascript"></script>
     <script th:src="@{/assets/js/scripts.js}" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
+
+    <!-- CUSTOMIZED JS -->
+    <script th:src="@{/assets/js/customized.js}" type="text/javascript"></script>
+    <!-- END CUSTOMIZED JS -->
   </body>
 </html>

@@ -33,7 +33,7 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/index"})
+    @RequestMapping(value = {"/index", "/"})
     public String index(Map<String, Object> map){
     /*    ModelAndView modelAndView = new ModelAndView("index");*/
         Subject subject = SecurityUtils.getSubject();
@@ -92,6 +92,7 @@ public class MainController {
         // 此方法不处理登录成功,由shiro进行处理
         return "login";
     }
+
     @RequestMapping(value = {"/403"})
     public String To403(){
     /*    ModelAndView modelAndView = new ModelAndView("403");*/

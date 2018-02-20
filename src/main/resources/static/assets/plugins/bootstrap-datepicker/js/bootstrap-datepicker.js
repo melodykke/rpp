@@ -1389,14 +1389,14 @@
 	};
 
 	var defaults = $.fn.datepicker.defaults = {
-		autoclose: false,
+		autoclose: true,
 		beforeShowDay: $.noop,
 		calendarWeeks: false,
 		clearBtn: false,
 		daysOfWeekDisabled: [],
 		endDate: Infinity,
 		forceParse: true,
-		format: 'mm/dd/yyyy',
+		format: 'yyyy/mm/dd',
 		keyboardNavigation: true,
 		language: 'en',
 		minViewMode: 0,

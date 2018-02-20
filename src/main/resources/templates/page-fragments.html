@@ -319,7 +319,7 @@
                     <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
                     <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
                     <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
-                    <a href="#" class="clearfix bg-master-lighter dropdown-item">
+                    <a th:href="@{/logout}" class="clearfix bg-master-lighter dropdown-item">
                         <span class="pull-left">Logout</span>
                         <span class="pull-right"><i class="pg-power"></i></span>
                     </a>
@@ -373,273 +373,107 @@
             <!-- BEGIN SIDEBAR MENU ITEMS-->
             <ul class="menu-items">
                 <li class="m-t-30 ">
-                    <a href="index.html" class="detailed">
-                        <span class="title">Dashboard</span>
-                        <span class="details">12 New Updates</span>
+                    <a th:href="@{/index}" class="detailed">
+                        <span class="title">控制台</span>
+                        <span class="details">系统主页</span>
                     </a>
                     <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
                 </li>
-                <li class="">
-                    <a href="email.html" class="detailed">
-                        <span class="title">Email</span>
-                        <span class="details">234 New Emails</span>
-                    </a>
-                    <span class="icon-thumbnail"><i class="pg-mail"></i></span>
-                </li>
-                <li class="">
-                    <a href="social.html"><span class="title">Social</span></a>
-                    <span class="icon-thumbnail"><i class="pg-social"></i></span>
-                </li>
+
                 <li>
-                    <a href="javascript:;"><span class="title">Calendar</span>
+                    <a href="javascript:;"><span class="title">新增信息</span>
                         <span class=" arrow"></span></a>
                     <span class="icon-thumbnail"><i class="pg-calender"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="calendar.html">Basic</a>
-                            <span class="icon-thumbnail">c</span>
+                            <a th:href="@{/power-plant/power-plant-base-info-upload}">信息录入</a>
+                            <span class="icon-thumbnail">录</span>
                         </li>
                         <li class="">
-                            <a href="calendar_lang.html">Languages</a>
-                            <span class="icon-thumbnail">L</span>
-                        </li>
-                        <li class="">
-                            <a href="calendar_month.html">Month</a>
-                            <span class="icon-thumbnail">M</span>
-                        </li>
-                        <li class="">
-                            <a href="calendar_lazy.html">Lazy load</a>
-                            <span class="icon-thumbnail">La</span>
-                        </li>
-                        <li class="">
-                            <a href="http://pages.revox.io/dashboard/2.1.0/doc/#calendar" target="_blank">Documentation</a>
-                            <span class="icon-thumbnail">D</span>
+                            <a href="calendar_lang.html">信息管理</a>
+                            <span class="icon-thumbnail">管</span>
                         </li>
                     </ul>
                 </li>
-                <li class="">
-                    <a href="builder.html">
-                        <span class="title">Builder</span>
-                    </a>
-                    <span class="icon-thumbnail"><i class="pg-layouts"></i></span>
-                </li>
                 <li>
-                    <a href="javascript:;"><span class="title">Layouts</span>
+                    <a href="javascript:;"><span class="title">电站信息报送</span>
                         <span class=" arrow"></span></a>
                     <span class="icon-thumbnail"><i class="pg-layouts2"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="default_layout.html">Default</a>
-                            <span class="icon-thumbnail">dl</span>
+                            <a href="default_layout.html">在建项目</a>
+                            <span class="icon-thumbnail">在</span>
                         </li>
                         <li class="">
-                            <a href="secondary_layout.html">Secondary</a>
-                            <span class="icon-thumbnail">sl</span>
-                        </li>
-                        <li class="">
-                            <a href="boxed_layout.html">Boxed</a>
-                            <span class="icon-thumbnail">bl</span>
-                        </li>
-                        <li class="">
-                            <a href="rtl_layout.html">RTL</a>
-                            <span class="icon-thumbnail">rl</span>
+                            <a href="secondary_layout.html">已建项目</a>
+                            <span class="icon-thumbnail">已</span>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;"><span class="title">UI Elements</span>
+                    <a href="javascript:;"><span class="title">信息审核</span>
                         <span class=" arrow"></span></a>
-                    <span class="icon-thumbnail">Ui</span>
+                    <span class="icon-thumbnail">审</span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="color.html">Color</a>
-                            <span class="icon-thumbnail">c</span>
+                            <a href="color.html">项目审核</a>
+                            <span class="icon-thumbnail">项</span>
                         </li>
                         <li class="">
-                            <a href="typography.html">Typography</a>
-                            <span class="icon-thumbnail">t</span>
+                            <a href="typography.html">资料审核</a>
+                            <span class="icon-thumbnail">资</span>
                         </li>
                         <li class="">
-                            <a href="icons.html">Icons</a>
-                            <span class="icon-thumbnail">i</span>
+                            <a href="icons.html">月报审核</a>
+                            <span class="icon-thumbnail">月</span>
                         </li>
                         <li class="">
-                            <a href="buttons.html">Buttons</a>
-                            <span class="icon-thumbnail">b</span>
-                        </li>
-                        <li class="">
-                            <a href="notifications.html">Notifications</a>
-                            <span class="icon-thumbnail">n</span>
-                        </li>
-                        <li class="">
-                            <a href="modals.html">Modals</a>
-                            <span class="icon-thumbnail">m</span>
-                        </li>
-                        <li class="">
-                            <a href="progress.html">Progress &amp; Activity</a>
-                            <span class="icon-thumbnail">pa</span>
-                        </li>
-                        <li class="">
-                            <a href="tabs_accordian.html">Tabs &amp; Accordions</a>
-                            <span class="icon-thumbnail">ta</span>
-                        </li>
-                        <li class="">
-                            <a href="sliders.html">Sliders</a>
-                            <span class="icon-thumbnail">s</span>
-                        </li>
-                        <li class="">
-                            <a href="tree_view.html">Tree View</a>
-                            <span class="icon-thumbnail">tv</span>
-                        </li>
-                        <li class="">
-                            <a href="nestables.html">Nestable</a>
-                            <span class="icon-thumbnail">ns</span>
+                            <a href="buttons.html">年报审核</a>
+                            <span class="icon-thumbnail">年</span>
                         </li>
                     </ul>
-                </li>
-                <li class="open active">
-                    <a href="javascript:;">
-                        <span class="title">Forms</span>
-                        <span class=" open  arrow"></span>
-                    </a>
-                    <span class="icon-thumbnail"><i class="pg-form"></i></span>
-                    <ul class="sub-menu">
-                        <li class="">
-                            <a href="form_elements.html">Form Elements</a>
-                            <span class="icon-thumbnail">fe</span>
-                        </li>
-                        <li class="">
-                            <a href="form_layouts.html">Form Layouts</a>
-                            <span class="icon-thumbnail">fl</span>
-                        </li>
-                        <li class="">
-                            <a href="form_wizard.html">Form Wizard</a>
-                            <span class="icon-thumbnail">fw</span>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="cards.html">
-                        <span class="title">Cards</span>
-                    </a>
-                    <span class="icon-thumbnail"><i class="pg-grid"></i></span>
-                </li>
-                <li class="">
-                    <a href="views.html">
-                        <span class="title">Views</span>
-                    </a>
-                    <span class="icon-thumbnail"><i class="pg pg-ui"></i></span>
                 </li>
                 <li>
-                    <a href="javascript:;"><span class="title">Tables</span>
+                    <a href="javascript:;"><span class="title">档案管理</span>
                         <span class=" arrow"></span></a>
                     <span class="icon-thumbnail"><i class="pg-tables"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="tables.html">Basic Tables</a>
-                            <span class="icon-thumbnail">bt</span>
+                            <a href="tables.html">资料上报</a>
+                            <span class="icon-thumbnail">报</span>
                         </li>
                         <li class="">
-                            <a href="datatables.html">Data Tables</a>
-                            <span class="icon-thumbnail">dt</span>
+                            <a href="datatables.html">资料查询</a>
+                            <span class="icon-thumbnail">查</span>
                         </li>
                     </ul>
                 </li>
+                <li class="">
+                    <a href="charts.html"><span class="title">电站数据库</span></a>
+                    <span class="icon-thumbnail"><i class="pg-charts"></i></span>
+                </li>
                 <li>
-                    <a href="javascript:;"><span class="title">Maps</span>
+                    <a href="javascript:;"><span class="title">系统设置</span>
                         <span class=" arrow"></span></a>
                     <span class="icon-thumbnail"><i class="pg-map"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="google_map.html">Google Maps</a>
-                            <span class="icon-thumbnail">gm</span>
+                            <a href="google_map.html">角色管理</a>
+                            <span class="icon-thumbnail">角</span>
                         </li>
                         <li class="">
-                            <a href="vector_map.html">Vector Maps</a>
-                            <span class="icon-thumbnail">vm</span>
+                            <a href="vector_map.html">用户管理</a>
+                            <span class="icon-thumbnail">用</span>
+                        </li>
+                        <li class="">
+                            <a href="vector_map.html">性能监控</a>
+                            <span class="icon-thumbnail">控</span>
                         </li>
                     </ul>
                 </li>
                 <li class="">
-                    <a href="charts.html"><span class="title">Charts</span></a>
-                    <span class="icon-thumbnail"><i class="pg-charts"></i></span>
-                </li>
-                <li>
-                    <a href="javascript:;"><span class="title">Extra</span>
-                        <span class=" arrow"></span></a>
-                    <span class="icon-thumbnail"><i class="pg-bag"></i></span>
-                    <ul class="sub-menu">
-                        <li class="">
-                            <a href="invoice.html">Invoice</a>
-                            <span class="icon-thumbnail">in</span>
-                        </li>
-                        <li class="">
-                            <a href="404.html">404 Page</a>
-                            <span class="icon-thumbnail">pg</span>
-                        </li>
-                        <li class="">
-                            <a href="500.html">500 Page</a>
-                            <span class="icon-thumbnail">pg</span>
-                        </li>
-                        <li class="">
-                            <a href="blank_template.html">Blank Page</a>
-                            <span class="icon-thumbnail">bp</span>
-                        </li>
-                        <li class="">
-                            <a href="login.html">Login</a>
-                            <span class="icon-thumbnail">l</span>
-                        </li>
-                        <li class="">
-                            <a href="register.html">Register</a>
-                            <span class="icon-thumbnail">re</span>
-                        </li>
-                        <li class="">
-                            <a href="lock_screen.html">Lockscreen</a>
-                            <span class="icon-thumbnail">ls</span>
-                        </li>
-                        <li class="">
-                            <a href="gallery.html">Gallery</a>
-                            <span class="icon-thumbnail">gl</span>
-                        </li>
-                        <li class="">
-                            <a href="timeline.html">Timeline</a>
-                            <span class="icon-thumbnail">t</span>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="javascript:;"><span class="title">Menu Levels</span>
-                        <span class="arrow"></span></a>
-                    <span class="icon-thumbnail"><i class="pg-menu_lv"></i></span>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="javascript:;">Level 1</a>
-                            <span class="icon-thumbnail">L1</span>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><span class="title">Level 2</span>
-                                <span class="arrow"></span></a>
-                            <span class="icon-thumbnail">L2</span>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="javascript:;">Sub Menu</a>
-                                    <span class="icon-thumbnail">Sm</span>
-                                </li>
-                                <li>
-                                    <a href="ujavascript:;">Sub Menu</a>
-                                    <span class="icon-thumbnail">Sm</span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="http://pages.revox.io/dashboard/2.2.0/docs/" target="_blank"><span class="title">Docs</span></a>
-                    <span class="icon-thumbnail"><i class="pg-note"></i></span>
-                </li>
-                <li class="">
-                    <a href="http://changelog.pages.revox.io/" target="_blank"><span class="title">Changelog</span></a>
-                    <span class="icon-thumbnail">Cl</span>
+                    <a href="http://changelog.pages.revox.io/" target="_blank"><span class="title">历史资料查询</span></a>
+                    <span class="icon-thumbnail">史</span>
                 </li>
             </ul>
             <div class="clearfix"></div>

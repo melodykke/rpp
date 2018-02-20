@@ -17,7 +17,7 @@ public class PowerPlantBaseInfoForm {
     private BigDecimal latitude; // 纬度
     private String location; // 建设地点
     private String developmentMode; // 开发方式
-    private BigDecimal installedCapacity; //装机规模(台/容量)
+    private String installedCapacity; //装机规模(台/容量)
     private String designedHydraulicHead; // 设计水头
     private BigDecimal designedPowerPerYear; // 设计年发电量
     private BigDecimal guaranteedOutput; // 保证出力
@@ -61,7 +61,7 @@ public class PowerPlantBaseInfoForm {
     private String safetyProductionTime; // 安全生产建设(时间)
     private String safetyProductionProductionSubject; // 安全生产生产主体
     private String safetyProductionSupervisingSubject; // 安全生产监管主体
-    private String green_smallHydropowerConstruction; // 绿色小水电建设
+    private String greenSmallHydropowerConstruction; // 绿色小水电建设
     private String dataSource; // 资料来源
     private String fillFormUnit; // 填报单位
     private String fillFormPerson; // 填报人员

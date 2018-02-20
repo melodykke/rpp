@@ -1,11 +1,14 @@
 package com.wrd.rpp.shiro.bean;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter@Setter
 public class UserInfo {
     @Id
     @GeneratedValue
@@ -16,7 +19,7 @@ public class UserInfo {
     private String password;
     private String salt;
     private byte state; //0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "sys_user_role", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
     private List<SysRole> sysRoleList;
 

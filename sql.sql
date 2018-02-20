@@ -90,7 +90,7 @@ CREATE TABLE `power_plant_base_info_upload`(
 	`latitude` DECIMAL(12,6) COMMENT '纬度',
 	`location` VARCHAR(32) COMMENT '建站地点',
 	`development_mode` VARCHAR(32) COMMENT '开发方式',
-	`installed_capacity` DECIMAL(10,2) COMMENT '装机规模',
+	`installed_capacity` VARCHAR(32) COMMENT '装机规模',
 	`designed_hydraulic_head` VARCHAR(32) COMMENT '设计水头',
 	`designed_power_per_year` DECIMAL(10,2) COMMENT '设计全年发电量(万千瓦时)',
 	`guaranteed_output` DECIMAL(10,2) COMMENT '保证出力',
@@ -146,3 +146,5 @@ CREATE TABLE `power_plant_base_info_upload`(
 	PRIMARY KEY (`plant_id`),
 	KEY `index_plant_code` (`plant_code`)
 	) ENGINE=INNODB DEFAULT CHARSET=utf8
+SHOW VARIABLES LIKE 'sql_mode';
+SET SESSION sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';

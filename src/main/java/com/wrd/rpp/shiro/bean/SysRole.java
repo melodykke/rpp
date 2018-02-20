@@ -1,12 +1,15 @@
 package com.wrd.rpp.shiro.bean;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class SysRole {
     @Id
     @GeneratedValue
@@ -21,7 +24,7 @@ public class SysRole {
     private List<UserInfo> userInfoList;
 
     //角色 -- 权限关系：多对多关系;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name="sys_role_permission",joinColumns={@JoinColumn(name="roleId")},inverseJoinColumns={@JoinColumn(name="permissionId")})
     private List<SysPermission> sysPermissionList;
 }
