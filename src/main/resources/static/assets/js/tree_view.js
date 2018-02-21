@@ -8,7 +8,7 @@
     'use strict';
 
     $(document).ready(function() {
-        // Treeview hierarchy configuration
+        // Treeview hierarchy config
         var treeData = [{
             title: "item1 with key and tooltip",
             tooltip: "Look, a tool tip!"

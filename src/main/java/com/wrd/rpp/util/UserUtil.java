@@ -1,11 +1,13 @@
 package com.wrd.rpp.util;
 
 import com.wrd.rpp.enums.UserAccontStatusEnum;
+import com.wrd.rpp.exception.SysException;
 import com.wrd.rpp.form.UserRegistryForm;
 import com.wrd.rpp.shiro.bean.UserInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.BeanUtils;
-
+@Slf4j
 public class UserUtil {
     public static UserInfo createDefaultUser(UserRegistryForm userRegistryForm){
         UserInfo userInfo = new UserInfo();

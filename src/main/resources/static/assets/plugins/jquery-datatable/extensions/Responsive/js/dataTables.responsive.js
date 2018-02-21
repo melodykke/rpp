@@ -54,10 +54,10 @@ var factory = function( $, DataTable ) {
  * Initialisation of Responsive is performed by:
  *
  * * Adding the class `responsive` or `dt-responsive` to the table. In this case
- *   Responsive will automatically be initialised with the default configuration
+ *   Responsive will automatically be initialised with the default config
  *   options when the DataTable is created.
- * * Using the `responsive` option in the DataTables configuration options. This
- *   can also be used to specify the configuration options, or simply set to
+ * * Using the `responsive` option in the DataTables config options. This
+ *   can also be used to specify the config options, or simply set to
  *   `true` to use the defaults.
  *
  *  @class

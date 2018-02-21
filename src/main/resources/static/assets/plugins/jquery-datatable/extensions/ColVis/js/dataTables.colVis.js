@@ -34,7 +34,7 @@ var factory = function( $, DataTable ) {
  * @constructor
  * @param {object} DataTables settings object. With DataTables 1.10 this can
  *   also be and API instance, table node, jQuery collection or jQuery selector.
- * @param {object} ColVis configuration options
+ * @param {object} ColVis config options
  */
 var ColVis = function( oDTSettings, oInit )
 {

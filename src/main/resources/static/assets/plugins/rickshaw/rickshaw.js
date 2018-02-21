@@ -494,7 +494,7 @@ Rickshaw.Graph = function(args) {
 
 		var domain = this.renderer.domain();
 
-		// this.*Scale is coming from the configuration dictionary
+		// this.*Scale is coming from the config dictionary
 		// which may be referenced by the Graph creator, or shared
 		// with other Graphs. We need to ensure we copy the scale
 		// so that our mutations do not change the object given to us.

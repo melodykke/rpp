@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>系统使用注册页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" href="pages/ico/60.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link th:href="@{/assets/plugins/pace/pace-theme-flash.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/assets/plugins/jquery-scrollbar/jquery.scrollbar.css}" rel="stylesheet" type="text/css" media="screen" />
+    <link th:href="@{/assets/plugins/select2/css/select2.min.css}" rel="stylesheet" type="text/css" media="screen" />
+    <link th:href="@{/assets/plugins/switchery/css/switchery.min.css}" rel="stylesheet" type="text/css" media="screen" />
+    <link th:href="@{/pages/css/pages-icons.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/pages/css/pages.css}" rel="stylesheet" type="text/css" class="main-stylesheet" />
+    <script type="text/javascript">
+    window.onload = function()
+    {
+      // fix for windows 8
+      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
+    }
+    </script>
+  </head>
+  <body class="fixed-header ">
+    <div class="register-container full-height sm-p-t-30">
+      <div class="d-flex justify-content-center flex-column full-height ">
+        <img th:src="@{/assets/img/logo.png}" alt="logo"  width="78" height="22" />
+        <h3>账号注册</h3>
+        <p>
+         xx农电信息管理系统账号注册
+        </p>
+        <form id="form-register" class="p-t-15" role="form" th:action="@{/register}" method="post">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group form-group-default">
+                <label>自定义账号名</label>
+                <input type="text" name="username" placeholder="账 号" class="form-control" required="required" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group form-group-default">
+                <label>行政区名</label>
+                  <div class="d-flex">
+                      <select name="regionName" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                          <option value="省水利厅">省水利厅</option>
+                          <option value="贵阳市" selected="selected">贵阳市</option>
+                          <option value="南明区">　南明区</option>
+                          <option value="云岩区">　云岩区</option>
+                          <option value="花溪区">　花溪区</option>
+                          <option value="乌当区">　乌当区</option>
+                          <option value="白云区">　白云区</option>
+                          <option value="观山湖区">　观山湖区</option>
+                          <option value="清镇市">　清镇市</option>
+                          <option value="开阳县">　开阳县</option>
+                          <option value="息烽县">　息烽县</option>
+                          <option value="修文县">　修文县</option>
+                          <option value="贵安新区">贵安新区</option>
+                          <option value="六盘水市">六盘水市</option>
+                          <option value="钟山区">　钟山区</option>
+                          <option value="六枝特区">　六枝特区</option>
+                          <option value="水城县">　水城县</option>
+                          <option value="盘县">　盘县</option>
+                          <option value="遵义市">遵义市</option>
+                          <option value="红花岗区">　红花岗区</option>
+                          <option value="汇川区">　汇川区</option>
+                          <option value="播州区">　播州区</option>
+                          <option value="赤水市">　赤水市</option>
+                          <option value="仁怀市">　仁怀市</option>
+                          <option value="桐梓县">　桐梓县</option>
+                          <option value="绥阳县">　绥阳县</option>
+                          <option value="正安县">　正安县</option>
+                          <option value="道真仡佬族苗族自治县">　道真仡佬族苗族自治县</option>
+                          <option value="务川仡佬族苗族自治县">　务川仡佬族苗族自治县</option>
+                          <option value="凤冈县">　凤冈县</option>
+                          <option value="湄潭县">　湄潭县</option>
+                          <option value="余庆县">　余庆县</option>
+                          <option value="习水县">　习水县</option>
+                          <option value="安顺市">安顺市</option>
+                          <option value="西秀区">　西秀区</option>
+                          <option value="平坝区">　平坝区</option>
+                          <option value="普定县">　普定县</option>
+                          <option value="镇宁布依族苗族自治县">　镇宁布依族苗族自治县</option>
+                          <option value="关岭布依族苗族自治县">　关岭布依族苗族自治县</option>
+                          <option value="紫云苗族布依族自治县">　紫云苗族布依族自治县</option>
+                          <option value="毕节市">毕节市</option>
+                          <option value="七星关区">　七星关区</option>
+                          <option value="大方县">　大方县</option>
+                          <option value="黔西县">　黔西县</option>
+                          <option value="金沙县">　金沙县</option>
+                          <option value="织金县">　织金县</option>
+                          <option value="纳雍县">　纳雍县</option>
+                          <option value="威宁彝族回族苗族自治县">　威宁彝族回族苗族自治县</option>
+                          <option value="赫章县">　赫章县</option>
+                          <option value="铜仁市">铜仁市</option>
+                          <option value="碧江区">　碧江区</option>
+                          <option value="万山区">　万山区</option>
+                          <option value="江口县">　江口县</option>
+                          <option value="玉屏侗族自治县">　玉屏侗族自治县</option>
+                          <option value="石阡县">　石阡县</option>
+                          <option value="思南县">　思南县</option>
+                          <option value="印江土家族苗族自治县">　印江土家族苗族自治县</option>
+                          <option value="德江县">　德江县</option>
+                          <option value="沿河土家族自治县">　沿河土家族自治县</option>
+                          <option value="松桃苗族自治县">　松桃苗族自治县</option>
+                          <option value="黔西南布依族苗族自治州">黔西南布依族苗族自治州</option>
+                          <option value="兴义市">　兴义市</option>
+                          <option value="兴仁县">　兴仁县</option>
+                          <option value="普安县">　普安县</option>
+                          <option value="晴隆县">　晴隆县</option>
+                          <option value="贞丰县">　贞丰县</option>
+                          <option value="望谟县">　望谟县</option>
+                          <option value="册亨县">　册亨县</option>
+                          <option value="安龙县">　安龙县</option>
+                          <option value="黔东南苗族侗族自治州">黔东南苗族侗族自治州</option>
+                          <option value="凯里市">　凯里市</option>
+                          <option value="黄平县">　黄平县</option>
+                          <option value="施秉县">　施秉县</option>
+                          <option value="三穗县">　三穗县</option>
+                          <option value="镇远县">　镇远县</option>
+                          <option value="岑巩县">　岑巩县</option>
+                          <option value="天柱县">　天柱县</option>
+                          <option value="锦屏县">　锦屏县</option>
+                          <option value="剑河县">　剑河县</option>
+                          <option value="台江县">　台江县</option>
+                          <option value="黎平县">　黎平县</option>
+                          <option value="榕江县">　榕江县</option>
+                          <option value="从江县">　从江县</option>
+                          <option value="雷山县">　雷山县</option>
+                          <option value="麻江县">　麻江县</option>
+                          <option value="丹寨县">　丹寨县</option>
+                          <option value="黔南布依族苗族自治州">黔南布依族苗族自治州</option>
+                          <option value="都匀市">　都匀市</option>
+                          <option value="福泉市">　福泉市</option>
+                          <option value="荔波县">　荔波县</option>
+                          <option value="贵定县">　贵定县</option>
+                          <option value="瓮安县">　瓮安县</option>
+                          <option value="独山县">　独山县</option>
+                          <option value="平塘县">　平塘县</option>
+                          <option value="罗甸县">　罗甸县</option>
+                          <option value="长顺县">　长顺县</option>
+                          <option value="龙里县">　龙里县</option>
+                          <option value="惠水县">　惠水县</option>
+                          <option value="三都水族自治县">　三都水族自治县</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group form-group-default">
+                <label>真实姓名</label>
+                <input type="text" name="name" placeholder="姓名" class="form-control" required="required"/>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-group-default">
+                        <label>联系电话</label>
+                        <input type="text" name="phone" placeholder="电话号码" class="form-control" required="required"/>
+                    </div>
+                </div>
+            </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group form-group-default">
+                <label>账号密码</label>
+                <input type="password" name="password" placeholder="密码" class="form-control" required="required"/>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-group-default">
+                        <label>确认密码</label>
+                        <input type="password" name="rPassword" placeholder="再一次输入以上密码" class="form-control" required="required"/>
+                    </div>
+                </div>
+            </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group form-group-default">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="您的联系邮箱地址" class="form-control" required="required"/>
+              </div>
+            </div>
+          </div>
+          <div class="row m-t-10">
+            <div class="col-lg-6">
+              <p><small>我同意 <a href="#" class="text-info">网站使用协议</a> 和 <a href="#" class="text-info">隐私协议</a>.</small></p>
+            </div>
+            <div class="col-lg-6 text-right">
+              <a href="#" class="text-info small">Help? Contact Support</a>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-cons m-t-10" type="submit">创建账号</button>
+        </form>
+      </div>
+    </div>
+    <div class=" full-width">
+      <div class="register-container m-b-10 clearfix">
+        <div class="m-b-30 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix d-flex-md-up">
+          <div class="col-md-2 no-padding d-flex align-items-center">
+            <img th:src="@{/assets/img/demo/pages_icon.png}"  width="60" height="60" />
+          </div>
+          <div class="col-md-9 no-padding d-flex align-items-center">
+            <p class="hinted-text small inline sm-p-t-10">xx农电局</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- START OVERLAY -->
+    <div class="overlay hide" data-pages="search">
+      <!-- BEGIN Overlay Content !-->
+      <div class="overlay-content has-results m-t-20">
+        <!-- BEGIN Overlay Header !-->
+        <div class="container-fluid">
+          <!-- BEGIN Overlay Logo !-->
+          <img class="overlay-brand" th:src="@{/assets/img/logo.png}" alt="logo"  width="78" height="22" />
+          <!-- END Overlay Logo !-->
+          <!-- BEGIN Overlay Close !-->
+          <a href="#" class="close-icon-light overlay-close text-black fs-16">
+            <i class="pg-close"></i>
+          </a>
+          <!-- END Overlay Close !-->
+        </div>
+        <!-- END Overlay Header !-->
+        <div class="container-fluid">
+          <!-- BEGIN Overlay Controls !-->
+          <input id="overlay-search" class="no-border overlay-search bg-transparent" placeholder="Search..." autocomplete="off" spellcheck="false" />
+          <br />
+          <div class="inline-block">
+            <div class="checkbox right">
+              <input id="checkboxn" type="checkbox" value="1" checked="checked" />
+              <label for="checkboxn"><i class="fa fa-search"></i> Search within page</label>
+            </div>
+          </div>
+          <div class="inline-block m-l-10">
+            <p class="fs-13">Press enter to search</p>
+          </div>
+          <!-- END Overlay Controls !-->
+        </div>
+        <!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
+        <div class="container-fluid">
+          <span>
+                <strong>suggestions :</strong>
+            </span>
+          <span id="overlay-suggestions"></span>
+          <br />
+          <div class="search-results m-t-40">
+            <p class="bold">Pages Search Results</p>
+            <div class="row">
+              <div class="col-md-6">
+                <!-- BEGIN Search Result Item !-->
+                <div class="">
+                  <!-- BEGIN Search Result Item Thumbnail !-->
+                  <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                    <div>
+                      <img width="50" height="50" th:src="@{/assets/img/profiles/avatar.jpg}" alt="" />
+                    </div>
+                  </div>
+                  <!-- END Search Result Item Thumbnail !-->
+                  <div class="p-l-10 inline p-t-5">
+                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on pages</h5>
+                    <p class="hint-text">via john smith</p>
+                  </div>
+                </div>
+                <!-- END Search Result Item !-->
+                <!-- BEGIN Search Result Item !-->
+                <div class="">
+                  <!-- BEGIN Search Result Item Thumbnail !-->
+                  <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                    <div>T</div>
+                  </div>
+                  <!-- END Search Result Item Thumbnail !-->
+                  <div class="p-l-10 inline p-t-5">
+                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> related topics</h5>
+                    <p class="hint-text">via pages</p>
+                  </div>
+                </div>
+                <!-- END Search Result Item !-->
+                <!-- BEGIN Search Result Item !-->
+                <div class="">
+                  <!-- BEGIN Search Result Item Thumbnail !-->
+                  <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                    <div><i class="fa fa-headphones large-text "></i>
+                    </div>
+                  </div>
+                  <!-- END Search Result Item Thumbnail !-->
+                  <div class="p-l-10 inline p-t-5">
+                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> music</h5>
+                    <p class="hint-text">via pagesmix</p>
+                  </div>
+                </div>
+                <!-- END Search Result Item !-->
+              </div>
+              <div class="col-md-6">
+                <!-- BEGIN Search Result Item !-->
+                <div class="">
+                  <!-- BEGIN Search Result Item Thumbnail !-->
+                  <div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
+                    <div><i class="fa fa-facebook large-text "></i>
+                    </div>
+                  </div>
+                  <!-- END Search Result Item Thumbnail !-->
+                  <div class="p-l-10 inline p-t-5">
+                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on facebook</h5>
+                    <p class="hint-text">via facebook</p>
+                  </div>
+                </div>
+                <!-- END Search Result Item !-->
+                <!-- BEGIN Search Result Item !-->
+                <div class="">
+                  <!-- BEGIN Search Result Item Thumbnail !-->
+                  <div class="thumbnail-wrapper d48 circular bg-complete text-white inline m-t-10">
+                    <div><i class="fa fa-twitter large-text "></i>
+                    </div>
+                  </div>
+                  <!-- END Search Result Item Thumbnail !-->
+                  <div class="p-l-10 inline p-t-5">
+                    <h5 class="m-b-5">Tweats on<span class="semi-bold result-name"> ice cream</span></h5>
+                    <p class="hint-text">via twitter</p>
+                  </div>
+                </div>
+                <!-- END Search Result Item !-->
+                <!-- BEGIN Search Result Item !-->
+                <div class="">
+                  <!-- BEGIN Search Result Item Thumbnail !-->
+                  <div class="thumbnail-wrapper d48 circular text-white bg-danger inline m-t-10">
+                    <div><i class="fa fa-google-plus large-text "></i>
+                    </div>
+                  </div>
+                  <!-- END Search Result Item Thumbnail !-->
+                  <div class="p-l-10 inline p-t-5">
+                    <h5 class="m-b-5">Circles on<span class="semi-bold result-name"> ice cream</span></h5>
+                    <p class="hint-text">via google plus</p>
+                  </div>
+                </div>
+                <!-- END Search Result Item !-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END Overlay Search Results !-->
+      </div>
+      <!-- END Overlay Content !-->
+    </div>
+    <!-- END OVERLAY -->
+    <!-- BEGIN VENDOR JS -->
+    <script th:src="@{/assets/plugins/pace/pace.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery/jquery-1.11.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/modernizr.custom.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-ui/jquery-ui.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/tether/js/tether.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery/jquery-easy.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-unveil/jquery.unveil.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-ios-list/jquery.ioslist.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-actual/jquery.actual.min.js}"></script>
+    <script th:src="@{/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+    <script th:src="@{/assets/plugins/select2/js/select2.full.min.js}" type="text/javascript" ></script>
+    <script th:src="@{/assets/plugins/classie/classie.js}" type="text/javascript" ></script>
+    <script th:src="@{/assets/plugins/switchery/js/switchery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-validation/js/jquery.validate.min.js}" type="text/javascript"></script>
+    <!-- END VENDOR JS -->
+    <script th:src="@{/pages/js/pages.min.js}"></script>
+    <script>
+    $(function()
+    {
+      $('#form-register').validate()
+    })
+    </script>
+  </body>
+</html>

@@ -17,7 +17,7 @@
     factory(jQuery);
   }
 }(function (jQuery) {
-  // This is needed so we can catch the AMD loader configuration and use it
+  // This is needed so we can catch the AMD loader config and use it
   // The inner file should be wrapped (by `banner.start.js`) in a function that
   // returns the AMD loader references.
   var S2 =
@@ -4773,7 +4773,7 @@ S2.define('select2/defaults',[
             language = Translation.loadPath(name);
           } catch (ex) {
             // The translation could not be loaded at all. Sometimes this is
-            // because of a configuration problem, other times this can be
+            // because of a config problem, other times this can be
             // because of how Select2 helps load all possible translation files.
             if (options.debug && window.console && console.warn) {
               console.warn(
@@ -5704,7 +5704,7 @@ S2.define('jquery.select2',[
   return Select2;
 });
 
-  // Return the AMD loader configuration so it can be used outside of this file
+  // Return the AMD loader config so it can be used outside of this file
   return {
     define: S2.define,
     require: S2.require

@@ -14,6 +14,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,54 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/403")
+    public String test(){
+        return "/403";
+    }
+
+    @GetMapping("/error")
+    public String test1(){
+        return "/error";
+    }
+    /**
+     * 用户账户注册页面
+     * @param userRegistryForm
+     * @param bindingResult
+     * @return
+     */
+    @GetMapping("/register")
+    public String register(){
+        return "/register";
+    }
+    /**
+     * 用户账户注册
+     * @param userRegistryForm
+     * @param bindingResult
+     * @return
+     */
+    @PostMapping("/register")
+    @ResponseBody
+    public ResultVO add(@Valid UserRegistryForm userRegistryForm, BindingResult bindingResult){
+        //表单后台验证
+        if(bindingResult.hasErrors()){
+            log.error("【账号错误】 账号注册错误， 参数不正确 userRegistryForm = {}", userRegistryForm);
+            throw new SysException(SysEnum.REGISTRY_PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
+        }
+        //检查accountName在后台是否已经存在
+        if(userService.findByUsername(userRegistryForm.getUsername())!=null){
+            log.error("【账号错误】 账号注册错误， 所注册账号名已经存在， userRegistryForm.username = {}", userRegistryForm.getUsername());
+            throw new SysException(SysEnum.REGISTRY_DUPLICATED_ACCOUNTNAME);
+        }
+        //验证密码是否一致
+        if(!userRegistryForm.getPassword().equals(userRegistryForm.getRPassword())){
+            log.error("【账号错误】 注册的密码和确认密码不一致！");
+            throw new SysException(SysEnum.REGISTRY_INCONSISTENT_PASSWORD);
+        }
+        UserInfo defaultUser = UserUtil.createDefaultUser(userRegistryForm);
+        userService.save(defaultUser);
+        return ResultUtil.success(defaultUser);
+    }
 
     @RequestMapping(value = {"/index", "/"})
     public String index(Map<String, Object> map){
@@ -70,8 +119,10 @@ public class MainController {
             log.error("【账号错误】 账号登录错误， 参数不正确 userSigninForm = {}", userSigninForm);
             throw new SysException(SysEnum.SIGNIN_PARAM_ERROR);
         }
-        String exception = (String)request.getAttribute("shiroLoginFailure");
+        //String exception = (String)request.getAttribute("shiroLoginFailure");
+        String exception = (String)request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
         System.out.println("exception: "+exception);
+        System.out.println(SecurityUtils.getSubject().getSession().getId());
         String msg = "";
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
@@ -87,41 +138,12 @@ public class MainController {
                 log.error("else -- >" + exception);
                 msg = "未知错误，请稍后重试 ";
             }
+        }else {
+            return "/index";
         }
         map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理
         return "login";
     }
 
-    @RequestMapping(value = {"/403"})
-    public String To403(){
-    /*    ModelAndView modelAndView = new ModelAndView("403");*/
-        return "403";
-    }
-
-
-
-    /**
-     * 用户账户注册
-     * @param userRegistryForm
-     * @param bindingResult
-     * @return
-     */
-    @PostMapping("/register")
-    @ResponseBody
-    public ResultVO add(@Valid UserRegistryForm userRegistryForm, BindingResult bindingResult){
-        //表单后台验证
-        if(bindingResult.hasErrors()){
-            log.error("【账号错误】 账号注册错误， 参数不正确 userRegistryForm = {}", userRegistryForm);
-            throw new SysException(SysEnum.REGISTRY_PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
-        }
-        //检查accountName在后台是否已经存在
-        if(userService.findByUsername(userRegistryForm.getUsername())!=null){
-            log.error("【账号错误】 账号注册错误， 所注册账号名已经存在， userRegistryForm.username = {}", userRegistryForm.getUsername());
-            throw new SysException(SysEnum.REGISTRY_DUPLICATED_ACCOUNTNAME);
-        }
-        UserInfo defaultUser = UserUtil.createDefaultUser(userRegistryForm);
-        userService.save(defaultUser);
-        return ResultUtil.success(defaultUser);
-    }
 }

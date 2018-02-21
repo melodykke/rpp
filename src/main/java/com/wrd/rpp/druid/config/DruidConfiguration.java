@@ -1,4 +1,4 @@
-package com.wrd.rpp.druid.configuration;
+package com.wrd.rpp.druid.config;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -15,6 +15,9 @@ public class UserInfo {
     private Integer userId;
     @Column(unique = true)
     private String username;
+    private String regionName;
+    private String email;
+    private String phone;
     private String name;
     private String password;
     private String salt;
