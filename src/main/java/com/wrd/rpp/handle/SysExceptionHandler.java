@@ -15,15 +15,18 @@ import javax.xml.transform.Result;
 @Slf4j
 public class SysExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handle(Exception e){
+    @ExceptionHandler({SysException.class})
+    @ResponseBody
+    public ResultVO handle(Exception e){
         if(e instanceof SysException){
-            ModelAndView mv = new ModelAndView("/error");
-            return mv;
+            log.info("【系统异常】" + e);
+            return ResultUtil.failed(((SysException)e).getCode(), e.getMessage());
         }else{
-            ModelAndView mv = new ModelAndView("/404");
-            return mv;
+            log.info("【未知异常】" + e);
+            return ResultUtil.failed();
         }
+
     }
+
 
 }

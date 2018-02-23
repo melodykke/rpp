@@ -43,9 +43,9 @@
         <!-- START Background Caption-->
         <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
           <h2 class="semi-bold text-white">
-					贵州农村水电信息管理系统</h2>
+					xxx农村水电信息管理系统</h2>
           <p class="small">
-            贵州省水利厅农电局 © 2017-2018 REVOX.
+            xxx省水利厅农电局 © 2017-2018 REVOX.
           </p>
         </div>
         <!-- END Background Caption-->
@@ -62,7 +62,7 @@
                 </div>
             </div>
           <!-- START Login Form -->
-          <form id="form-login" class="p-t-15" role="form" method="post" >
+          <form id="form-login" class="p-t-15" role="form" method="post" th:action="@{/login}">
             <!-- START Form Control-->
             <div class="form-group form-group-default">
               <label>登录名</label>
@@ -87,7 +87,7 @@
                 </div>
               </div>
               <div class="col-md-6 d-flex align-items-center justify-content-end">
-                <a href="#" class="text-info small">帮助？</a>
+                <a th:href="@{/register}" class="text-info small">没有账号？</a>
               </div>
             </div>
             <!-- END Form Control-->

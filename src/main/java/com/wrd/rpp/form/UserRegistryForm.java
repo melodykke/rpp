@@ -9,6 +9,8 @@ public class UserRegistryForm {
     private String username;
     @NotEmpty(message = "行政区名必填")
     private String regionName;
+    @NotEmpty(message = "上级行政机构名")
+    private String superiorRegionName;
     @NotEmpty(message = "真实姓名必填")
     private String name;
     @NotEmpty(message = "账号密码必填")
@@ -17,4 +19,5 @@ public class UserRegistryForm {
     private String rPassword;
     @NotEmpty(message = "联系电话必填")
     private String phone;
+    private String email;
 }

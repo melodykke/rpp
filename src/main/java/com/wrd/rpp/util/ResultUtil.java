@@ -27,4 +27,17 @@ public class ResultUtil {
         resultVO.setMsg(SysEnum.DATA_CALLBACK_FAILED.getMsg());
         return resultVO;
     }
+
+    public static ResultVO failed(SysEnum sysEnum){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(sysEnum.getCode());
+        resultVO.setMsg(sysEnum.getMsg());
+        return resultVO;
+    }
+    public static ResultVO failed(Integer code, String msg){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(code);
+        resultVO.setMsg(msg);
+        return resultVO;
+    }
 }

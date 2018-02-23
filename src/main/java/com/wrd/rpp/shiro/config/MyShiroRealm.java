@@ -44,6 +44,9 @@ public class MyShiroRealm extends AuthorizingRealm{
 		if(userInfo == null){
 			return null;
 		}
+		if(userInfo.getState()==0){
+			return null;
+		}
 		// 3. 加密， 使用SimpleAuthenticationInfo 进行身份处理
 		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userInfo, userInfo.getPassword(), ByteSource.Util.bytes(userInfo.getSalt()), this.getName());
 		return simpleAuthenticationInfo;

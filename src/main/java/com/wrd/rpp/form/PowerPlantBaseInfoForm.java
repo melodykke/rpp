@@ -1,15 +1,15 @@
 package com.wrd.rpp.form;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Data
 public class PowerPlantBaseInfoForm {
     private String plantCode;
-    @NotNull(message = "电站名称为空！")
+    @NotEmpty(message = "电站名称为空！")
     private String plantName; // 电站名称
     private String administrativeArea; // 行政区
     private String plantRiverLocation; // 河流名称
@@ -43,11 +43,11 @@ public class PowerPlantBaseInfoForm {
     private String mainDamType; // 主坝类型
     private BigDecimal migrantedPopulation; // 迁移人口
     private BigDecimal staticTotalInvestment; // 静态总投资
-    private Date constructionTime; // 建设开始时间
-    private Date constructionEndTime; // 建设结束时间
-    private Date productionTime; // 投产时间
-    private Date completionAcceptanceTime; // 竣工验收时间
-    private Date compileTime; // 编制时间
+    private String constructionTime; // 建设开始时间
+    private String constructionEndTime; // 建设结束时间
+    private String productionTime; // 投产时间
+    private String completionAcceptanceTime; // 竣工验收时间
+    private String compileTime; // 编制时间
     private String compileUnit; // 编制单位
     private String compileLegalPerson; // 项目法人
     private String contact; // 联系人
@@ -66,6 +66,6 @@ public class PowerPlantBaseInfoForm {
     private String fillFormUnit; // 填报单位
     private String fillFormPerson; // 填报人员
     private String fillFormPersonTel; // 填报人员电话
-    private Date fillFormTime; // 填报时间
+    private String fillFormTime; // 填报时间
     private String marks; // 备注
 }

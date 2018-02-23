@@ -1,7 +1,6 @@
 package com.wrd.rpp.controller;
 
 import com.wrd.rpp.dataobject.PowerPlantBaseInfoUpload;
-import com.wrd.rpp.dataobject.PowerPlantPowerInfo;
 import com.wrd.rpp.dto.PowerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTO;
 import com.wrd.rpp.enums.SysEnum;
 import com.wrd.rpp.exception.SysException;
@@ -12,14 +11,8 @@ import com.wrd.rpp.util.ExcelUtils;
 import com.wrd.rpp.util.ResultUtil;
 import com.wrd.rpp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ResourceUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,9 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -96,6 +86,7 @@ public class PowerPlantController {
      * @return
      */
     @GetMapping("/power-plant-base-info-upload")
+    @RequiresRoles("county")
     public ModelAndView powerPlantBaseInfoUpload(){
         ModelAndView modelAndView = new ModelAndView("power-plant-base-info-upload");
         return modelAndView;
@@ -113,7 +104,7 @@ public class PowerPlantController {
     public ResultVO<PowerPlantBaseInfoUpload> powerPlantBaseInfoUpload(@Valid PowerPlantBaseInfoForm powerPlantBaseInfoForm, BindingResult bindingResult, Map<String, Object> map){
         if(bindingResult.hasErrors()){
             log.error("【电站信息】 电站基础信息填报错误， 参数不正确 powerPlantBaseInfoForm = {}， 错误：{}", powerPlantBaseInfoForm, bindingResult.getFieldError().getDefaultMessage());
-            throw new SysException(SysEnum.PARAM_ERROR);
+            throw new SysException(SysEnum.DATA_SUBMIT_FAILED.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
         SysMsg sysMsg = powerPlantService.savePowerPlantBaseInfoUpload(powerPlantBaseInfoForm);
         return ResultUtil.success(sysMsg.getObject());

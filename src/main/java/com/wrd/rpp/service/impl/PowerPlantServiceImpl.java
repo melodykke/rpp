@@ -17,7 +17,12 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -85,8 +90,23 @@ public class PowerPlantServiceImpl implements PowerPlantService {
 
     @Override
     public SysMsg savePowerPlantBaseInfoUpload(PowerPlantBaseInfoForm powerPlantBaseInfoForm) {
+        if(powerPlantBaseInfoUploadRepository.findOneByPlantName(powerPlantBaseInfoForm.getPlantName()) != null) {
+            log.error("【数据存储】 数据存储错误,重复的电站名称，powerPlantBaseInfoForm.plantName = {}", powerPlantBaseInfoForm.getPlantName());
+            throw new SysException(SysEnum.DUPLICATED_PLANTNAME);
+        }
         PowerPlantBaseInfoUpload powerPlantBaseInfoUpload = new PowerPlantBaseInfoUpload();
         BeanUtils.copyProperties(powerPlantBaseInfoForm, powerPlantBaseInfoUpload);
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            powerPlantBaseInfoUpload.setConstructionTime(powerPlantBaseInfoForm.getConstructionTime() == "" ? null : format.parse(powerPlantBaseInfoForm.getConstructionTime()));
+            powerPlantBaseInfoUpload.setConstructionEndTime(powerPlantBaseInfoForm.getConstructionEndTime() == "" ? null : format.parse(powerPlantBaseInfoForm.getConstructionEndTime()));
+            powerPlantBaseInfoUpload.setProductionTime(powerPlantBaseInfoForm.getProductionTime() == "" ? null : format.parse(powerPlantBaseInfoForm.getProductionTime()));
+            powerPlantBaseInfoUpload.setCompletionAcceptanceTime(powerPlantBaseInfoForm.getCompletionAcceptanceTime() == "" ? null : format.parse(powerPlantBaseInfoForm.getCompletionAcceptanceTime()));
+            powerPlantBaseInfoUpload.setCompileTime(powerPlantBaseInfoForm.getCompileTime() == "" ? null : format.parse(powerPlantBaseInfoForm.getCompileTime()));
+            powerPlantBaseInfoUpload.setFillFormTime(powerPlantBaseInfoForm.getFillFormTime() == "" ? null : format.parse(powerPlantBaseInfoForm.getFillFormTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         powerPlantBaseInfoUpload.setPlantId(KeyUtil.genUniqueKey());
         PowerPlantBaseInfoUpload powerPlantBaseInfoUploadReturn = powerPlantBaseInfoUploadRepository.save(powerPlantBaseInfoUpload);
         if(powerPlantBaseInfoUploadReturn == null){

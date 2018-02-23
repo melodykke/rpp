@@ -211,7 +211,7 @@
                     .datum(data.siteVisits)
                     .call(chart);
 
-              
+
 
                 nv.utils.windowResize(chart.update);
 

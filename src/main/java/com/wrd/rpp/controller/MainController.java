@@ -9,12 +9,16 @@ import com.wrd.rpp.shiro.bean.UserInfo;
 import com.wrd.rpp.util.ResultUtil;
 import com.wrd.rpp.util.UserUtil;
 import com.wrd.rpp.vo.ResultVO;
+import com.wrd.rpp.vo.UserInfoVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -60,8 +64,7 @@ public class MainController {
      * @return
      */
     @PostMapping("/register")
-    @ResponseBody
-    public ResultVO add(@Valid UserRegistryForm userRegistryForm, BindingResult bindingResult){
+    public String add(@Valid UserRegistryForm userRegistryForm, BindingResult bindingResult){
         //表单后台验证
         if(bindingResult.hasErrors()){
             log.error("【账号错误】 账号注册错误， 参数不正确 userRegistryForm = {}", userRegistryForm);
@@ -77,9 +80,15 @@ public class MainController {
             log.error("【账号错误】 注册的密码和确认密码不一致！");
             throw new SysException(SysEnum.REGISTRY_INCONSISTENT_PASSWORD);
         }
+        //判断如果this用户的regionName在数据库中已存在，则返回错误！
+        if(userService.findByRegionName(userRegistryForm.getRegionName()) != null){
+            log.error("【账号错误】 该行政区以被注册，不得重复注册！");
+            throw new SysException(SysEnum.REGISTRY_DUPLICATED_REGIONNAME);
+        }
         UserInfo defaultUser = UserUtil.createDefaultUser(userRegistryForm);
+        defaultUser.setParent(userService.findByRegionName(userRegistryForm.getSuperiorRegionName()));
         userService.save(defaultUser);
-        return ResultUtil.success(defaultUser);
+        return "redirect:/login";
     }
 
     @RequestMapping(value = {"/index", "/"})
@@ -114,7 +123,6 @@ public class MainController {
     @PostMapping("/login")
     public String login (@Valid UserSigninForm userSigninForm, BindingResult bindingResult, HttpServletRequest request,
                          Map<String, Object> map){
-      /*  ModelAndView modelAndView = new ModelAndView("login");*/
         if(bindingResult.hasErrors()){
             log.error("【账号错误】 账号登录错误， 参数不正确 userSigninForm = {}", userSigninForm);
             throw new SysException(SysEnum.SIGNIN_PARAM_ERROR);
@@ -127,7 +135,7 @@ public class MainController {
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
                 log.error("UnknownAccountException -- > 账号不存在  userSigninForm = {}", userSigninForm);
-                msg = "账号不存在，请重新输入！";
+                msg = "账号不存在或账号尚未激活，请确认后重试！";
             } else if (IncorrectCredentialsException.class.getName().equals(exception)) {
                 log.error("IncorrectCredentialsException -- > 密码不正确：", userSigninForm);
                 msg = "密码不正确，请重新输入！";
@@ -143,7 +151,22 @@ public class MainController {
         }
         map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理
-        return "login";
+        return "/login";
     }
 
+    @GetMapping("/getSubject")
+    @RequiresUser
+    @ResponseBody
+    public ResultVO getSubject(){
+        UserInfo userInfo = (UserInfo)SecurityUtils.getSubject().getPrincipal();
+        UserInfoVO userInfoVO = new UserInfoVO();
+        BeanUtils.copyProperties(userInfo, userInfoVO);
+        return ResultUtil.success(userInfoVO);
+    }
+
+    @GetMapping("/user-manage")
+    @RequiresRoles("admin")
+    public String userManage(){
+        return "/user-manage";
+    }
 }

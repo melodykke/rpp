@@ -174,7 +174,7 @@
         <!-- END MOBILE SIDEBAR TOGGLE -->
         <div class="">
             <div class="brand inline   ">
-                <img th:src="@{/assets/img/logo.png}" alt="logo" th:data-th:src="@{/assets/img/logo.png}" th:data-src-retina="assets/img/logo_2x.png}" width="78" height="22"/>
+                <img th:src="@{/assets/img/logo.png}" alt="logo"  width="78" height="22"/>
             </div>
             <!-- START NOTIFICATION LIST -->
             <ul class="hidden-md-down notification-list no-margin hidden-sm-down b-grey b-l b-r no-style p-l-30 p-r-20">
@@ -189,42 +189,6 @@
                             <div class="notification-panel">
                                 <!-- START Notification Body-->
                                 <div class="notification-body scrollable">
-                                    <!-- START Notification Item-->
-                                    <div class="notification-item unread clearfix">
-                                        <!-- START Notification Item-->
-                                        <div class="heading open">
-                                            <a href="#" class="text-complete pull-left">
-                                                <i class="pg-map fs-16 m-r-10"></i>
-                                                <span class="bold">Carrot Design</span>
-                                                <span class="fs-12 m-l-10">David Nester</span>
-                                            </a>
-                                            <div class="pull-right">
-                                                <div class="thumbnail-wrapper d16 circular inline m-t-15 m-r-10 toggle-more-details">
-                                                    <div><i class="fa fa-angle-left"></i>
-                                                    </div>
-                                                </div>
-                                                <span class=" time">few sec ago</span>
-                                            </div>
-                                            <div class="more-details">
-                                                <div class="more-details-inner">
-                                                    <h5 class="semi-bold fs-16">“Apple’s Motivation - Innovation <br />
-                                                        distinguishes between <br />
-                                                        A leader and a follower.”</h5>
-                                                    <p class="small hint-text">
-                                                        Commented on john Smiths wall.
-                                                        <br /> via pages framework.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END Notification Item-->
-                                        <!-- START Notification Item Right Side-->
-                                        <div class="option" data-toggle="tooltip" data-placement="left" title="mark as read">
-                                            <a href="#" class="mark"></a>
-                                        </div>
-                                        <!-- END Notification Item Right Side-->
-                                    </div>
-                                    <!-- START Notification Body-->
                                     <!-- START Notification Item-->
                                     <div class="notification-item  clearfix">
                                         <div class="heading">
@@ -259,30 +223,11 @@
                                         <!-- END Notification Item Right Side-->
                                     </div>
                                     <!-- END Notification Item-->
-                                    <!-- START Notification Item-->
-                                    <div class="notification-item unread clearfix">
-                                        <div class="heading">
-                                            <div class="thumbnail-wrapper d24 circular b-white m-r-5 b-a b-white m-t-10 m-r-10">
-                                                <img width="30" height="30" th:data-src-retina="assets/img/profiles/1x.jpg}" th:data-th:src="@{/assets/img/profiles/1.jpg}" alt="" th:src="@{/assets/img/profiles/1.jpg}"/>
-                                            </div>
-                                            <a href="#" class="text-complete pull-left">
-                                                <span class="bold">Revox Design Labs</span>
-                                                <span class="fs-12 m-l-10">Owners</span>
-                                            </a>
-                                            <span class="pull-right time">11:00pm</span>
-                                        </div>
-                                        <!-- START Notification Item Right Side-->
-                                        <div class="option" data-toggle="tooltip" data-placement="left" title="mark as read">
-                                            <a href="#" class="mark"></a>
-                                        </div>
-                                        <!-- END Notification Item Right Side-->
-                                    </div>
-                                    <!-- END Notification Item-->
                                 </div>
                                 <!-- END Notification Body-->
                                 <!-- START Notification Footer-->
                                 <div class="notification-footer text-center">
-                                    <a href="#" class="">Read all notifications</a>
+                                    <a href="#" class="">消息提醒</a>
                                     <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
                                         <i class="pg-refresh_new"></i>
                                     </a>
@@ -307,12 +252,12 @@
         <div class="d-flex align-items-center">
             <!-- START User Info-->
             <div class="pull-left p-r-10 fs-14 font-heading hidden-md-down">
-                <span class="semi-bold">欢迎， </span> <span class="text-master">melodykke</span>
+                <span class="semi-bold">欢迎， </span> <span class="text-master" id="subject-name">…<span id="subject-refresh" hidden="hidden">点我 <a th:href="@{/getSubject}">刷新</a></span></span>
             </div>
             <div class="dropdown pull-right hidden-md-down">
                 <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="thumbnail-wrapper d32 circular inline">
-                  <img th:src="@{/assets/img/profiles/avatar.jpg}" alt="" th:data-th:src="@{/assets/img/profiles/avatar.jpg}" th:data-src-retina="assets/img/profiles/avatar_small2x.jpg}" width="32" height="32"/>
+                  <img th:src="@{/assets/img/profiles/avatar.jpg}" alt="" width="32" height="32"/>
                   </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
@@ -458,7 +403,7 @@
                     <span class="icon-thumbnail"><i class="pg-map"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="google_map.html">角色管理</a>
+                            <a href="javascript:void(0)" id="role-manage">角色管理</a>
                             <span class="icon-thumbnail">角</span>
                         </li>
                         <li class="">
@@ -480,7 +425,41 @@
         </div>
         <!-- END SIDEBAR MENU -->
     </nav>
+    <div class="modal fade slide-up disable-scroll" id="permission-manager" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog ">
+            <div class="modal-content-wrapper">
+                <div class="modal-content">
+                    <div class="modal-header clearfix text-left">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+                        </button>
+                        <h5>角色分配</h5>
+                        <p class="p-b-10">向目标用户分配各类型角色（一般情况下，一个用户分配一个角色即可！）</p>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="p-t-20 clearfix p-l-10 p-r-10">
+                                    <div class="pull-left">
+                                        <p class="bold font-montserrat text-uppercase">TOTAL</p>
+                                    </div>
+                                    <div class="pull-right">
+                                        <p class="bold font-montserrat text-uppercase">$20.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 m-t-10 sm-m-t-10">
+                                <button type="button" class="btn btn-primary btn-block m-t-5">Pay Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 </div>
+
 <div th:fragment="footer">
     <div class=" container-fluid  container-fixed-lg footer">
         <div class="copyright sm-text-center">
@@ -494,6 +473,28 @@
                 xxx水利厅<span class="hint-text">&amp; 农电局</span>
             </p>
             <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="ppbiu-submit-cover-layer">
+    <div class="modal fade slide-up disable-scroll" id="ppbiu-submit" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog ">
+            <div class="modal-content-wrapper">
+                <div class="modal-content">
+                    <div class="modal-header clearfix text-left">
+                        <h5 id="h5title">oooooooo</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="ptext" class="no-margin">oooooooooo</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="goahead-button" class="btn btn-primary btn-cons  pull-left" aria-hidden="true" >继续</button>
+                        <button type="button" id="return-button" class="btn btn-default btn-cons no-margin pull-left" data-dismiss="modal" >返回</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
         </div>
     </div>
 </div>
