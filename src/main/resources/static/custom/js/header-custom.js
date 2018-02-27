@@ -21,7 +21,7 @@ function getSubject(url){
         //成功返回之后调用的函数
         success:function(data){
             $("#subject-refresh").hide();
-            $('#subject-name').text(data.data.regionName)
+            $('#subject-name').text(data.data.name)
         },
         //调用执行后调用的函数
         /*complete: function(XMLHttpRequest, textStatus){

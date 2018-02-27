@@ -403,7 +403,7 @@
                     <span class="icon-thumbnail"><i class="pg-map"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="javascript:void(0)" id="role-manage">角色管理</a>
+                            <a th:href="@{/user/user-manage}">角色管理</a>
                             <span class="icon-thumbnail">角</span>
                         </li>
                         <li class="">
@@ -425,39 +425,6 @@
         </div>
         <!-- END SIDEBAR MENU -->
     </nav>
-    <div class="modal fade slide-up disable-scroll" id="permission-manager" tabindex="-1" role="dialog" aria-hidden="false">
-        <div class="modal-dialog ">
-            <div class="modal-content-wrapper">
-                <div class="modal-content">
-                    <div class="modal-header clearfix text-left">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
-                        </button>
-                        <h5>角色分配</h5>
-                        <p class="p-b-10">向目标用户分配各类型角色（一般情况下，一个用户分配一个角色即可！）</p>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="p-t-20 clearfix p-l-10 p-r-10">
-                                    <div class="pull-left">
-                                        <p class="bold font-montserrat text-uppercase">TOTAL</p>
-                                    </div>
-                                    <div class="pull-right">
-                                        <p class="bold font-montserrat text-uppercase">$20.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 m-t-10 sm-m-t-10">
-                                <button type="button" class="btn btn-primary btn-block m-t-5">Pay Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-    </div>
 </div>
 
 <div th:fragment="footer">
@@ -483,10 +450,10 @@
             <div class="modal-content-wrapper">
                 <div class="modal-content">
                     <div class="modal-header clearfix text-left">
-                        <h5 id="h5title">oooooooo</h5>
+                        <h5 id="h5title">…………</h5>
                     </div>
                     <div class="modal-body">
-                        <p id="ptext" class="no-margin">oooooooooo</p>
+                        <p id="ptext" class="no-margin">…………</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="goahead-button" class="btn btn-primary btn-cons  pull-left" aria-hidden="true" >继续</button>
@@ -495,6 +462,109 @@
                 </div>
             </div>
             <!-- /.modal-content -->
+        </div>
+    </div>
+</div>
+
+<div th:fragment="overlay-search-results">
+    <div class="container-fluid">
+              <span>
+                    <strong>suggestions :</strong>
+                </span>
+        <span id="overlay-suggestions"></span>
+        <br />
+        <div class="search-results m-t-40">
+            <p class="bold">Pages Search Results</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- BEGIN Search Result Item !-->
+                    <div class="">
+                        <!-- BEGIN Search Result Item Thumbnail !-->
+                        <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                            <div>
+                                <img width="50" height="50" th:src="@{/assets/img/profiles/avatar.jpg}" alt="" />
+                            </div>
+                        </div>
+                        <!-- END Search Result Item Thumbnail !-->
+                        <div class="p-l-10 inline p-t-5">
+                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on pages</h5>
+                            <p class="hint-text">via john smith</p>
+                        </div>
+                    </div>
+                    <!-- END Search Result Item !-->
+                    <!-- BEGIN Search Result Item !-->
+                    <div class="">
+                        <!-- BEGIN Search Result Item Thumbnail !-->
+                        <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                            <div>T</div>
+                        </div>
+                        <!-- END Search Result Item Thumbnail !-->
+                        <div class="p-l-10 inline p-t-5">
+                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> related topics</h5>
+                            <p class="hint-text">via pages</p>
+                        </div>
+                    </div>
+                    <!-- END Search Result Item !-->
+                    <!-- BEGIN Search Result Item !-->
+                    <div class="">
+                        <!-- BEGIN Search Result Item Thumbnail !-->
+                        <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                            <div><i class="fa fa-headphones large-text "></i>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item Thumbnail !-->
+                        <div class="p-l-10 inline p-t-5">
+                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> music</h5>
+                            <p class="hint-text">via pagesmix</p>
+                        </div>
+                    </div>
+                    <!-- END Search Result Item !-->
+                </div>
+                <div class="col-md-6">
+                    <!-- BEGIN Search Result Item !-->
+                    <div class="">
+                        <!-- BEGIN Search Result Item Thumbnail !-->
+                        <div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
+                            <div><i class="fa fa-facebook large-text "></i>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item Thumbnail !-->
+                        <div class="p-l-10 inline p-t-5">
+                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on facebook</h5>
+                            <p class="hint-text">via facebook</p>
+                        </div>
+                    </div>
+                    <!-- END Search Result Item !-->
+                    <!-- BEGIN Search Result Item !-->
+                    <div class="">
+                        <!-- BEGIN Search Result Item Thumbnail !-->
+                        <div class="thumbnail-wrapper d48 circular bg-complete text-white inline m-t-10">
+                            <div><i class="fa fa-twitter large-text "></i>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item Thumbnail !-->
+                        <div class="p-l-10 inline p-t-5">
+                            <h5 class="m-b-5">Tweats on<span class="semi-bold result-name"> ice cream</span></h5>
+                            <p class="hint-text">via twitter</p>
+                        </div>
+                    </div>
+                    <!-- END Search Result Item !-->
+                    <!-- BEGIN Search Result Item !-->
+                    <div class="">
+                        <!-- BEGIN Search Result Item Thumbnail !-->
+                        <div class="thumbnail-wrapper d48 circular text-white bg-danger inline m-t-10">
+                            <div><i class="fa fa-google-plus large-text "></i>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item Thumbnail !-->
+                        <div class="p-l-10 inline p-t-5">
+                            <h5 class="m-b-5">Circles on<span class="semi-bold result-name"> ice cream</span></h5>
+                            <p class="hint-text">via google plus</p>
+                        </div>
+                    </div>
+                    <!-- END Search Result Item !-->
+                </div>
+            </div>
         </div>
     </div>
 </div>

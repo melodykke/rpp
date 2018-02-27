@@ -46,6 +46,7 @@ public class ShiroConfiguration {
 		// 配置不会被拦截的链接 顺序判断
 		filterChainDefinitionMap.put("/assets/**","anon");
 		filterChainDefinitionMap.put("/pages/**","anon");
+		filterChainDefinitionMap.put("/custom/**","anon");
 		filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/register", "anon");
 

@@ -8,8 +8,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface UserService {
-    public void save(UserInfo userInfo);
-    public UserInfo findByUsername(String username);
-    public UserInfo findByRegionName(String regionName);
-    public Page<UserInfoVO> ListAll(Pageable pageable);
+    void save(UserInfo userInfo);
+    UserInfo findByUsername(String username);
+    UserInfo findUserInfoByRegionCode(String regionCode);
+    Page<UserInfoVO> ListAll(Pageable pageable);
+    String changeState(String username);
 }

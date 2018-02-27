@@ -16,6 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
     <meta content="" name="description" />
     <meta content="" name="author" />
+    <link th:href="@{/custom/js/tree_files/ace.min.css}" rel="stylesheet" />
     <link th:href="@{/assets/plugins/pace/pace-theme-flash.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.css}" rel="stylesheet" type="text/css" />
@@ -64,49 +65,74 @@
                                           Comman Practice Followed
                                           -->
                       <th style="width:1%" class="text-center">
-                        <button class="btn btn-link"><i class="pg-trash"></i>
-                        </button>
+                          <div class="col-2 text-center">
+                              <i class="fs-14 fa fa-th"></i>
+                          </div>
                       </th>
                       <th style="width:20%">用户名</th>
+                      <th style="width:20%">角色</th>
                       <th style="width:20%">行政区</th>
+                      <th style="width:20%">行政区代码</th>
                       <th style="width:29%">姓名</th>
                       <th style="width:15%">电话</th>
                       <th style="width:15%">邮箱</th>
+                      <th style="width:15%">状态</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+
+                  
+                    <!--/*@thymesVar id="userInfoVOPage" type="java"*/-->
+                    <tr th:each="userInfo : ${userInfoVOPage.content}" >
                       <td class="v-align-middle">
                         <div class="checkbox text-center">
-                          <input type="checkbox" value="3" id="checkbox4" />
-                          <label for="checkbox4" class="no-padding no-margin"></label>
+
+                            <span class="badge btn-complete user-role-manage-button" th:id="${userInfo.username}"> </span>
+
                         </div>
                       </td>
                       <td class="v-align-middle ">
-                        <p>Life’s sadness shared</p>
+                          <p th:text="${userInfo.username}"></p>
+                      </td>
+                      <td class="v-align-middle ">
+                          <p th:text="${userInfo.roles}"></p>
                       </td>
                       <td class="v-align-middle">
-                        <p>United States, India, China,Africa</p>
+                          <p th:text="${userInfo.regionName}"></p>
                       </td>
                       <td class="v-align-middle">
-                        <p>he world speaks English. Common law, Magna Carta and the Bill of Rights are its wonderful legacy</p>
+                          <p th:text="${userInfo.regionCode}"></p>
                       </td>
                       <td class="v-align-middle">
-                        <p>Public</p>
+                          <p th:text="${userInfo.name}"></p>
                       </td>
                       <td class="v-align-middle">
-                        <p>April 13,2014 10:13</p>
+                          <p th:text="${userInfo.phone}"></p>
+                      </td>
+                      <td class="v-align-middle">
+                          <p th:text="${userInfo.email}"></p>
+                      </td>
+                      <td class="v-align-middle">
+                          <button type="button" class="btn btn-complete change-user-state" data-toggle="button" th:id="${userInfo.username}" th:text="${userInfo.state}"></button>
+                          <!--<p th:text="${userInfo.state}"></p>-->
                       </td>
                     </tr>
                     </tbody>
                   </table>
-                    <div class="btn-toolbar m-t-10" role="toolbar" style="position: relative; float: right;">
-                        <div class="btn-group btn-group-sm">
-                            <button type="button" class="btn btn-default">Left</button>
-                            <button type="button" class="btn btn-default">Middle</button>
-                            <button type="button" class="btn btn-default">Right</button>
+                    <row>
+                        <div class="col-md-6 m-t-10 no-padding" style="position: relative; float: left;">
+                            <p>用户 <span style="font-style: oblique" th:text="${userInfoVOPage.totalElements}"> </span>人　共 <span style="font-style: oblique" th:text="${userInfoVOPage.totalPages}"></span> 页</p>
                         </div>
-                    </div>
+                        <div class="col-xs-6 m-t-10 no-padding">
+                            <div class="btn-toolbar m-t-10" role="toolbar" style="position: relative; float: right;">
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-default">Left</button>
+                                    <button type="button" class="btn btn-default">Middle</button>
+                                    <button type="button" class="btn btn-default">Right</button>
+                                </div>
+                            </div>
+                        </div>
+                    </row>
                 </div>
               </div>
             </div>
@@ -134,7 +160,7 @@
         <!-- BEGIN Overlay Header !-->
         <div class="container-fluid">
           <!-- BEGIN Overlay Logo !-->
-          <img class="overlay-brand" src="assets/img/logo.png" alt="logo" width="78" height="22" />
+          <img class="overlay-brand" th:src="@{/assets/img/logo.png}" alt="logo" width="78" height="22" />
           <!-- END Overlay Logo !-->
           <!-- BEGIN Overlay Close !-->
           <a href="#" class="close-icon-light overlay-close text-black fs-16">
@@ -159,109 +185,49 @@
           <!-- END Overlay Controls !-->
         </div>
         <!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
-        <div class="container-fluid">
-          <span>
-                <strong>suggestions :</strong>
-            </span>
-          <span id="overlay-suggestions"></span>
-          <br />
-          <div class="search-results m-t-40">
-            <p class="bold">Pages Search Results</p>
-            <div class="row">
-              <div class="col-md-6">
-                <!-- BEGIN Search Result Item !-->
-                <div class="">
-                  <!-- BEGIN Search Result Item Thumbnail !-->
-                  <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
-                    <div>
-                      <img width="50" height="50" src="assets/img/profiles/avatar.jpg" alt="" />
+          <div th:include="page-fragments :: overlay-search-results"></div>
+        <!-- END Overlay Search Results !-->
+      </div>
+      <!-- END Overlay Content !-->
+    </div>
+    <div class="modal fade slide-up disable-scroll" id="role-manager" tabindex="-1" role="dialog" aria-hidden="false">
+      <div class="modal-dialog ">
+        <div class="modal-content-wrapper">
+          <div class="modal-content">
+            <div class="modal-header clearfix text-left">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+              </button>
+              <h5>角色分配</h5>
+              <p class="p-b-10">向目标用户分配各类型角色（一般情况下，一个用户分配一个角色即可！）</p>
+            </div>
+            <div class="modal-body">
+
+              <div class="row">
+                <div class="col-md-8">
+                    <div class="widget-box">
+                        <div class="widget-header header-color-blue2">
+                            <h4 class="lighter smaller">为该用户配置角色</h4>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main padding-8">
+                                <div id="roletree" class="tree tree-selectable"> </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <!-- END Search Result Item Thumbnail !-->
-                  <div class="p-l-10 inline p-t-5">
-                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on pages</h5>
-                    <p class="hint-text">via john smith</p>
-                  </div>
                 </div>
-                <!-- END Search Result Item !-->
-                <!-- BEGIN Search Result Item !-->
-                <div class="">
-                  <!-- BEGIN Search Result Item Thumbnail !-->
-                  <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
-                    <div>T</div>
+                  <div class="col-md-4 m-t-10 sm-m-t-10">
+                      <p style="font-style: italic; color: red"><span  id="code"></span><span  id="msg"></span></p>
                   </div>
-                  <!-- END Search Result Item Thumbnail !-->
-                  <div class="p-l-10 inline p-t-5">
-                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> related topics</h5>
-                    <p class="hint-text">via pages</p>
-                  </div>
+                <div class="col-md-4 m-t-10 sm-m-t-10">
+                  <button id="assign-role-confirm" type="button" class="btn btn-primary btn-block m-t-5">确定</button>
                 </div>
-                <!-- END Search Result Item !-->
-                <!-- BEGIN Search Result Item !-->
-                <div class="">
-                  <!-- BEGIN Search Result Item Thumbnail !-->
-                  <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
-                    <div><i class="fa fa-headphones large-text "></i>
-                    </div>
-                  </div>
-                  <!-- END Search Result Item Thumbnail !-->
-                  <div class="p-l-10 inline p-t-5">
-                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> music</h5>
-                    <p class="hint-text">via pagesmix</p>
-                  </div>
-                </div>
-                <!-- END Search Result Item !-->
-              </div>
-              <div class="col-md-6">
-                <!-- BEGIN Search Result Item !-->
-                <div class="">
-                  <!-- BEGIN Search Result Item Thumbnail !-->
-                  <div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
-                    <div><i class="fa fa-facebook large-text "></i>
-                    </div>
-                  </div>
-                  <!-- END Search Result Item Thumbnail !-->
-                  <div class="p-l-10 inline p-t-5">
-                    <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on facebook</h5>
-                    <p class="hint-text">via facebook</p>
-                  </div>
-                </div>
-                <!-- END Search Result Item !-->
-                <!-- BEGIN Search Result Item !-->
-                <div class="">
-                  <!-- BEGIN Search Result Item Thumbnail !-->
-                  <div class="thumbnail-wrapper d48 circular bg-complete text-white inline m-t-10">
-                    <div><i class="fa fa-twitter large-text "></i>
-                    </div>
-                  </div>
-                  <!-- END Search Result Item Thumbnail !-->
-                  <div class="p-l-10 inline p-t-5">
-                    <h5 class="m-b-5">Tweats on<span class="semi-bold result-name"> ice cream</span></h5>
-                    <p class="hint-text">via twitter</p>
-                  </div>
-                </div>
-                <!-- END Search Result Item !-->
-                <!-- BEGIN Search Result Item !-->
-                <div class="">
-                  <!-- BEGIN Search Result Item Thumbnail !-->
-                  <div class="thumbnail-wrapper d48 circular text-white bg-danger inline m-t-10">
-                    <div><i class="fa fa-google-plus large-text "></i>
-                    </div>
-                  </div>
-                  <!-- END Search Result Item Thumbnail !-->
-                  <div class="p-l-10 inline p-t-5">
-                    <h5 class="m-b-5">Circles on<span class="semi-bold result-name"> ice cream</span></h5>
-                    <p class="hint-text">via google plus</p>
-                  </div>
-                </div>
-                <!-- END Search Result Item !-->
               </div>
             </div>
           </div>
         </div>
-        <!-- END Overlay Search Results !-->
+        <!-- /.modal-content -->
       </div>
-      <!-- END Overlay Content !-->
+
     </div>
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
@@ -287,11 +253,32 @@
     <script type="text/javascript" th:src="@{/assets/plugins/datatables-responsive/js/lodash.min.js}"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
-    <script src="pages/js/pages.min.js"></script>
+    <script th:src="@{/pages/js/pages.min.js}"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
     <script th:src="@{/assets/js/tables.js}" type="text/javascript"></script>
     <script th:src="@{/assets/js/scripts.js}" type="text/javascript"></script>
+    <script th:src="@{/custom/js/user-manage.js}" type="text/javascript"></script>
+    <script th:src="@{/custom/js/tree_files/fuelux.tree-sampledata.js}"></script>
+    <script th:src="@{/custom/js/tree_files/fuelux.tree.min.js}"></script>
+    <script th:src="@{/custom/js/tree_files/ace-elements.min.js}"></script>
+    <script th:src="@{/custom/js/tree_files/ace.min.js}"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+
+            $('#roletree').ace_tree({
+                dataSource: treeDataSource,
+                multiSelect: true,
+                loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                'open-icon': 'icon-minus',
+                'close-icon': 'icon-plus',
+                'selectable': true,
+                'selected-icon': 'icon-ok',
+                'unselected-icon': 'icon-remove'
+            });
+
+        });
+    </script>
     <!-- END PAGE LEVEL JS -->
   </body>
 </html>

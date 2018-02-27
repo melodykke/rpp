@@ -52,7 +52,7 @@
               <div class="form-group form-group-default">
                 <label>行政区名</label>
                   <div class="d-flex">
-                      <select name="regionName" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                      <select name="regionCode" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
                           <option value="520000000000">贵州省水利厅</option>
                           <option value="520100000000" selected="selected">贵阳市</option>
                           <option value="520102000000">　南明区</option>
@@ -156,30 +156,6 @@
                   </div>
               </div>
           </div>
-            <div class="row">
-                <div class="form-group form-group-default">
-                    <label>上级行政区名</label>
-                    <div class="d-flex">
-                        <select name="superiorRegionName" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                            <option value="省水利厅">省水利厅</option>
-                            <option value="贵阳市" >贵阳市</option>
-                            <option value="贵安新区">贵安新区</option>
-                            <option value="六盘水市">六盘水市</option>
-                            <option value="遵义市">遵义市</option>
-                            <option value="安顺市">安顺市</option>
-                            <option value="毕节市">毕节市</option>
-                            <option value="铜仁市">铜仁市</option>
-
-                            <option value="黔西南布依族苗族自治州">黔西南布依族苗族自治州</option>
-
-                            <option value="黔东南苗族侗族自治州">黔东南苗族侗族自治州</option>
-
-                            <option value="黔南布依族苗族自治州">黔南布依族苗族自治州</option>
-
-                        </select>
-                    </div>
-                </div>
-            </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group form-group-default">
@@ -228,8 +204,9 @@
               <a th:href="@{/login}" class="text-info small">返回</a>
             </div>
           </div>
-          <button class="btn btn-primary btn-cons m-t-10" type="submit">创建账号</button>
         </form>
+          <button id="register-button" class="btn btn-primary btn-cons m-t-10" type="submit">创建账号</button>
+
       </div>
     </div>
     <div class=" full-width">
@@ -380,6 +357,26 @@
       </div>
       <!-- END Overlay Content !-->
     </div>
+    <div class="modal fade slide-up disable-scroll" id="register-submit-cover-layer" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog ">
+            <div class="modal-content-wrapper">
+                <div class="modal-content">
+                    <div class="modal-header clearfix text-left">
+                        <h5 id="h5title">…………</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="ptext" class="no-margin">…………</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="goahead-button" class="btn btn-primary btn-cons  pull-left" aria-hidden="true" >关闭</button>
+                        <button type="button" id="return-button" class="btn btn-default btn-cons no-margin pull-left" data-dismiss="modal" >返回</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
     <script th:src="@{/assets/plugins/pace/pace.min.js}" type="text/javascript"></script>
@@ -399,11 +396,15 @@
     <script th:src="@{/assets/plugins/jquery-validation/js/jquery.validate.min.js}" type="text/javascript"></script>
     <!-- END VENDOR JS -->
     <script th:src="@{/pages/js/pages.min.js}"></script>
-    <script>
+    <script th:src="@{/custom/js/register.js}" type="text/javascript"></script>
+
+
+
+<!--    <script>
     $(function()
     {
       $('#form-register').validate()
     })
-    </script>
+    </script>-->
   </body>
 </html>

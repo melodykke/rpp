@@ -6,8 +6,10 @@ import lombok.Data;
 public class UserInfoVO {
     private String username;
     private String regionName;
-    private String superiorRegionName;
+    private String regionCode;
+    private String roles;
     private String email;
     private String phone;
     private String name;
+    private String state;
 }

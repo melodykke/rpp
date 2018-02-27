@@ -13,6 +13,7 @@ public enum SysEnum {
     OPERATION_SUCCESS(1, "操作正常！"),
 
     DATA_CALLBACK_SUCCESS(100, "数据成功返回"),
+    DATA_CONFIG_SUCCESS(99, "数据配置成功"),
     DATA_CALLBACK_FAILED(101, "数据返回错误"),
     DATA_SUBMIT_FAILED(102, "数据提交错误， 请检查后重试！"),
 
@@ -20,9 +21,12 @@ public enum SysEnum {
     REGISTRY_DUPLICATED_ACCOUNTNAME(201, "所注册账号名称已被他人使用，请换个账号名重试"),
     REGISTRY_INCONSISTENT_PASSWORD(202, "输入的账号密码不正确，请确认后重试！"),
     REGISTRY_DUPLICATED_REGIONNAME(203, "输入的行政区已被注册，请勿重复注册！"),
+    REGISTRY_NO_SUPERIOR(204, "您的上级部门还未注册，请等待您的上级部门注册后重试！"),
     SIGNIN_PARAM_ERROR(210, "账号登录错误"),
 
-    PAGE_NO_CONTENT(300, "查询错误，查询页无内容！")
+    PAGE_NO_CONTENT(300, "查询错误，查询页无内容！"),
+
+    ASSIGNROLES_PARAM_ERROR(400, "参数错误，请核对后重新配置，或重启浏览器再试！")
     ;
 
     private Integer code;

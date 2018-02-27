@@ -1,9 +1,13 @@
 package com.wrd.rpp.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
+import com.wrd.rpp.dataobject.Region;
 import com.wrd.rpp.enums.SysEnum;
 import com.wrd.rpp.exception.SysException;
 import com.wrd.rpp.form.UserRegistryForm;
 import com.wrd.rpp.form.UserSigninForm;
+import com.wrd.rpp.repository.RegionRepository;
+import com.wrd.rpp.service.PowerPlantService;
 import com.wrd.rpp.service.UserService;
 import com.wrd.rpp.shiro.bean.UserInfo;
 import com.wrd.rpp.util.ResultUtil;
@@ -11,6 +15,7 @@ import com.wrd.rpp.util.UserUtil;
 import com.wrd.rpp.vo.ResultVO;
 import com.wrd.rpp.vo.UserInfoVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -37,7 +42,10 @@ public class MainController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private PowerPlantService powerPlantService;
+    @Autowired
+    private RegionRepository regionRepository;
     @GetMapping("/403")
     public String test(){
         return "/403";
@@ -64,7 +72,8 @@ public class MainController {
      * @return
      */
     @PostMapping("/register")
-    public String add(@Valid UserRegistryForm userRegistryForm, BindingResult bindingResult){
+    @ResponseBody
+    public ResultVO add(@Valid UserRegistryForm userRegistryForm, BindingResult bindingResult){
         //表单后台验证
         if(bindingResult.hasErrors()){
             log.error("【账号错误】 账号注册错误， 参数不正确 userRegistryForm = {}", userRegistryForm);
@@ -81,14 +90,20 @@ public class MainController {
             throw new SysException(SysEnum.REGISTRY_INCONSISTENT_PASSWORD);
         }
         //判断如果this用户的regionName在数据库中已存在，则返回错误！
-        if(userService.findByRegionName(userRegistryForm.getRegionName()) != null){
+        if(userService.findUserInfoByRegionCode(userRegistryForm.getRegionCode()) != null){
             log.error("【账号错误】 该行政区以被注册，不得重复注册！");
             throw new SysException(SysEnum.REGISTRY_DUPLICATED_REGIONNAME);
         }
-        UserInfo defaultUser = UserUtil.createDefaultUser(userRegistryForm);
-        defaultUser.setParent(userService.findByRegionName(userRegistryForm.getSuperiorRegionName()));
+        //获得当前注册账号地区的上一级地区代码
+        String ParentRegionCode = regionRepository.findRegionByRegionCode(userRegistryForm.getRegionCode()).getParent().getRegionCode();
+
+        if(userService.findUserInfoByRegionCode(ParentRegionCode) == null){
+            log.error("【账号错误】 该注册账号上级不存在，不得先行注册！");
+            throw new SysException(SysEnum.REGISTRY_NO_SUPERIOR);
+        }
+        UserInfo defaultUser = UserUtil.createDefaultUser(userRegistryForm, userService.findUserInfoByRegionCode(ParentRegionCode));
         userService.save(defaultUser);
-        return "redirect:/login";
+        return ResultUtil.success();
     }
 
     @RequestMapping(value = {"/index", "/"})
@@ -164,9 +179,4 @@ public class MainController {
         return ResultUtil.success(userInfoVO);
     }
 
-    @GetMapping("/user-manage")
-    @RequiresRoles("admin")
-    public String userManage(){
-        return "/user-manage";
-    }
 }

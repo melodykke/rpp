@@ -40,6 +40,8 @@ public class PowerPlantServiceImpl implements PowerPlantService {
     private PowerPlantGeneratingEquipmentRepository powerPlantGeneratingEquipmentRepository;
     @Autowired
     private PowerPlantBaseInfoUploadRepository powerPlantBaseInfoUploadRepository;
+    @Autowired
+    private RegionRepository regionRepository;
     @Override //存储电站基本数据
     public SysMsg savePowerPlantBaseInfoList(List<PowerPlantBaseInfo> powerPlantBaseInfoList){
         List<PowerPlantBaseInfo> powerPlantBaseInfoListReturn = powerPlantBaseInfoRepository.save(powerPlantBaseInfoList);
@@ -116,7 +118,10 @@ public class PowerPlantServiceImpl implements PowerPlantService {
         return new SysMsg(SysEnum.OPERATION_SUCCESS, powerPlantBaseInfoUploadReturn);
     }
 
-
+    @Override
+    public Region findByRegionCode(String code) {
+        return regionRepository.findRegionByRegionCode(code);
+    }
 
 
     //出现储存错误时调用

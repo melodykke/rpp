@@ -1,13 +1,17 @@
 package com.wrd.rpp.service.impl;
 
 import com.wrd.rpp.convert.UserInfo2UserInfoVO;
+import com.wrd.rpp.dataobject.Region;
 import com.wrd.rpp.enums.SysEnum;
+import com.wrd.rpp.enums.UserAccountStatusEnum;
 import com.wrd.rpp.exception.SysException;
+import com.wrd.rpp.repository.RegionRepository;
 import com.wrd.rpp.repository.UserRepository;
 import com.wrd.rpp.service.UserService;
 import com.wrd.rpp.shiro.bean.UserInfo;
 import com.wrd.rpp.vo.UserInfoVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -25,7 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private RegionRepository regionRepository;
     @Override
     public void save(UserInfo userInfo) {
         userRepository.save(userInfo);
@@ -37,9 +42,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfo findByRegionName(String regionName) {
-        return userRepository.findByRegionName(regionName);
+    public UserInfo findUserInfoByRegionCode(String regionCode) {
+        return userRepository.findUserInfoByRegionCode(regionCode);
     }
+
 
     @Override
     public Page<UserInfoVO> ListAll(Pageable pageable) {
@@ -49,9 +55,22 @@ public class UserServiceImpl implements UserService {
             log.info("【用户管理】 查询用户错误，查询页无内容！");
             throw new SysException(SysEnum.PAGE_NO_CONTENT);
         }
-        List<UserInfoVO> userInfoVOList = userInfoList.stream().map(e -> UserInfo2UserInfoVO.convert(e)).collect(Collectors.toList());
+        List<UserInfoVO> userInfoVOList = userInfoList.stream().map(e -> UserInfo2UserInfoVO.convert(e, regionRepository.findRegionByRegionCode(e.getRegionCode()).getRegionName())).collect(Collectors.toList());
+        //userInfoVOList = userInfoVOList.stream().map(e -> e.setRegionName("dd")).collect(Collectors.toList());
         Page<UserInfoVO> userInfoVOPage = new PageImpl<UserInfoVO>(userInfoVOList, pageable, userInfoPage.getTotalElements());
         return userInfoVOPage;
+    }
+
+    @Override
+    public String changeState(String username) {
+        UserInfo userInfo = userRepository.findByUsername(username);
+        if(userInfo.getState()==0){
+            userInfo.setState((byte)1);
+        }else if(userInfo.getState()==1){
+            userInfo.setState((byte)0);
+        }
+        UserInfo userInfo1 = userRepository.save(userInfo);
+        return userInfo1.getState()==0 ? UserAccountStatusEnum.ACCOUNT_INACTIVATED.getMsg() : UserAccountStatusEnum.ACCOUNT_ACTIVATED.getMsg();
     }
 
 
