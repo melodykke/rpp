@@ -20,9 +20,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,7 +32,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Controller
+@RestController
 @RequestMapping("/user")
 @Slf4j
 public class UserController {
@@ -40,18 +42,27 @@ public class UserController {
     private RoleService roleService;
     @GetMapping("/user-manage")
     @RequiresRoles("admin")
-    public String userManage(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                             @RequestParam(value = "size", defaultValue = "5") Integer size,
-                             Map<String, Object> map){
-        PageRequest pageRequest = new PageRequest(page, size);
-        Page<UserInfoVO> userInfoVOPage = userService.ListAll(pageRequest);
-        map.put("userInfoVOPage", userInfoVOPage);
-        return "/user-manage";
+    public ModelAndView userManage(){
+        ModelAndView mv = new ModelAndView("/user-manage");
+        return mv;
     }
+    @PostMapping("/user-manage")
+    @RequiresRoles("admin")
+    public ResultVO userManage(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
+                             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                             Map<String, Object> map){
+        //前端bootstrap的table传来的参数为pageIndex和pageSize;pageIndex是从1开始的，而后台pageable的page计数是从0开始的
+        Integer page = pageIndex-1;
+        Integer size = pageSize;
+        Sort sort = new Sort(Sort.Direction.ASC, "regionCode");
+        PageRequest pageRequest = new PageRequest(page, size, sort);
+        Page<UserInfoVO> userInfoVOPage = userService.listAll(pageRequest);
+        return ResultUtil.success(userInfoVOPage);
+    }
+
 
     @PostMapping("/assign-role")
     @RequiresRoles("admin")
-    @ResponseBody
     public ResultVO assignRoles(@Valid AssignRolesForm assignRolesForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("【角色分配】 参数不正确 assignRolesForm = {}", assignRolesForm);
@@ -70,7 +81,6 @@ public class UserController {
 
     @GetMapping("/change-state")
     @RequiresRoles(value = "admin")
-    @ResponseBody
     public ResultVO changeState(@RequestParam String username){
         String msg = userService.changeState(username);
         return ResultUtil.success(SysEnum.DATA_CONFIG_SUCCESS.getCode(), msg);

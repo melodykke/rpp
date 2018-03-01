@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#basicTable").bootstrapTable({
+   $("#basicTable").bootstrapTable({
         url: 'http://sell01.natapp1.cc/user/user-manage',
         method: 'POST',
         striped: true,//设置为 true 会有隔行变色效果
@@ -17,23 +17,23 @@ $(document).ready(function() {
         paginationPreText: '‹',//指定分页条中上一页按钮的图标或文字,这里是<
         paginationNextText: '›',//指定分页条中下一页按钮的图标或文字,这里是>
         responseHandler:responseHandler,//请求数据成功后，渲染表格前的方法
-        columns :[
-            {
-                title: '<div class="col-2 text-center"><i class="fs-14 fa fa-th"></i></div>',//表的列名
-                align: 'center',//水平居中
-                formatter: function (value, row, index) {//自定义显示可以写标签哦~
-                    return  '<span class="badge btn-complete user-role-manage-button" onclick ="roleManage(\'' + row.username + '\')"> </span>';
-                }
-            },
-            {
-                title: '用户名',//表的列名
-                field: 'username',//json数据中rows数组中的属性名
-                align: 'center'//水平居中
-            },
-            {
-                title: '角色',//表的列名
-                field: 'roles',//json数据中rows数组中的属性名
-                align: 'center'//水平居中
+       columns :[
+           {
+               title: '<div class="col-2 text-center"><i class="fs-14 fa fa-th"></i></div>',//表的列名
+               align: 'center',//水平居中
+               formatter: function (value, row, index) {//自定义显示可以写标签哦~
+                   return  '<span class="badge btn-complete user-role-manage-button" onclick ="roleManage(\'' + row.username + '\')"> </span>';
+               }
+           },
+           {
+               title: '用户名',//表的列名
+               field: 'username',//json数据中rows数组中的属性名
+               align: 'center'//水平居中
+           },
+           {
+            title: '角色',//表的列名
+            field: 'roles',//json数据中rows数组中的属性名
+            align: 'center'//水平居中
             },
             {
                 title: '行政区',
@@ -61,9 +61,9 @@ $(document).ready(function() {
                 title: '邮箱',
                 field: 'email',
                 align: 'center'
-                /* formatter: function (value, row, index) {//自定义显示，这三个参数分别是：value该行的属性，row该行记录，index该行下标
-                     return row.userStatus == 0 ? "正常" : row.userStatus == 1 ? "请假" : "离职";
-                 }*/
+               /* formatter: function (value, row, index) {//自定义显示，这三个参数分别是：value该行的属性，row该行记录，index该行下标
+                    return row.userStatus == 0 ? "正常" : row.userStatus == 1 ? "请假" : "离职";
+                }*/
 
             },
             {
@@ -73,11 +73,11 @@ $(document).ready(function() {
                 formatter: function (value, row, index) {//自定义显示可以写标签哦~
                     console.log('user.state:'+row.state)
                     return  row.state == "未激活" ? '<button type="button" class="btn btn-complete" data-toggle="button" onclick ="changeUserState(\'' +this+ "','" + row.username + '\')">未激活</button>':
-                        '<button type="button" class="btn btn-complete" data-toggle="button" onclick ="changeUserState(\'' +this+ "','" + row.username + '\')">正常</button>';
+                       '<button type="button" class="btn btn-complete" data-toggle="button" onclick ="changeUserState(\'' +this+ "','" + row.username + '\')">正常</button>';
 
                 }
             }
-        ]
+       ]
     })
 
 //请求服务数据时所传参数
@@ -103,22 +103,16 @@ $(document).ready(function() {
         };
     };
 
-
+//刷新表格数据,点击你的按钮调用这个方法就可以刷新
+    function refresh() {
+        $('#basicTable').bootstrapTable('refresh', {url: "http://sell01.natapp1.cc/user/user-manage"});
+    };
 
 })
 
-//刷新表格数据,点击你的按钮调用这个方法就可以刷新
-function refresh() {
-    var opt = {
-        url: "http://sell01.natapp1.cc/user/user-manage",
-        silent: true,
-
-    };
-    $('#basicTable').bootstrapTable('refresh', opt);
-};
-
 //设置角色的state 0未激活 1激活
 function changeUserState(obj, username) {
+    console.log(obj+":"+username)
     var thisButton = this;
     var data = "username=" + username;
     var url = "http://sell01.natapp1.cc/user/change-state";
@@ -139,8 +133,6 @@ function changeUserState(obj, username) {
         success: function (data) {
             obj.innerText = data.msg;
             console.log("userInfo.state 改变成功; msg=" + data.msg);
-            refresh()
         },
     });
-
 }

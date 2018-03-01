@@ -11,6 +11,6 @@ public interface UserService {
     void save(UserInfo userInfo);
     UserInfo findByUsername(String username);
     UserInfo findUserInfoByRegionCode(String regionCode);
-    Page<UserInfoVO> ListAll(Pageable pageable);
+    Page<UserInfoVO> listAll(Pageable pageable);
     String changeState(String username);
 }

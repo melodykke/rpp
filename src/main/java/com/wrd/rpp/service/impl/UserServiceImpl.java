@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Page<UserInfoVO> ListAll(Pageable pageable) {
+    public Page<UserInfoVO> listAll(Pageable pageable) {
         Page<UserInfo> userInfoPage = userRepository.findAll(pageable);
         List<UserInfo> userInfoList = userInfoPage.getContent();
         if(userInfoList.size() <= 0){
@@ -56,7 +56,6 @@ public class UserServiceImpl implements UserService {
             throw new SysException(SysEnum.PAGE_NO_CONTENT);
         }
         List<UserInfoVO> userInfoVOList = userInfoList.stream().map(e -> UserInfo2UserInfoVO.convert(e, regionRepository.findRegionByRegionCode(e.getRegionCode()).getRegionName())).collect(Collectors.toList());
-        //userInfoVOList = userInfoVOList.stream().map(e -> e.setRegionName("dd")).collect(Collectors.toList());
         Page<UserInfoVO> userInfoVOPage = new PageImpl<UserInfoVO>(userInfoVOList, pageable, userInfoPage.getTotalElements());
         return userInfoVOPage;
     }
