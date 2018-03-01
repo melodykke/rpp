@@ -3,17 +3,21 @@ package com.wrd.rpp.shiro.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * 这是shiro配置类
@@ -105,14 +109,40 @@ public class ShiroConfiguration {
 		hashedCredentialsMatcher.setHashIterations(2);//散列次数
 		return hashedCredentialsMatcher;
 	}
+/****************************************Shiro生命周期处理器***********************************************************/
+	@Bean
+	public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+		return new LifecycleBeanPostProcessor();
+	}
 /****************************************配置controller里面访问url权限的permission检验，用 aop ***********************************************************/
+	/**
+	 * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
+	 * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能
+	 * @return
+	 */
+	@Bean
+	@DependsOn({"lifecycleBeanPostProcessor"})
+	public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator(){
+		DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+		advisorAutoProxyCreator.setProxyTargetClass(true);
+		return advisorAutoProxyCreator;
+	}
 	@Bean //开启shiro aop注解（检查访问链接者的permission）
 	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
 		return authorizationAttributeSourceAdvisor;
 	}
-/****************************************ehcache***********************************************************/	
+/****************************************ShiroDialect***********************************************************/
+	/**
+	 * 添加ShiroDialect 为了在thymeleaf里使用shiro的标签的bean
+	 * @return
+	 */
+	@Bean
+	public ShiroDialect shiroDialect(){
+		return new ShiroDialect();
+	}
+    /****************************************ehcache***********************************************************/
 	@Bean //注入ehcache
 	public EhCacheManager ehCacheManager(){
 		EhCacheManager ehCacheManager = new EhCacheManager();

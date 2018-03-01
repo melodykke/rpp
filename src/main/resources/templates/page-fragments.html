@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <div th:fragment="quickview">
     <div id="quickview" class="quickview-wrapper" data-pages="quickview">
@@ -330,10 +331,12 @@
                         <span class=" arrow"></span></a>
                     <span class="icon-thumbnail"><i class="pg-calender"></i></span>
                     <ul class="sub-menu">
+                        <shiro:hasRole name="county">
                         <li class="">
                             <a th:href="@{/power-plant/power-plant-base-info-upload}">信息录入</a>
                             <span class="icon-thumbnail">录</span>
                         </li>
+                        </shiro:hasRole>
                         <li class="">
                             <a href="calendar_lang.html">信息管理</a>
                             <span class="icon-thumbnail">管</span>
