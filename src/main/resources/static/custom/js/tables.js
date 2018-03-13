@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $("#basicTable").bootstrapTable({
         url: 'http://sell01.natapp1.cc/user/user-manage',
         method: 'POST',
@@ -20,7 +21,6 @@ $(document).ready(function() {
         columns :[
             {
                 title: '<div class="col-2 text-center"><i class="fs-14 fa fa-th"></i></div>',//表的列名
-                width:300,
                 align: 'center',//水平居中
                 formatter: function (value, row, index) {//自定义显示可以写标签哦~
                     return  '<span class="badge btn-complete user-role-manage-button" onclick ="roleManage(\'' + row.username + '\')"> </span>';
@@ -104,7 +104,10 @@ $(document).ready(function() {
         };
     };
 
-
+    //table的搜索
+    $("#user-table-search").keyup(function () {
+        refresh();
+    });
 
 })
 
@@ -143,5 +146,5 @@ function changeUserState(obj, username) {
             refresh()
         },
     });
-
 }
+

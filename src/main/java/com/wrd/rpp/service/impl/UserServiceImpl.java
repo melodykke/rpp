@@ -16,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +33,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RegionRepository regionRepository;
+
+
+
     @Override
     public void save(UserInfo userInfo) {
         userRepository.save(userInfo);
@@ -49,6 +54,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<UserInfoVO> listAll(Pageable pageable) {
+/*        Page<UserInfo> userInfoPage = userRepository.findAll(new Specification() {
+            @Override
+            public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) {
+                Path path = root.get("state");
+                return cb.equal(path, 1);
+            }
+        }, pageable);*/
         Page<UserInfo> userInfoPage = userRepository.findAll(pageable);
         List<UserInfo> userInfoList = userInfoPage.getContent();
         if(userInfoList.size() <= 0){

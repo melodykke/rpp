@@ -50,6 +50,7 @@ public class UserController {
     @RequiresRoles("admin")
     public ResultVO userManage(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                             @RequestParam(value = "param", defaultValue = "") String param,
                              Map<String, Object> map){
         //前端bootstrap的table传来的参数为pageIndex和pageSize;pageIndex是从1开始的，而后台pageable的page计数是从0开始的
         Integer page = pageIndex-1;

@@ -8956,20 +8956,27 @@ table.dataTable.table-condensed .sorting_desc:after {
 }
 /* Demo classes */
 .demo-table-search thead th:nth-child(1) {
-  width: 20%;
+  width: 5%;
 }
 .demo-table-search thead th:nth-child(2) {
-  width: 22%;
+  width: 10%;
 }
 .demo-table-search thead th:nth-child(3) {
-  width: 24%;
+  width: 10%;
 }
 .demo-table-search thead th:nth-child(4) {
-  width: 15%;
+  width: 10%;
 }
 .demo-table-search thead th:nth-child(5) {
-  width: 19%;
+  width: 15%;
 }
+.demo-table-search thead th:nth-child(6) {
+  width: 10%;
+}
+.demo-table-search thead th:nth-child(7) {
+  width: 15%;
+}
+
 .demo-table-dynamic thead th:nth-child(1) {
   width: 25%;
 }

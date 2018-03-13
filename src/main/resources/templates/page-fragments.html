@@ -397,7 +397,7 @@
                     </ul>
                 </li>
                 <li class="">
-                    <a href="charts.html"><span class="title">电站数据库</span></a>
+                    <a th:href="@{/register}" target="mainFrame"><span class="title">电站数据库</span></a>
                     <span class="icon-thumbnail"><i class="pg-charts"></i></span>
                 </li>
                 <li>
@@ -406,12 +406,12 @@
                     <span class="icon-thumbnail"><i class="pg-map"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a th:href="@{/user/user-manage}">角色管理</a>
+                            <a th:href="datatables.html">角色管理</a>
                             <span class="icon-thumbnail">角</span>
                         </li>
                         <li class="">
-                            <a href="vector_map.html">用户管理</a>
-                            <span class="icon-thumbnail">用</span>
+                            <a th:href="@{/user/user-manage}" th:target="mainFrame">用户管理</a>
+                            <span class="icon-thumbnail">户</span>
                         </li>
                         <li class="">
                             <a th:href="@{/druid/index.html}">性能监控</a>
