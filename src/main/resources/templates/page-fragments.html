@@ -333,7 +333,7 @@
                     <ul class="sub-menu">
                         <shiro:hasRole name="county">
                         <li class="">
-                            <a th:href="@{/power-plant/power-plant-base-info-upload}">信息录入</a>
+                            <a th:href="@{/power-plant/power-plant-base-info-upload}" th:target="mainFrame">信息录入</a>
                             <span class="icon-thumbnail">录</span>
                         </li>
                         </shiro:hasRole>

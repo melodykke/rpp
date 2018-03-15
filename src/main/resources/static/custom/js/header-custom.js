@@ -1,3 +1,6 @@
+
+var user;
+
 $(document).ready(function(){
     getSubject('/getSubject');
 });
@@ -21,7 +24,8 @@ function getSubject(url){
         //成功返回之后调用的函数
         success:function(data){
             $("#subject-refresh").hide();
-            $('#subject-name').text(data.data.name)
+            $('#subject-name').text(data.data.name);
+            dows(data.data.username);
         },
         //调用执行后调用的函数
         /*complete: function(XMLHttpRequest, textStatus){
@@ -37,4 +41,53 @@ function getSubject(url){
             $("#back-msg").text("十分抱歉！数据提交出现错误，请重启浏览器并重新尝试！");
         }
     })
+}
+
+function reconnect(username){
+    websocket = new WebSocket('ws://sell01.natapp1.cc/websocket/' + username)
+}
+
+function dows(username){
+    var websocket = null;
+    //ws心跳检查
+    var heartCheck = {
+        timeout: 20000,//60ms
+        timeoutObj: null,
+        reset: function () {
+            clearTimeout(this.timeoutObj);
+            this.start();
+        },
+        start: function () {
+            this.timeoutObj = setTimeout(function () {
+                websocket.send("HeartBeat:"+username, "beat");
+            }, this.timeout)
+        }
+    }
+    if('WebSocket' in window) {
+        websocket = new WebSocket('ws://sell01.natapp1.cc/websocket/' + username)
+    }else {
+        alert('该浏览器不支持ws！');
+    }
+    websocket.onopen = function (event) {
+        console.log('建立连接');
+        heartCheck.start();
+    }
+    websocket.onclose = function (event) {
+        console.log('连接关闭')
+    }
+    websocket.onmessage = function (event) {
+        console.log('收到消息：'+event.data);
+        if(event.data.startsWith('echo')){
+            heartCheck.reset();
+        }else{
+            $('#online-notice-modal').modal();
+        }
+
+    }
+    websocket.onerror = function (event) {
+        reconnect(username);
+    }
+    websocket.onbeforeunload = function () {
+        websocket.close();
+    }
 }

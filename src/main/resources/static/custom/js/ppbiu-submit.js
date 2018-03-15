@@ -55,4 +55,8 @@ $(document).ready(function() {
         window.location = "http://sell01.natapp1.cc/power-plant/power-plant-base-info-upload"
         $('#goahead-button').attr('disabled',"true");
     })
+    $('#return-button').click(function(){
+        window.parent.location = "http://sell01.natapp1.cc"
+        $('#return-button').attr('disabled',"true");
+    })
 })

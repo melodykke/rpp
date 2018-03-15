@@ -13,4 +13,5 @@ public interface UserService {
     UserInfo findUserInfoByRegionCode(String regionCode);
     Page<UserInfoVO> listAll(Pageable pageable);
     String changeState(String username);
+    UserInfo findParentByUsername(String username);
 }

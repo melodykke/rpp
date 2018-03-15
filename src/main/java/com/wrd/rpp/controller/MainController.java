@@ -42,8 +42,7 @@ public class MainController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private PowerPlantService powerPlantService;
+
     @Autowired
     private RegionRepository regionRepository;
     @GetMapping("/403")

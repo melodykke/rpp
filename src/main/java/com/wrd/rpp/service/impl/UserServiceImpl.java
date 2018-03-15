@@ -84,5 +84,13 @@ public class UserServiceImpl implements UserService {
         return userInfo1.getState()==0 ? UserAccountStatusEnum.ACCOUNT_INACTIVATED.getMsg() : UserAccountStatusEnum.ACCOUNT_ACTIVATED.getMsg();
     }
 
+    //找到当前用户的上级用户
+    @Override
+    public UserInfo findParentByUsername(String username) {
+        UserInfo thisUser = userRepository.findByUsername(username);
+        UserInfo parentUser = thisUser.getParent();
+        return parentUser;
+    }
+
 
 }

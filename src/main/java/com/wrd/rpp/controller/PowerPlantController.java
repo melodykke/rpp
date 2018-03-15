@@ -7,10 +7,13 @@ import com.wrd.rpp.exception.SysException;
 import com.wrd.rpp.form.PowerPlantBaseInfoForm;
 import com.wrd.rpp.msg.SysMsg;
 import com.wrd.rpp.service.PowerPlantService;
+import com.wrd.rpp.service.WebSocket;
+import com.wrd.rpp.shiro.bean.UserInfo;
 import com.wrd.rpp.util.ExcelUtils;
 import com.wrd.rpp.util.ResultUtil;
 import com.wrd.rpp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -30,6 +33,8 @@ public class PowerPlantController {
 
     @Autowired
     private PowerPlantService powerPlantService;
+    @Autowired
+    private WebSocket webSocket;
 
     /**
      * 电站基本信息Excel导入
@@ -107,6 +112,8 @@ public class PowerPlantController {
             throw new SysException(SysEnum.DATA_SUBMIT_FAILED.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
         SysMsg sysMsg = powerPlantService.savePowerPlantBaseInfoUpload(powerPlantBaseInfoForm);
+        //录入成功后ws向上级提示消息
+        webSocket.sendMsg("有新的电站基础信息录入待审批!", (UserInfo)SecurityUtils.getSubject().getPrincipal());
         return ResultUtil.success(sysMsg.getObject());
     }
 
