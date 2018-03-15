@@ -100,8 +100,9 @@ $(document).ready(function() {
         //如果没有错误则返回数据，渲染表格
         return {
             total : data.data.totalElements, //总条目elements数,前面的key必须为"total"
-            data : data.data.content //行数据，前面的key要与之前设置的dataField的值一致.
+            data : data.data.content, //行数据，前面的key要与之前设置的dataField的值一致.
         };
+        window.top.window.iframeAutoHeight(); //66666666666666666666666666666
     };
 
     //table的搜索

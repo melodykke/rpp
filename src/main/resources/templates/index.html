@@ -98,15 +98,17 @@
         //]]>
     </script>
 
-    <script type="text/javascript">
-        function changeFrameHeight(){
-            var ifm= document.getElementById("page-container-content");
-            ifm.height=document.documentElement.clientHeight;
-        }
-        window.onresize=function(){
-            changeFrameHeight();
-        }
 
+    <!--调整iframe窗口-->
+    <script type="text/javascript" language="javascript">
+        function iframeAutoHeight(){
+            var iframe=document.getElementById("page-container-content");
+            if(navigator.userAgent.indexOf("MSIE")>0||navigator.userAgent.indexOf("rv:11")>0||navigator.userAgent.indexOf("Firefox")>0){
+                iframe.height=iframe.contentWindow.document.body.scrollHeight;
+            }else{
+                iframe.height=iframe.contentWindow.document.documentElement.scrollHeight;
+            }
+        }
     </script>
 </head>
 <body class="fixed-header dashboard" onload="remove_loading()" style="margin:0 0;padding:0 0" scroll="no">
@@ -122,7 +124,7 @@
     <div class="page-content-wrapper" >
         <!-- START PAGE CONTENT -->
         <div class="content" id="page-content">
-            <iframe  id="page-container-content" name="mainFrame" src="" width="100%" frameborder="no" border="0" marginwidth="0" marginheight=" 0" allowtransparency="yes" onload="changeFrameHeight()"></iframe>
+            <iframe  id="page-container-content" name="mainFrame" src="" width="100%" scrolling="no" frameborder="no" border="0" marginwidth="0" marginheight="0" onload="javascript:iframeAutoHeight();" ></iframe>
         </div>
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
