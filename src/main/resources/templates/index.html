@@ -60,18 +60,11 @@
             width:213px;
             font-size:1px;
         }
-        #progress {
-            height:5px;
-            font-size:1px;
-            width:1px;
-            position:relative;
-            top:1px;
-            left:0px;
-            background-color:#77A9E0;
-        }
     </style>
+    <script th:src="@{/assets/plugins/jquery/jquery-1.11.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/custom/js/index.js}" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">
-        //<![CDATA[
+      /*  //<![CDATA[
         document.write('<div id="loader_container"><div id="loader"><div align="center">页面组件加载中……<br />首次加载可能会花费一分钟，请稍候...</div><div id="loader_bg"><div id="progress"> </div></div></div></div>');
         var t_id = setInterval(animate,20);
         var pos=0;
@@ -95,7 +88,7 @@
             targelem.style.display='none';
             targelem.style.visibility='hidden';
         }
-
+*/
 
 /*        function iframeAutoHeight() {
             var iframe = document.getElementById("page-container-content");
@@ -211,7 +204,7 @@
 <!-- END OVERLAY -->
 <!-- BEGIN VENDOR JS -->
 <script th:src="@{/assets/plugins/pace/pace.min.js}" type="text/javascript"></script>
-<script th:src="@{/assets/plugins/jquery/jquery-1.11.1.min.js}" type="text/javascript"></script>
+
 <script th:src="@{/assets/plugins/modernizr.custom.js}" type="text/javascript"></script>
 <script th:src="@{/assets/plugins/jquery-ui/jquery-ui.min.js}" type="text/javascript"></script>
 <script th:src="@{/assets/plugins/tether/js/tether.min.js}" type="text/javascript"></script>
@@ -251,7 +244,7 @@
 <!--CUSTOMIZED js-->
 <script th:src="@{/custom/js/header-custom.js}" type="text/javascript"></script>
 <script th:src="@{/custom/js/slide-bar-custom.js}" type="text/javascript"></script>
-<script th:src="@{/custom/js/index.js}" type="text/javascript"></script>
+
 <script th:src="@{/custom/js/websocket.js}" type="text/javascript"></script>
 <!--CUSTOMIZED js END-->
 </body>
