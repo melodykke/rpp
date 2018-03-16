@@ -18,6 +18,11 @@ $(document).ready(function() {
         paginationPreText: '‹',//指定分页条中上一页按钮的图标或文字,这里是<
         paginationNextText: '›',//指定分页条中下一页按钮的图标或文字,这里是>
         responseHandler:responseHandler,//请求数据成功后，渲染表格前的方法
+        onLoadSuccess:function(){
+            if( window.parent!=window.self){
+                $("#page-container-content",window.parent.document).onload=parent.reinitIframe();
+            }
+        },
         columns :[
             {
                 title: '<div class="col-2 text-center"><i class="fs-14 fa fa-th"></i></div>',//表的列名
@@ -97,12 +102,12 @@ $(document).ready(function() {
             alert("错误代码" + errcode);
             return;
         }
+
         //如果没有错误则返回数据，渲染表格
         return {
             total : data.data.totalElements, //总条目elements数,前面的key必须为"total"
             data : data.data.content, //行数据，前面的key要与之前设置的dataField的值一致.
         };
-        window.top.window.iframeAutoHeight(); //66666666666666666666666666666
     };
 
     //table的搜索
@@ -119,7 +124,9 @@ function refresh() {
         silent: true,
 
     };
+
     $('#basicTable').bootstrapTable('refresh', opt);
+
 };
 
 //设置角色的state 0未激活 1激活
@@ -148,4 +155,3 @@ function changeUserState(obj, username) {
         },
     });
 }
-
