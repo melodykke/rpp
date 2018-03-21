@@ -1,15 +1,22 @@
 package com.wrd.rpp.controller;
 
 
+import com.wrd.rpp.convert.ApplicationInfo2VO;
 import com.wrd.rpp.convert.UserInfo2UserInfoVO;
+import com.wrd.rpp.dataobject.ApplicationInfo;
+import com.wrd.rpp.dataobject.PowerPlantBaseInfoUpload;
+import com.wrd.rpp.dataobject.Region;
+import com.wrd.rpp.enums.ApplicationStatusEnum;
+import com.wrd.rpp.enums.ApplicationTypeEnum;
 import com.wrd.rpp.enums.SysEnum;
 import com.wrd.rpp.exception.SysException;
 import com.wrd.rpp.form.AssignRolesForm;
 import com.wrd.rpp.repository.RoleRepository;
-import com.wrd.rpp.service.RoleService;
-import com.wrd.rpp.service.UserService;
+import com.wrd.rpp.service.*;
 import com.wrd.rpp.shiro.bean.UserInfo;
+import com.wrd.rpp.util.KeyUtil;
 import com.wrd.rpp.util.ResultUtil;
+import com.wrd.rpp.vo.ApplicationVO;
 import com.wrd.rpp.vo.ResultVO;
 import com.wrd.rpp.vo.UserInfoVO;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,6 +48,10 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private RegionService regionService;
+    @Autowired
+    private ApplicationInfoService applicationInfoService;
     @GetMapping("/user-manage")
     @RequiresRoles("admin")
     public ModelAndView userManage(){
@@ -87,5 +99,31 @@ public class UserController {
         return ResultUtil.success(SysEnum.DATA_CONFIG_SUCCESS.getCode(), msg);
     }
 
-
+    @GetMapping("/base-info-approval")
+    @RequiresRoles(value = {"admin", "city"}, logical = Logical.OR)
+    public ModelAndView baseInfoApproval(){
+        ModelAndView mv = new ModelAndView("/power-plant-base-info-approval");
+        return mv;
+    }
+    @PostMapping("/get-approval-list")
+    @RequiresRoles(value = {"admin", "city"}, logical = Logical.OR)
+    public ResultVO getApprovalList(){
+        String thisUserRegionCode = ((UserInfo)SecurityUtils.getSubject().getPrincipal()).getRegionCode();
+        Region thisUserRegion = regionService.findRegionByRegionCode(thisUserRegionCode);
+        List<String> childrenRegionCodeList = new ArrayList<String>();
+        for(Region region : thisUserRegion.getChildren()){
+            childrenRegionCodeList.add(region.getRegionCode());
+        }
+        List<ApplicationInfo> applicationInfoList = applicationInfoService.findByRegionCodeInAndStatusIs(childrenRegionCodeList, ApplicationStatusEnum.HAVENT_APPROVAL_YET.getStatusCode());
+        List<ApplicationVO> applicationVOList = ApplicationInfo2VO.convertList(applicationInfoList);
+        return ResultUtil.success(applicationVOList);
+    }
 }
+/*
+@RequiresRoles("user")
+
+//必须同时属于user和admin角色
+@RequiresRoles({"user","admin"})
+
+//属于user或者admin之一;修改logical为OR 即可
+@RequiresRoles(value={"user","admin"},logical=Logical.OR)*/

@@ -21,4 +21,6 @@ public interface PowerPlantService {
     public SysMsg savePowerPlantBaseInfoUpload(PowerPlantBaseInfoForm powerPlantBaseInfoForm);
     //地区代码获取地区
     public Region findByRegionCode(String code);
+/*    //根据行政区代码list，获取旗下所有电站基础信息bean
+    public List<PowerPlantBaseInfoUpload> findApprovalList(List<String> regionCode);*/
 }

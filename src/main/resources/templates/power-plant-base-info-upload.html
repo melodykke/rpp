@@ -10,7 +10,6 @@
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png}" />
     <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png}"/>
     <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png}"/>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-touch-fullscreen" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
@@ -27,606 +26,638 @@
     <link th:href="@{/assets/plugins/bootstrap-datepicker/css/datepicker3.css}" rel="stylesheet" type="text/css" media="screen" />
     <link th:href="@{/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css}" rel="stylesheet" type="text/css" media="screen" />
   </head>
-  <body class="fixed-header ">
-    <!-- BEGIN SIDEBPANEL-->
-   <!-- <div th:include="page-fragments :: sidebar"></div>-->
-    <!-- END SIDEBAR -->
-    <!-- END SIDEBPANEL-->
-    <!-- START PAGE-CONTAINER -->
-    <div class="page-container ">
-      <!-- START HEADER -->
-      <!--<div th:include="page-fragments :: header"></div>-->
-      <!-- END HEADER -->
-      <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
-        <div class="content">
-          <!-- START CONTAINER FLUID -->
-          <div class=" container-fluid   container-fixed-lg">
-            <div id="rootwizard" class="m-t-10">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm" role="tablist" data-init-reponsive-tabs="dropdownfx">
-                <li class="nav-item">
-                  <a class="active" data-toggle="tab" href="#tab1" role="tab"><i class="fa fa-shopping-cart tab-icon"></i> <span>基础数据</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="" data-toggle="tab" href="#tab2" role="tab"><i class="fa fa-truck tab-icon"></i> <span>电站建设</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="" data-toggle="tab" href="#tab3" role="tab"><i class="fa fa-credit-card tab-icon"></i> <span>运行管理</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="" data-toggle="tab" href="#tab4" role="tab"><i class="fa fa-check tab-icon"></i> <span>提交</span></a>
-                </li>
-              </ul>
-              <!-- Tab panes -->
-              <form id="powerPlantBaseInfoForm" class="tab-content">
-                <div class="tab-pane padding-20 sm-no-padding active slide-left" id="tab1">
-                  <div class="row row-same-height">
-                    <div class=" col-md-6 b-r b-dashed b-grey sm-b-b">
-                      <div class="bg-master-light padding-30 sm-padding-5">
-                          <h2> Ⅰ </h2>
-                          <div class="form-group-attached">
-                            <div class="row clearfix">
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default required">
-                                  <label>电站名称</label>
-                                  <input type="text" name="plantName" class="form-control" required="required"/>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default">
-                                  <label>电站编码（选填）</label>
-                                  <input type="text" name="plantCode" class="form-control" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row clearfix">
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default required">
-                                  <label>行政区</label>
-                                  <input type="text" name="administrativeArea" class="form-control" required="required"/>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default">
-                                  <label>河流名称</label>
-                                  <input type="text" name="plantRiverLocation" class="form-control" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row clearfix">
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default required">
-                                  <label>经度</label>
-                                  <input type="text" name="longitude" class="form-control" required="required"/>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default">
-                                  <label>纬度</label>
-                                  <input type="text" name="latitude" class="form-control" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row clearfix">
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default required">
-                                  <label>建设地点</label>
-                                  <input type="text" name="location" class="form-control" required="required"/>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group form-group-default">
-                                  <label>开发方式</label>
-                                  <input type="text" name="developmentMode" class="form-control" />
-                                </div>
-                              </div>
-                            </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>装机规模(台/容量)</label>
-                                          <input type="text" name="installedCapacity" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>设计水头</label>
-                                          <input type="text" name="designedHydraulicHead" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>设计年发电量</label>
-                                          <input type="text" name="designedPowerPerYear" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>保证出力</label>
-                                          <input type="text" name="guaranteedOutput" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>生态流量</label>
-                                          <input type="text" name="ecoFlow" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>发电引用流量</label>
-                                          <input type="text" name="flowForPower" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="bg-master-light padding-30 sm-padding-5">
-                          <h2> Ⅱ </h2>
-                          <div class="form-group-attached">
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>调节性能</label>
-                                          <input type="text" name="regulationPerformance" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>坝间河道长度</label>
-                                          <input type="text" name="damIntervalLength" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>多年平均流量</label>
-                                          <input type="text" name="averageFlowForYears" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>堤坝控制流域面积</label>
-                                          <input type="text" name="damContralWatershedArea" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>正常蓄水位</label>
-                                          <input type="text" name="normalStorageLevel" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>死水位</label>
-                                          <input type="text" name="deadWaterLevel" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>防洪限制水位</label>
-                                          <input type="text" name="limitingLevelDuringFloodSeason" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>总库容</label>
-                                          <input type="text" name="totalStorage" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>正常蓄水位相应库容</label>
-                                          <input type="text" name="normalWaterLevelStorage" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>建站状态</label>
-                                          <div class="input-group-addon d-flex">
-                                              <select name="plantStatus" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                                  <option value="在建" selected="selected">在建</option>
-                                                  <option value="已建">已建</option>
-                                                  <option value="停运">停运</option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>死库容</label>
-                                          <input type="text" name="deadStorage" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>调节库容</label>
-                                          <input type="text" name="adjustStorage" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab2">
-                  <div class="row row-same-height">
-                    <div class="col-md-6 b-r b-dashed b-grey ">
-                        <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
-                          <h2> Ⅲ </h2>
-                          <div class="form-group-attached">
-                              <div class="row clearfix">
-                                  <div class="bg-master-light col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>发电厂房形式</label>
-                                          <input type="text" name="powerFactoryForm" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>综合利用</label>
-                                          <input type="text" name="integratedUtilization" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>水库淹没耕地</label>
-                                          <input type="text" name="submergedCultivatedLand" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>水库淹没林地</label>
-                                          <input type="text" name="submergedForest" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>坝高</label>
-                                          <input type="text" name="damHight" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>主坝类型</label>
-                                          <input type="text" name="mainDamType" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>迁移人口</label>
-                                          <input type="text" name="migrantedPopulation" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>静态总投资</label>
-                                          <input type="text" name="staticTotalInvestment" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
-                          <h2> Ⅳ </h2>
-                          <div class="form-group-attached">
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>建设开始时间</label>
-                                          <input name="constructionTime"  class="form-control" placeholder="选取时间" id="constructionTime"  />
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>建设结束时间</label>
-                                          <input name="constructionEndTime"  class="form-control" placeholder="选取时间" id="constructionEndTime"  />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>投产时间</label>
-                                          <input name="productionTime"  class="form-control" placeholder="选取时间" id="productionTime"  />
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>竣工验收时间</label>
-                                          <input name="completionAcceptanceTime"  class="form-control" placeholder="选取时间" id="completionAcceptanceTime"  />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>编制时间</label>
-                                          <input name="compileTime"  class="form-control" placeholder="选取时间" id="compileTime"  />
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>编制单位</label>
-                                          <input type="text" name="compileUnit" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab3">
-                  <div class="row row-same-height">
-                    <div class="col-md-6 b-r b-dashed b-grey ">
-                      <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
-                        <h2> Ⅴ </h2>
-                          <div class="form-group-attached">
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>项目法人</label>
-                                          <input type="text" name="compileLegalPerson" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>联系人</label>
-                                          <input type="text" name="contact" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>联系电话</label>
-                                          <input type="text" name="tel" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>使用权证编号</label>
-                                          <input type="text" name="useWarrantNumber" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>证书编号</label>
-                                          <input type="text" name="certificateNumber" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>水库大坝登记注册号码</label>
-                                          <input type="text" name="registrationNumber" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>安全鉴定情况(类别)</label>
-                                          <input type="text" name="safetyAppraisalType" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>安全鉴定情况(时间,格式：年/月/日)</label>
-                                          <input type="text" name="safetyAppraisalTime" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>安全生产建设(等级)</label>
-                                          <input type="text" name="safetyProductionLevel" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>安全生产建设(时间,格式：年/月/日)</label>
-                                          <input type="text" name="safetyProductionTime" class="form-control" />
-                                      </div>
-                                  </div>
-                              </div>
 
-                          </div>
+  <body class="fixed-header ">
+    <div id="rootwizard" class="m-t-10">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm" role="tablist" data-init-reponsive-tabs="dropdownfx">
+        <li class="nav-item">
+          <a class="active" data-toggle="tab" href="#tab1" role="tab"><i class="fa fa-shopping-cart tab-icon"></i> <span>基础数据</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="" data-toggle="tab" href="#tab2" role="tab"><i class="fa fa-truck tab-icon"></i> <span>电站建设</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="" data-toggle="tab" href="#tab3" role="tab"><i class="fa fa-credit-card tab-icon"></i> <span>运行管理</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="" data-toggle="tab" href="#tab4" role="tab"><i class="fa fa-check tab-icon"></i> <span>提交</span></a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <form id="powerPlantBaseInfoForm" class="tab-content">
+        <div class="tab-pane padding-20 sm-no-padding active slide-left" id="tab1">
+          <div class="row row-same-height">
+            <div class=" col-md-6 b-r b-dashed b-grey sm-b-b">
+              <div class="bg-master-light padding-30 sm-padding-5">
+                  <h2> Ⅰ </h2>
+                  <div class="form-group-attached">
+                    <div class="row clearfix">
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default required">
+                          <label>电站名称</label>
+                          <input type="text" name="plantName" class="form-control" required="required"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default">
+                          <label>电站编码（选填）</label>
+                          <input type="text" name="plantCode" class="form-control" />
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                          <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
-                            <h2> Ⅵ </h2>
-                              <div class="form-group-attached">
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>安全生产生产主体</label>
-                                          <input type="text" name="safetyProductionProductionSubject" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>安全生产监管主体</label>
-                                          <input type="text" name="safetyProductionSupervisingSubject" class="form-control" />
-                                      </div>
-                                  </div>
+                    <div class="row clearfix">
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default required">
+                            <label>行政区名</label>
+                            <div class="d-flex">
+                                <select name="regionCode" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                    <option value="520000000000">贵州省水利厅</option>
+                                    <option value="520100000000" selected="selected">贵阳市</option>
+                                    <option value="520102000000">　南明区</option>
+                                    <option value="520103000000">　云岩区</option>
+                                    <option value="520111000000">　花溪区</option>
+                                    <option value="520112000000">　乌当区</option>
+                                    <option value="520113000000">　白云区</option>
+                                    <option value="520115000000">　观山湖区</option>
+                                    <option value="520181000000">　清镇市</option>
+                                    <option value="520121000000">　开阳县</option>
+                                    <option value="520122000000">　息烽县</option>
+                                    <option value="520123000000">　修文县</option>
+                                    <option value="555555555555">贵安新区</option>
+                                    <option value="520200000000">六盘水市</option>
+                                    <option value="520201000000">　钟山区</option>
+                                    <option value="520203000000">　六枝特区</option>
+                                    <option value="520221000000">　水城县</option>
+                                    <option value="520222000000">　盘县</option>
+                                    <option value="520300000000">遵义市</option>
+                                    <option value="520302000000">　红花岗区</option>
+                                    <option value="520303000000">　汇川区</option>
+                                    <option value="520321000000">　播州区</option>
+                                    <option value="520381000000">　赤水市</option>
+                                    <option value="520382000000">　仁怀市</option>
+                                    <option value="520322000000">　桐梓县</option>
+                                    <option value="520323000000">　绥阳县</option>
+                                    <option value="520324000000">　正安县</option>
+                                    <option value="520325000000">　道真仡佬族苗族自治县</option>
+                                    <option value="520326000000">　务川仡佬族苗族自治县</option>
+                                    <option value="520327000000">　凤冈县</option>
+                                    <option value="520328000000">　湄潭县</option>
+                                    <option value="520329000000">　余庆县</option>
+                                    <option value="520330000000">　习水县</option>
+                                    <option value="520400000000">安顺市</option>
+                                    <option value="520402000000">　西秀区</option>
+                                    <option value="520403000000">　平坝区</option>
+                                    <option value="520422000000">　普定县</option>
+                                    <option value="520423000000">　镇宁布依族苗族自治县</option>
+                                    <option value="520424000000">　关岭布依族苗族自治县</option>
+                                    <option value="520425000000">　紫云苗族布依族自治县</option>
+                                    <option value="520500000000">毕节市</option>
+                                    <option value="520502000000">　七星关区</option>
+                                    <option value="520521000000">　大方县</option>
+                                    <option value="520522000000">　黔西县</option>
+                                    <option value="520523000000">　金沙县</option>
+                                    <option value="520524000000">　织金县</option>
+                                    <option value="520525000000">　纳雍县</option>
+                                    <option value="520526000000">　威宁彝族回族苗族自治县</option>
+                                    <option value="520527000000">　赫章县</option>
+                                    <option value="520600000000">铜仁市</option>
+                                    <option value="520602000000">　碧江区</option>
+                                    <option value="520603000000">　万山区</option>
+                                    <option value="520621000000">　江口县</option>
+                                    <option value="520622000000">　玉屏侗族自治县</option>
+                                    <option value="520623000000">　石阡县</option>
+                                    <option value="520624000000">　思南县</option>
+                                    <option value="520625000000">　印江土家族苗族自治县</option>
+                                    <option value="520626000000">　德江县</option>
+                                    <option value="520627000000">　沿河土家族自治县</option>
+                                    <option value="520628000000">　松桃苗族自治县</option>
+                                    <option value="522300000000">黔西南布依族苗族自治州</option>
+                                    <option value="522301000000">　兴义市</option>
+                                    <option value="522322000000">　兴仁县</option>
+                                    <option value="522323000000">　普安县</option>
+                                    <option value="522324000000">　晴隆县</option>
+                                    <option value="522325000000">　贞丰县</option>
+                                    <option value="522326000000">　望谟县</option>
+                                    <option value="522327000000">　册亨县</option>
+                                    <option value="522328000000">　安龙县</option>
+                                    <option value="522600000000">黔东南苗族侗族自治州</option>
+                                    <option value="522601000000">　凯里市</option>
+                                    <option value="522622000000">　黄平县</option>
+                                    <option value="522623000000">　施秉县</option>
+                                    <option value="522624000000">　三穗县</option>
+                                    <option value="522625000000">　镇远县</option>
+                                    <option value="522626000000">　岑巩县</option>
+                                    <option value="522627000000">　天柱县</option>
+                                    <option value="522628000000">　锦屏县</option>
+                                    <option value="522629000000">　剑河县</option>
+                                    <option value="522630000000">　台江县</option>
+                                    <option value="522631000000">　黎平县</option>
+                                    <option value="522632000000">　榕江县</option>
+                                    <option value="522633000000">　从江县</option>
+                                    <option value="522634000000">　雷山县</option>
+                                    <option value="522635000000">　麻江县</option>
+                                    <option value="522636000000">　丹寨县</option>
+                                    <option value="522700000000">黔南布依族苗族自治州</option>
+                                    <option value="522701000000">　都匀市</option>
+                                    <option value="522702000000">　福泉市</option>
+                                    <option value="522722000000">　荔波县</option>
+                                    <option value="522723000000">　贵定县</option>
+                                    <option value="522725000000">　瓮安县</option>
+                                    <option value="522726000000">　独山县</option>
+                                    <option value="522727000000	">　平塘县</option>
+                                    <option value="522728000000">　罗甸县</option>
+                                    <option value="522729000000">　长顺县</option>
+                                    <option value="522730000000">　龙里县</option>
+                                    <option value="522731000000	">　惠水县</option>
+                                    <option value="522732000000">　三都水族自治县</option>
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default">
+                          <label>河流名称</label>
+                          <input type="text" name="plantRiverLocation" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row clearfix">
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default required">
+                          <label>经度</label>
+                          <input type="text" name="longitude" class="form-control" required="required"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default">
+                          <label>纬度</label>
+                          <input type="text" name="latitude" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row clearfix">
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default required">
+                          <label>建设地点</label>
+                          <input type="text" name="location" class="form-control" required="required"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group form-group-default">
+                          <label>开发方式</label>
+                          <input type="text" name="developmentMode" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>装机规模(台/容量)</label>
+                                  <input type="text" name="installedCapacity" class="form-control" required="required"/>
                               </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>绿色小水电建设</label>
-                                          <input type="text" name="greenSmallHydropowerConstruction" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>资料来源</label>
-                                          <input type="text" name="dataSource" class="form-control" />
-                                      </div>
-                                  </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>设计水头</label>
+                                  <input type="text" name="designedHydraulicHead" class="form-control" />
                               </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>填报单位</label>
-                                          <input type="text" name="fillFormUnit" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>填报人员</label>
-                                          <input type="text" name="fillFormPerson" class="form-control" />
-                                      </div>
-                                  </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>设计年发电量</label>
+                                  <input type="text" name="designedPowerPerYear" class="form-control" required="required"/>
                               </div>
-                              <div class="row clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default required">
-                                          <label>填报人员电话</label>
-                                          <input type="text" name="fillFormPersonTel" class="form-control" required="required"/>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group form-group-default">
-                                          <label>填报时间</label>
-                                          <input name="fillFormTime"  class="form-control" placeholder="选取时间" id="fillFormTime"  />
-                                      </div>
-                                  </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>保证出力</label>
+                                  <input type="text" name="guaranteedOutput" class="form-control" />
                               </div>
-                                  <div class="form-group form-group-default m-t-25">
-                                      <label>备  注</label>
-                                      <input type="text" name="marks" class="form-control" placeholder="备注" />
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>生态流量</label>
+                                  <input type="text" name="ecoFlow" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>发电引用流量</label>
+                                  <input type="text" name="flowForPower" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="bg-master-light padding-30 sm-padding-5">
+                  <h2> Ⅱ </h2>
+                  <div class="form-group-attached">
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>调节性能</label>
+                                  <input type="text" name="regulationPerformance" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>坝间河道长度</label>
+                                  <input type="text" name="damIntervalLength" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>多年平均流量</label>
+                                  <input type="text" name="averageFlowForYears" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>堤坝控制流域面积</label>
+                                  <input type="text" name="damContralWatershedArea" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>正常蓄水位</label>
+                                  <input type="text" name="normalStorageLevel" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>死水位</label>
+                                  <input type="text" name="deadWaterLevel" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>防洪限制水位</label>
+                                  <input type="text" name="limitingLevelDuringFloodSeason" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>总库容</label>
+                                  <input type="text" name="totalStorage" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>正常蓄水位相应库容</label>
+                                  <input type="text" name="normalWaterLevelStorage" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>建站状态</label>
+                                  <div class="input-group-addon d-flex">
+                                      <select name="plantStatus" class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                          <option value="在建" selected="selected">在建</option>
+                                          <option value="已建">已建</option>
+                                          <option value="停运">停运</option>
+                                      </select>
                                   </div>
                               </div>
                           </div>
-                    </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>死库容</label>
+                                  <input type="text" name="deadStorage" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>调节库容</label>
+                                  <input type="text" name="adjustStorage" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                </div>
-                <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab4">
-                  <h1>请确认后提交！</h1>
-                </div>
-                <div class="padding-20 sm-padding-5 sm-m-b-20 sm-m-t-20 bg-white clearfix">
-                  <ul class="pager wizard no-style">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>下一步</span>
-                      </button>
-                    </li>
-                    <li class="finish hidden">
-                      <button id="submitForm" class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>完 成</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>第一页</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>上一步</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <div class="wizard-footer padding-20 bg-master-light">
-                  <p class="small hint-text pull-left no-margin">
-                    * 注 带有 " * " 内容为必填项！ 另，新建电站若目前没有获得统一电站编码的，在填写次表格时可以留空不填，待日后进入电站管理页面修改补充。
-                  </p>
-                  <div class="pull-right">
-                    <img th:src="@{/assets/img/logo.png}" alt="logo" width="78" height="22"/>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
-          <!-- END CONTAINER FLUID -->
         </div>
-        <!-- END PAGE CONTENT -->
-        <!-- START COPYRIGHT -->
-        <!-- START CONTAINER FLUID -->
-        <!-- START CONTAINER FLUID -->
-      <!--  <div th:include="page-fragments :: footer"></div>-->
-        <!-- END COPYRIGHT -->
-      </div>
-      <!-- END PAGE CONTENT WRAPPER -->
-    </div>
-    <!-- END PAGE CONTAINER -->
-    <!--START QUICKVIEW -->
-    <!--<div th:include="page-fragments :: quickview"></div>-->
-    <!-- END QUICKVIEW-->
-    <!-- START OVERLAY -->
-    <div class="overlay hide" data-pages="search">
-      <!-- BEGIN Overlay Content !-->
-      <div class="overlay-content has-results m-t-20">
-        <!-- BEGIN Overlay Header !-->
-        <div class="container-fluid">
-          <!-- BEGIN Overlay Logo !-->
-          <img class="overlay-brand" th:src="@{/assets/img/logo.png}" alt="logo" th:data-th:src="@{/assets/img/logo.png}" th:data-src-retina="assets/img/logo_2x.png}" width="78" height="22"/>
-          <!-- END Overlay Logo !-->
-          <!-- BEGIN Overlay Close !-->
-          <a href="#" class="close-icon-light overlay-close text-black fs-16">
-            <i class="pg-close"></i>
-          </a>
-          <!-- END Overlay Close !-->
-        </div>
-        <!-- END Overlay Header !-->
-        <div class="container-fluid">
-          <!-- BEGIN Overlay Controls !-->
-          <input id="overlay-search" class="no-border overlay-search bg-transparent" placeholder="Search..." autocomplete="off" spellcheck="false"/>
-          <br />
-          <div class="inline-block">
-            <div class="checkbox right">
-              <input id="checkboxn" type="checkbox" value="1" checked="checked"/>
-              <label for="checkboxn"><i class="fa fa-search"></i> Search within page</label>
+        <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab2">
+          <div class="row row-same-height">
+            <div class="col-md-6 b-r b-dashed b-grey ">
+                <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
+                  <h2> Ⅲ </h2>
+                  <div class="form-group-attached">
+                      <div class="row clearfix">
+                          <div class="bg-master-light col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>发电厂房形式</label>
+                                  <input type="text" name="powerFactoryForm" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>综合利用</label>
+                                  <input type="text" name="integratedUtilization" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>水库淹没耕地</label>
+                                  <input type="text" name="submergedCultivatedLand" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>水库淹没林地</label>
+                                  <input type="text" name="submergedForest" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>坝高</label>
+                                  <input type="text" name="damHight" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>主坝类型</label>
+                                  <input type="text" name="mainDamType" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>迁移人口</label>
+                                  <input type="text" name="migrantedPopulation" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>静态总投资</label>
+                                  <input type="text" name="staticTotalInvestment" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
+                  <h2> Ⅳ </h2>
+                  <div class="form-group-attached">
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>建设开始时间</label>
+                                  <input name="constructionTime"  class="form-control" placeholder="选取时间" id="constructionTime"  />
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>建设结束时间</label>
+                                  <input name="constructionEndTime"  class="form-control" placeholder="选取时间" id="constructionEndTime"  />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>投产时间</label>
+                                  <input name="productionTime"  class="form-control" placeholder="选取时间" id="productionTime"  />
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>竣工验收时间</label>
+                                  <input name="completionAcceptanceTime"  class="form-control" placeholder="选取时间" id="completionAcceptanceTime"  />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>编制时间</label>
+                                  <input name="compileTime"  class="form-control" placeholder="选取时间" id="compileTime"  />
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>编制单位</label>
+                                  <input type="text" name="compileUnit" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
             </div>
           </div>
-          <div class="inline-block m-l-10">
-            <p class="fs-13">Press enter to search</p>
-          </div>
-          <!-- END Overlay Controls !-->
         </div>
-        <!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
-          <div th:include="page-fragments :: overlay-search-results"></div>
-        <!-- END Overlay Search Results !-->
-      </div>
-      <!-- END Overlay Content !-->
+        <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab3">
+          <div class="row row-same-height">
+            <div class="col-md-6 b-r b-dashed b-grey ">
+              <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
+                <h2> Ⅴ </h2>
+                  <div class="form-group-attached">
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>项目法人</label>
+                                  <input type="text" name="compileLegalPerson" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>联系人</label>
+                                  <input type="text" name="contact" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>联系电话</label>
+                                  <input type="text" name="tel" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>使用权证编号</label>
+                                  <input type="text" name="useWarrantNumber" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>证书编号</label>
+                                  <input type="text" name="certificateNumber" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>水库大坝登记注册号码</label>
+                                  <input type="text" name="registrationNumber" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>安全鉴定情况(类别)</label>
+                                  <input type="text" name="safetyAppraisalType" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>安全鉴定情况(时间,格式：年/月/日)</label>
+                                  <input type="text" name="safetyAppraisalTime" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>安全生产建设(等级)</label>
+                                  <input type="text" name="safetyProductionLevel" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>安全生产建设(时间,格式：年/月/日)</label>
+                                  <input type="text" name="safetyProductionTime" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+                  <div class="bg-master-light padding-30 sm-padding-5 sm-m-t-15 m-t-50">
+                    <h2> Ⅵ </h2>
+                      <div class="form-group-attached">
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>安全生产生产主体</label>
+                                  <input type="text" name="safetyProductionProductionSubject" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>安全生产监管主体</label>
+                                  <input type="text" name="safetyProductionSupervisingSubject" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>绿色小水电建设</label>
+                                  <input type="text" name="greenSmallHydropowerConstruction" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>资料来源</label>
+                                  <input type="text" name="dataSource" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>填报单位</label>
+                                  <input type="text" name="fillFormUnit" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>填报人员</label>
+                                  <input type="text" name="fillFormPerson" class="form-control" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default required">
+                                  <label>填报人员电话</label>
+                                  <input type="text" name="fillFormPersonTel" class="form-control" required="required"/>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="form-group form-group-default">
+                                  <label>填报时间</label>
+                                  <input name="fillFormTime"  class="form-control" placeholder="选取时间" id="fillFormTime"  />
+                              </div>
+                          </div>
+                      </div>
+                          <div class="form-group form-group-default m-t-25">
+                              <label>备  注</label>
+                              <input type="text" name="marks" class="form-control" placeholder="备注" />
+                          </div>
+                      </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab4">
+          <h1>请确认后提交！</h1>
+        </div>
+        <div class="padding-20 sm-padding-5 sm-m-b-20 sm-m-t-20 bg-white clearfix">
+          <ul class="pager wizard no-style">
+            <li class="next">
+              <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
+                <span>下一步</span>
+              </button>
+            </li>
+            <li class="finish hidden">
+              <button id="submitForm" class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                <span>完 成</span>
+              </button>
+            </li>
+            <li class="previous first hidden">
+              <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                <span>第一页</span>
+              </button>
+            </li>
+            <li class="previous">
+              <button class="btn btn-default btn-cons pull-right" type="button">
+                <span>上一步</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="wizard-footer padding-20 bg-master-light">
+          <p class="small hint-text pull-left no-margin">
+            * 注 带有 " * " 内容为必填项！ 另，新建电站若目前没有获得统一电站编码的，在填写次表格时可以留空不填，待日后进入电站管理页面修改补充。
+          </p>
+          <div class="pull-right">
+            <img th:src="@{/assets/img/logo.png}" alt="logo" width="78" height="22"/>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </form>
     </div>
-    <!-- cover -->
-    <div th:include="page-fragments :: ppbiu-submit-cover-layer"></div>
-    <!-- cover end -->
-    <!-- END OVERLAY -->
+
     <!-- BEGIN VENDOR JS -->
     <script th:src="@{/assets/plugins/pace/pace.min.js}" type="text/javascript"></script>
     <script th:src="@{/assets/plugins/jquery/jquery-1.11.1.min.js}" type="text/javascript"></script>

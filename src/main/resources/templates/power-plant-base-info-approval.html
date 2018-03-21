@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>基础信息审核</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/custom/js/jquery.dataTables.min.css}"/>
+    <link class="main-stylesheet" th:href="@{/pages/css/pages.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/pages/css/pages-icons.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+    <table id="approval-table" class="display" >
+        <thead>
+        <tr>
+            <th>行政区</th>
+            <th>电站DB代码</th>
+            <th>事件</th>
+            <th>状态</th>
+            <th>提交时间</th>
+            <th>备注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/custom/js/jquery.dataTables.min.js}"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/custom/js/approval.js"></script>
+
+
+</body>
+</html>

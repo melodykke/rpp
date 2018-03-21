@@ -63,145 +63,63 @@
     </style>
     <script th:src="@{/assets/plugins/jquery/jquery-1.11.1.min.js}" type="text/javascript"></script>
     <script th:src="@{/custom/js/index.js}" type="text/javascript"></script>
-    <script language="JavaScript" type="text/javascript">
-      /*  //<![CDATA[
-        document.write('<div id="loader_container"><div id="loader"><div align="center">页面组件加载中……<br />首次加载可能会花费一分钟，请稍候...</div><div id="loader_bg"><div id="progress"> </div></div></div></div>');
-        var t_id = setInterval(animate,20);
-        var pos=0;
-        var dir=2;
-        var len=0;
-        function animate()
-        {
-            var elem = document.getElementById('progress');
-            if(elem != null) {
-                if (pos==0) len += dir;
-                if (len>32 || pos>179) pos += dir;
-                if (pos>179) len -= dir;
-                if (pos>179 && len==0) pos=0;
-                elem.style.left = pos+'px';
-                elem.style.width = len+'px';
-            }
-        }
-        function remove_loading() {
-            this.clearInterval(t_id);
-            var targelem = document.getElementById('loader_container');
-            targelem.style.display='none';
-            targelem.style.visibility='hidden';
-        }
-*/
-
-/*        function iframeAutoHeight() {
-            var iframe = document.getElementById("page-container-content");
-            if (navigator.userAgent.indexOf("MSIE") > 0 || navigator.userAgent.indexOf("rv:11") > 0 || navigator.userAgent.indexOf("Firefox") > 0) {
-                iframe.height = iframe.contentWindow.document.body.scrollHeight;
-            } else {
-                iframe.height = iframe.contentWindow.document.documentElement.scrollHeight;
-            }
-        }*/
-
-        function reinitIframe(){
-            var iframe=document.getElementById("page-container-content");
-            if(navigator.userAgent.indexOf("MSIE")>0||navigator.userAgent.indexOf("rv:11")>0||navigator.userAgent.indexOf("Firefox")>0){
-                iframe.height=iframe.contentWindow.document.body.scrollHeight;
-            }else{
-                iframe.height=iframe.contentWindow.document.documentElement.scrollHeight;
-            }
-        }
-
-     /*   window.setInterval("reinitIframe()", 200);*/
-
-        //]]>
-    </script>
-
-
 </head>
 <body class="fixed-header dashboard" onload="remove_loading()" style="margin:0 0;padding:0 0" scroll="no">
+
 <!-- BEGIN SIDEBPANEL-->
-<div th:include="page-fragments :: sidebar"></div>
+<div th:include="page-fragments :: begin-sidebpanel"></div>
 <!-- END SIDEBPANEL-->
+
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
+
     <!-- START HEADER -->
-    <div th:include="page-fragments :: header"></div>
+    <div th:include="page-fragments :: start-header"></div>
     <!-- END HEADER -->
+
     <!-- START PAGE CONTENT WRAPPER -->
-    <div class="page-content-wrapper" >
+    <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
-        <div class="content" id="page-content">
-            <iframe  id="page-container-content" name="mainFrame" src="" width="100%" scrolling="no" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>
+        <div class="content ">
+
+            <!-- START JUMBOTRON -->
+            <!--<div th:include="page-fragments :: start-jumbotron"></div>-->
+            <!-- END JUMBOTRON -->
+
+            <!-- START CONTAINER FLUID -->
+            <div class=" container-fluid   container-fixed-lg">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <iframe id="mainFrame" name="mainFrame" src="" width="100%" scrolling="no" frameborder="no" border="0" marginwidth="0" marginheight="0" allowTransparency="true"></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTAINER FLUID -->
         </div>
         <!-- END PAGE CONTENT -->
+
         <!-- START COPYRIGHT -->
-        <!-- START CONTAINER FLUID -->
-        <div th:include="page-fragments :: footer"></div>
+        <div th:include="page-fragments :: start-copyright"></div>
         <!-- END COPYRIGHT -->
+
     </div>
     <!-- END PAGE CONTENT WRAPPER -->
 </div>
 <!-- END PAGE CONTAINER -->
+
 <!--START QUICKVIEW -->
-<div th:include="page-fragments :: quickview"></div>
+<div th:include="page-fragments :: start-quickview"></div>
 <!-- END QUICKVIEW-->
+
 <!-- START OVERLAY -->
-<div class="overlay hide" data-pages="search">
-    <!-- BEGIN Overlay Content !-->
-    <div class="overlay-content has-results m-t-20">
-        <!-- BEGIN Overlay Header !-->
-        <div class="container-fluid">
-            <!-- BEGIN Overlay Logo !-->
-            <img class="overlay-brand" th:src="@{/assets/img/logo.png}" alt="logo"  width="78" height="22" />
-            <!-- END Overlay Logo !-->
-            <!-- BEGIN Overlay Close !-->
-            <a href="#" class="close-icon-light overlay-close text-black fs-16">
-                <i class="pg-close"></i>
-            </a>
-            <!-- END Overlay Close !-->
-        </div>
-        <!-- END Overlay Header !-->
-        <div class="container-fluid">
-            <!-- BEGIN Overlay Controls !-->
-            <input id="overlay-search" class="no-border overlay-search bg-transparent" placeholder="Search..." autocomplete="off" spellcheck="false" />
-            <br/>
-            <div class="inline-block">
-                <div class="checkbox right">
-                    <input id="checkboxn" type="checkbox" value="1" checked="checked"/>
-                    <label for="checkboxn"><i class="fa fa-search"></i> Search within page</label>
-                </div>
-            </div>
-            <div class="inline-block m-l-10">
-                <p class="fs-13">Press enter to search</p>
-            </div>
-            <!-- END Overlay Controls !-->
-        </div>
-        <!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
-        <div th:include="page-fragments :: overlay-search-results"></div>
-        <!-- END Overlay Search Results !-->
-    </div>
-    <!-- END Overlay Content !-->
-</div>
-<div class="modal fade stick-up" id="online-notice-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content-wrapper">
-            <div class="modal-content">
-                <div class="modal-header clearfix text-left">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
-                    </button>
-                    <h5>您收到一条新消息！</h5>
-                </div>
-                <div class="modal-body">
-                    <p class="no-margin">您收到一条新的待审批消息，如需查看请点击“查看”按钮，忽略请点击“取消”或单击其他部分。</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-cons  pull-left inline" data-dismiss="modal">查看</button>
-                    <button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">取消</button>
-                </div>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+<div th:include="page-fragments :: start-overlay"></div>
 <!-- END OVERLAY -->
+
+<!-- Modals -->
+<div th:include="page-fragments :: ppbiu-submit-cover-layer"></div>
+<div th:include="page-fragments :: online-notice-cover-layer"></div>
+<div th:include="page-fragments :: approval-detail-cover-layer"></div>
+
 <!-- BEGIN VENDOR JS -->
 <script th:src="@{/assets/plugins/pace/pace.min.js}" type="text/javascript"></script>
 

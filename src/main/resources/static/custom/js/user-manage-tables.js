@@ -21,6 +21,7 @@ $(document).ready(function() {
         onLoadSuccess:function(){
             if( window.parent!=window.self){
                 $("#page-container-content",window.parent.document).onload=parent.reinitIframe();
+                parent.remove_loading();
             }
         },
         columns :[

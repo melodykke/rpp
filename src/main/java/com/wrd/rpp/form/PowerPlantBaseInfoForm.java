@@ -11,7 +11,7 @@ public class PowerPlantBaseInfoForm {
     private String plantCode;
     @NotEmpty(message = "电站名称为空！")
     private String plantName; // 电站名称
-    private String administrativeArea; // 行政区
+    private String regionCode; // 行政区
     private String plantRiverLocation; // 河流名称
     private BigDecimal longitude; // 经度
     private BigDecimal latitude; // 纬度
@@ -68,4 +68,5 @@ public class PowerPlantBaseInfoForm {
     private String fillFormPersonTel; // 填报人员电话
     private String fillFormTime; // 填报时间
     private String marks; // 备注
+    private Byte status = 0;
 }

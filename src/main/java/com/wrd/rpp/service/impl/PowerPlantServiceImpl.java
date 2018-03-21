@@ -2,6 +2,7 @@ package com.wrd.rpp.service.impl;
 
 import com.wrd.rpp.dataobject.*;
 import com.wrd.rpp.dto.PowerPlantLocationInfoAndPowerPlantGeneratingEquipmentDTO;
+import com.wrd.rpp.enums.ApplicationTypeEnum;
 import com.wrd.rpp.enums.SysEnum;
 import com.wrd.rpp.exception.SysException;
 import com.wrd.rpp.form.PowerPlantBaseInfoForm;
@@ -21,8 +22,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,6 +41,8 @@ public class PowerPlantServiceImpl implements PowerPlantService {
     private PowerPlantBaseInfoUploadRepository powerPlantBaseInfoUploadRepository;
     @Autowired
     private RegionRepository regionRepository;
+    @Autowired
+    private ApplicationInfoRepository applicationInfoRepository;
     @Override //存储电站基本数据
     public SysMsg savePowerPlantBaseInfoList(List<PowerPlantBaseInfo> powerPlantBaseInfoList){
         List<PowerPlantBaseInfo> powerPlantBaseInfoListReturn = powerPlantBaseInfoRepository.save(powerPlantBaseInfoList);
@@ -111,6 +112,11 @@ public class PowerPlantServiceImpl implements PowerPlantService {
         }
         powerPlantBaseInfoUpload.setPlantId(KeyUtil.genUniqueKey());
         PowerPlantBaseInfoUpload powerPlantBaseInfoUploadReturn = powerPlantBaseInfoUploadRepository.save(powerPlantBaseInfoUpload);
+        //生成一条申请信息，并存入数据库
+        ApplicationInfo applicationInfo = new ApplicationInfo(KeyUtil.genUniqueKey(), powerPlantBaseInfoUpload.getPlantId()
+                , powerPlantBaseInfoUpload.getRegionCode(), ApplicationTypeEnum.power_plant_base_info_application.getMsg()
+                , powerPlantBaseInfoUpload.getStatus(), powerPlantBaseInfoUpload.getMarks());
+        applicationInfoRepository.save(applicationInfo);
         if(powerPlantBaseInfoUploadReturn == null){
             log.error("【数据存储】 数据存储错误，powerPlantBaseInfoUpload = {}", powerPlantBaseInfoUpload);
             throw new SysException(SysEnum.DATA_STORE_ERROR);
@@ -122,6 +128,14 @@ public class PowerPlantServiceImpl implements PowerPlantService {
     public Region findByRegionCode(String code) {
         return regionRepository.findRegionByRegionCode(code);
     }
+
+/*    @Override
+    public List<PowerPlantBaseInfoUpload> findApprovalList(List<String> regionCodeList) {
+        List<PowerPlantBaseInfoUpload> powerPlantBaseInfoUploadList = powerPlantBaseInfoUploadRepository
+                .findPowerPlantBaseInfoUploadsByRegionCodeInAndStatusIs(regionCodeList, ApplicationStatusEnum.HAVENT_APPROVAL_YET.getStatusCode());
+        return powerPlantBaseInfoUploadList;
+
+    }*/
 
 
     //出现储存错误时调用

@@ -45,6 +45,7 @@ public class MainController {
 
     @Autowired
     private RegionRepository regionRepository;
+
     @GetMapping("/403")
     public String test(){
         return "/403";
@@ -53,6 +54,11 @@ public class MainController {
     @GetMapping("/error")
     public String test1(){
         return "/error";
+    }
+
+    @GetMapping("/indexpage")
+    public String indexpage(){
+        return "/indexpage";
     }
     /**
      * 用户账户注册页面

@@ -16,7 +16,7 @@ public class PowerPlantBaseInfoUpload {
     private String plantId;
     private String plantCode;
     private String plantName; // 电站名称
-    private String administrativeArea; // 行政区
+    private String regionCode; // 行政区
     private String plantRiverLocation; // 河流名称
     private BigDecimal longitude; // 经度
     private BigDecimal latitude; // 纬度
@@ -73,6 +73,7 @@ public class PowerPlantBaseInfoUpload {
     private String fillFormPersonTel; // 填报人员电话
     private Date fillFormTime; // 填报时间
     private String marks; // 备注
+    private Byte status;
     private Date createTime;
     private Date updateTime;
 }

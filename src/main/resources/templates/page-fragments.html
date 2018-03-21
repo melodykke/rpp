@@ -3,7 +3,319 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
-<div th:fragment="quickview">
+
+<!-- START HEADER -->
+<div th:fragment="start-header">
+<div class="header ">
+    <!-- START MOBILE SIDEBAR TOGGLE -->
+    <a href="#" class="btn-link toggle-sidebar hidden-lg-up pg pg-menu" data-toggle="sidebar">
+    </a>
+    <!-- END MOBILE SIDEBAR TOGGLE -->
+    <div class="">
+        <div class="brand inline   ">
+            <img th:src="@{/assets/img/logo.png}" alt="logo"  width="78" height="22"/>
+        </div>
+        <!-- START NOTIFICATION LIST -->
+        <ul class="hidden-md-down notification-list no-margin hidden-sm-down b-grey b-l b-r no-style p-l-30 p-r-20">
+            <li class="p-r-10 inline">
+                <div class="dropdown">
+                    <a href="javascript:;" id="notification-center" class="header-icon pg pg-world" data-toggle="dropdown">
+                        <span class="bubble"></span>
+                    </a>
+                    <!-- START Notification Dropdown -->
+                    <div class="dropdown-menu notification-toggle" role="menu" aria-labelledby="notification-center">
+                        <!-- START Notification -->
+                        <div class="notification-panel">
+                            <!-- START Notification Body-->
+                            <div class="notification-body scrollable">
+                                <!-- START Notification Item-->
+                                <div class="notification-item  clearfix">
+                                    <div class="heading">
+                                        <a href="#" class="text-danger pull-left">
+                                            <i class="fa fa-exclamation-triangle m-r-10"></i>
+                                            <span class="bold">98% Server Load</span>
+                                            <span class="fs-12 m-l-10">Take Action</span>
+                                        </a>
+                                        <span class="pull-right time">2 mins ago</span>
+                                    </div>
+                                    <!-- START Notification Item Right Side-->
+                                    <div class="option">
+                                        <a href="#" class="mark"></a>
+                                    </div>
+                                    <!-- END Notification Item Right Side-->
+                                </div>
+                                <!-- END Notification Item-->
+                                <!-- START Notification Item-->
+                                <div class="notification-item  clearfix">
+                                    <div class="heading">
+                                        <a href="#" class="text-warning-dark pull-left">
+                                            <i class="fa fa-exclamation-triangle m-r-10"></i>
+                                            <span class="bold">Warning Notification</span>
+                                            <span class="fs-12 m-l-10">Buy Now</span>
+                                        </a>
+                                        <span class="pull-right time">yesterday</span>
+                                    </div>
+                                    <!-- START Notification Item Right Side-->
+                                    <div class="option">
+                                        <a href="#" class="mark"></a>
+                                    </div>
+                                    <!-- END Notification Item Right Side-->
+                                </div>
+                                <!-- END Notification Item-->
+                            </div>
+                            <!-- END Notification Body-->
+                            <!-- START Notification Footer-->
+                            <div class="notification-footer text-center">
+                                <a href="#" class="">消息提醒</a>
+                                <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
+                                    <i class="pg-refresh_new"></i>
+                                </a>
+                            </div>
+                            <!-- START Notification Footer-->
+                        </div>
+                        <!-- END Notification -->
+                    </div>
+                    <!-- END Notification Dropdown -->
+                </div>
+            </li>
+            <li class="p-r-10 inline">
+                <a href="#" class="header-icon pg pg-link"></a>
+            </li>
+            <li class="p-r-10 inline">
+                <a href="#" class="header-icon pg pg-thumbs"></a>
+            </li>
+        </ul>
+        <!-- END NOTIFICATIONS LIST -->
+        <a href="#" class="search-link hidden-md-down" data-toggle="search"><i class="pg-search"></i>全局 <span class="bold"> 搜索</span></a>
+    </div>
+    <div class="d-flex align-items-center">
+        <!-- START User Info-->
+        <div class="pull-left p-r-10 fs-14 font-heading hidden-md-down">
+            <span class="semi-bold">欢迎， </span> <span class="text-master" id="subject-name">…<span id="subject-refresh" hidden="hidden">点我 <a th:href="@{/getSubject}">刷新</a></span></span>
+        </div>
+        <div class="dropdown pull-right hidden-md-down">
+            <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="thumbnail-wrapper d32 circular inline">
+              <img th:src="@{/assets/img/profiles/avatar.jpg}" alt="" width="32" height="32"/>
+              </span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
+                <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
+                <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
+                <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
+                <a th:href="@{/logout}" class="clearfix bg-master-lighter dropdown-item">
+                    <span class="pull-left">Logout</span>
+                    <span class="pull-right"><i class="pg-power"></i></span>
+                </a>
+            </div>
+        </div>
+        <!-- END User Info-->
+        <a href="#" class="header-icon pg pg-alt_menu btn-link m-l-10 sm-no-margin d-inline-block" data-toggle="quickview" data-toggle-element="#quickview"></a>
+    </div>
+</div>
+</div>
+<!-- END HEADER -->
+
+
+<!-- START JUMBOTRON -->
+<div th:fragment="start-jumbotron">
+<div class="jumbotron" data-pages="parallax">
+    <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">控制台</a></li>
+                <li class="breadcrumb-item active">Form Elements</li>
+            </ol>
+            <!-- END BREADCRUMB -->
+        </div>
+    </div>
+</div>
+</div>
+<!-- END JUMBOTRON -->
+
+
+<!-- BEGIN SIDEBPANEL-->
+<div th:fragment="begin-sidebpanel">
+    <nav class="page-sidebar" data-pages="sidebar">
+        <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
+        <div class="sidebar-overlay-slide from-top" id="appMenu">
+            <div class="row">
+                <div class="col-xs-6 no-padding">
+                    <a href="#" class="p-l-40"><img th:src="@{/assets/img/demo/social_app.svg}" alt="socail"/>
+                    </a>
+                </div>
+                <div class="col-xs-6 no-padding">
+                    <a href="#" class="p-l-10"><img th:src="@{/assets/img/demo/email_app.svg}" alt="socail"/>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 m-t-20 no-padding">
+                    <a href="#" class="p-l-40"><img th:src="@{/assets/img/demo/calendar_app.svg}" alt="socail"/>
+                    </a>
+                </div>
+                <div class="col-xs-6 m-t-20 no-padding">
+                    <a href="#" class="p-l-10"><img th:src="@{/assets/img/demo/add_more.svg}" alt="socail"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- END SIDEBAR MENU TOP TRAY CONTENT-->
+        <!-- BEGIN SIDEBAR MENU HEADER-->
+        <div class="sidebar-header">
+            <img th:src="@{/assets/img/logo_white.png}" alt="logo" class="brand"  width="78" height="22"/>
+            <div class="sidebar-header-controls">
+                <button type="button" class="btn btn-xs sidebar-slide-toggle btn-link m-l-20 hidden-md-down" data-pages-toggle="#appMenu"><i class="fa fa-angle-down fs-16"></i>
+                </button>
+                <button type="button" class="btn btn-link hidden-md-down" data-toggle-pin="sidebar"><i class="fa fs-12"></i>
+                </button>
+            </div>
+        </div>
+        <!-- END SIDEBAR MENU HEADER-->
+        <!-- START SIDEBAR MENU -->
+        <div class="sidebar-menu">
+            <!-- BEGIN SIDEBAR MENU ITEMS-->
+            <ul class="menu-items">
+                <li class="m-t-30 ">
+                    <a th:href="@{/index}" class="detailed">
+                        <span class="title">控制台</span>
+                        <span class="details">系统主页</span>
+                    </a>
+                    <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+                </li>
+
+                <li>
+                    <a href="javascript:;"><span class="title">新增信息</span>
+                        <span class=" arrow"></span></a>
+                    <span class="icon-thumbnail"><i class="pg-calender"></i></span>
+                    <ul class="sub-menu">
+                        <shiro:hasRole name="county">
+                        <li class="">
+                            <a th:href="@{/power-plant/power-plant-base-info-upload}" th:target="mainFrame">信息录入</a>
+                            <span class="icon-thumbnail">录</span>
+                        </li>
+                        </shiro:hasRole>
+                        <li class="">
+                            <a href="calendar_lang.html">信息管理</a>
+                            <span class="icon-thumbnail">管</span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;"><span class="title">电站信息报送</span>
+                        <span class=" arrow"></span></a>
+                    <span class="icon-thumbnail"><i class="pg-layouts2"></i></span>
+                    <ul class="sub-menu">
+                        <li class="">
+                            <a href="default_layout.html">在建项目</a>
+                            <span class="icon-thumbnail">在</span>
+                        </li>
+                        <li class="">
+                            <a href="secondary_layout.html">已建项目</a>
+                            <span class="icon-thumbnail">已</span>
+                        </li>
+                    </ul>
+                </li>
+                <shiro:hasAnyRoles name="admin, city">
+                <li>
+                    <a href="javascript:;"><span class="title">信息审核</span>
+                        <span class=" arrow"></span></a>
+                    <span class="icon-thumbnail">审</span>
+                    <ul class="sub-menu">
+                        <li class="">
+                            <a id="to-base-info-approval" th:href="@{/user/base-info-approval}" th:target="mainFrame">项目审核</a>
+                            <span class="icon-thumbnail">项</span>
+                        </li>
+                        <li class="">
+                            <a href="typography.html">资料审核</a>
+                            <span class="icon-thumbnail">资</span>
+                        </li>
+                        <li class="">
+                            <a href="icons.html">月报审核</a>
+                            <span class="icon-thumbnail">月</span>
+                        </li>
+                        <li class="">
+                            <a href="buttons.html">年报审核</a>
+                            <span class="icon-thumbnail">年</span>
+                        </li>
+                    </ul>
+                </li>
+                </shiro:hasAnyRoles>
+                <li>
+                    <a href="javascript:;"><span class="title">档案管理</span>
+                        <span class=" arrow"></span></a>
+                    <span class="icon-thumbnail"><i class="pg-tables"></i></span>
+                    <ul class="sub-menu">
+                        <li class="">
+                            <a href="tables.html">资料上报</a>
+                            <span class="icon-thumbnail">报</span>
+                        </li>
+                        <li class="">
+                            <a href="datatables.html">资料查询</a>
+                            <span class="icon-thumbnail">查</span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a th:href="@{/register}" target="mainFrame"><span class="title">电站数据库</span></a>
+                    <span class="icon-thumbnail"><i class="pg-charts"></i></span>
+                </li>
+                <shiro:hasRole name="admin">
+                <li>
+                    <a href="javascript:;"><span class="title">系统设置</span>
+                        <span class=" arrow"></span></a>
+                    <span class="icon-thumbnail"><i class="pg-map"></i></span>
+                    <ul class="sub-menu">
+                        <li class="">
+                            <a th:href="datatables.html">角色管理</a>
+                            <span class="icon-thumbnail">角</span>
+                        </li>
+                        <li class="">
+                            <a id="to-user-manage" th:href="@{/user/user-manage}" th:target="mainFrame">用户管理</a>
+                            <span class="icon-thumbnail">户</span>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/druid/index.html}">性能监控</a>
+                            <span class="icon-thumbnail">控</span>
+                        </li>
+                    </ul>
+                </li>
+                </shiro:hasRole>
+                <li class="">
+                    <a href="http://changelog.pages.revox.io/" target="_blank"><span class="title">历史资料查询</span></a>
+                    <span class="icon-thumbnail">史</span>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <!-- END SIDEBAR MENU -->
+    </nav>
+</div>
+<!-- END SIDEBPANEL-->
+
+
+<!-- START COPYRIGHT -->
+<div th:fragment="start-copyright">
+    <div class=" container-fluid  container-fixed-lg footer">
+        <div class="copyright sm-text-center">
+            <p class="small no-margin pull-left sm-pull-reset">
+                <span class="hint-text">Copyright &copy; 2017-2018 </span>
+                <span class="font-montserrat">xx智慧水利科技股份有限公司</span>
+                <span class="hint-text"> 版权所有 </span>
+                <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> <span class="muted">|</span> <a href="#" class="m-l-10">Privacy Policy</a></span>
+            </p>
+            <p class="small no-margin pull-right sm-pull-reset">
+                xxx水利厅<span class="hint-text">&amp; 农电局</span>
+            </p>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!-- END COPYRIGHT -->
+
+<!--START QUICKVIEW -->
+<div th:fragment="start-quickview">
     <div id="quickview" class="quickview-wrapper" data-pages="quickview">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
@@ -166,289 +478,153 @@
         </div>
     </div>
 </div>
+<!-- END QUICKVIEW-->
 
-<div th:fragment="header">
-    <div class="header ">
-        <!-- START MOBILE SIDEBAR TOGGLE -->
-        <a href="#" class="btn-link toggle-sidebar hidden-lg-up pg pg-menu" data-toggle="sidebar">
-        </a>
-        <!-- END MOBILE SIDEBAR TOGGLE -->
-        <div class="">
-            <div class="brand inline   ">
-                <img th:src="@{/assets/img/logo.png}" alt="logo"  width="78" height="22"/>
+
+
+
+<!-- START OVERLAY -->
+<div th:fragment="start-overlay">
+<div class="overlay hide" data-pages="search">
+    <!-- BEGIN Overlay Content !-->
+    <div class="overlay-content has-results m-t-20">
+        <!-- BEGIN Overlay Header !-->
+        <div class="container-fluid">
+            <!-- BEGIN Overlay Logo !-->
+            <img class="overlay-brand" th:src="@{/assets/img/logo.png}" alt="logo" />
+            <!-- END Overlay Logo !-->
+            <!-- BEGIN Overlay Close !-->
+            <a href="#" class="close-icon-light overlay-close text-black fs-16">
+                <i class="pg-close"></i>
+            </a>
+            <!-- END Overlay Close !-->
+        </div>
+        <!-- END Overlay Header !-->
+        <div class="container-fluid">
+            <!-- BEGIN Overlay Controls !-->
+            <input id="overlay-search" class="no-border overlay-search bg-transparent" placeholder="Search..." autocomplete="off" spellcheck="false" />
+            <br />
+            <div class="inline-block">
+                <div class="checkbox right">
+                    <input id="checkboxn" type="checkbox" value="1" checked="checked" />
+                    <label for="checkboxn"><i class="fa fa-search"></i> Search within page</label>
+                </div>
             </div>
-            <!-- START NOTIFICATION LIST -->
-            <ul class="hidden-md-down notification-list no-margin hidden-sm-down b-grey b-l b-r no-style p-l-30 p-r-20">
-                <li class="p-r-10 inline">
-                    <div class="dropdown">
-                        <a href="javascript:;" id="notification-center" class="header-icon pg pg-world" data-toggle="dropdown">
-                            <span class="bubble"></span>
-                        </a>
-                        <!-- START Notification Dropdown -->
-                        <div class="dropdown-menu notification-toggle" role="menu" aria-labelledby="notification-center">
-                            <!-- START Notification -->
-                            <div class="notification-panel">
-                                <!-- START Notification Body-->
-                                <div class="notification-body scrollable">
-                                    <!-- START Notification Item-->
-                                    <div class="notification-item  clearfix">
-                                        <div class="heading">
-                                            <a href="#" class="text-danger pull-left">
-                                                <i class="fa fa-exclamation-triangle m-r-10"></i>
-                                                <span class="bold">98% Server Load</span>
-                                                <span class="fs-12 m-l-10">Take Action</span>
-                                            </a>
-                                            <span class="pull-right time">2 mins ago</span>
-                                        </div>
-                                        <!-- START Notification Item Right Side-->
-                                        <div class="option">
-                                            <a href="#" class="mark"></a>
-                                        </div>
-                                        <!-- END Notification Item Right Side-->
-                                    </div>
-                                    <!-- END Notification Item-->
-                                    <!-- START Notification Item-->
-                                    <div class="notification-item  clearfix">
-                                        <div class="heading">
-                                            <a href="#" class="text-warning-dark pull-left">
-                                                <i class="fa fa-exclamation-triangle m-r-10"></i>
-                                                <span class="bold">Warning Notification</span>
-                                                <span class="fs-12 m-l-10">Buy Now</span>
-                                            </a>
-                                            <span class="pull-right time">yesterday</span>
-                                        </div>
-                                        <!-- START Notification Item Right Side-->
-                                        <div class="option">
-                                            <a href="#" class="mark"></a>
-                                        </div>
-                                        <!-- END Notification Item Right Side-->
-                                    </div>
-                                    <!-- END Notification Item-->
+            <div class="inline-block m-l-10">
+                <p class="fs-13">Press enter to search</p>
+            </div>
+            <!-- END Overlay Controls !-->
+        </div>
+        <!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
+        <div class="container-fluid">
+          <span>
+                <strong>suggestions :</strong>
+            </span>
+            <span id="overlay-suggestions"></span>
+            <br />
+            <div class="search-results m-t-40">
+                <p class="bold">Pages Search Results</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- BEGIN Search Result Item !-->
+                        <div class="">
+                            <!-- BEGIN Search Result Item Thumbnail !-->
+                            <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                                <div>
+                                    <img width="50" height="50" th:src="@{/assets/img/profiles/avatar.jpg}" alt="" />
                                 </div>
-                                <!-- END Notification Body-->
-                                <!-- START Notification Footer-->
-                                <div class="notification-footer text-center">
-                                    <a href="#" class="">消息提醒</a>
-                                    <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
-                                        <i class="pg-refresh_new"></i>
-                                    </a>
-                                </div>
-                                <!-- START Notification Footer-->
                             </div>
-                            <!-- END Notification -->
+                            <!-- END Search Result Item Thumbnail !-->
+                            <div class="p-l-10 inline p-t-5">
+                                <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on pages</h5>
+                                <p class="hint-text">via john smith</p>
+                            </div>
                         </div>
-                        <!-- END Notification Dropdown -->
+                        <!-- END Search Result Item !-->
+                        <!-- BEGIN Search Result Item !-->
+                        <div class="">
+                            <!-- BEGIN Search Result Item Thumbnail !-->
+                            <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                                <div>T</div>
+                            </div>
+                            <!-- END Search Result Item Thumbnail !-->
+                            <div class="p-l-10 inline p-t-5">
+                                <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> related topics</h5>
+                                <p class="hint-text">via pages</p>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item !-->
+                        <!-- BEGIN Search Result Item !-->
+                        <div class="">
+                            <!-- BEGIN Search Result Item Thumbnail !-->
+                            <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
+                                <div><i class="fa fa-headphones large-text "></i>
+                                </div>
+                            </div>
+                            <!-- END Search Result Item Thumbnail !-->
+                            <div class="p-l-10 inline p-t-5">
+                                <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> music</h5>
+                                <p class="hint-text">via pagesmix</p>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item !-->
                     </div>
-                </li>
-                <li class="p-r-10 inline">
-                    <a href="#" class="header-icon pg pg-link"></a>
-                </li>
-                <li class="p-r-10 inline">
-                    <a href="#" class="header-icon pg pg-thumbs"></a>
-                </li>
-            </ul>
-            <!-- END NOTIFICATIONS LIST -->
-            <a href="#" class="search-link hidden-md-down" data-toggle="search"><i class="pg-search"></i>全局 <span class="bold"> 搜索</span></a>
-        </div>
-        <div class="d-flex align-items-center">
-            <!-- START User Info-->
-            <div class="pull-left p-r-10 fs-14 font-heading hidden-md-down">
-                <span class="semi-bold">欢迎， </span> <span class="text-master" id="subject-name">…<span id="subject-refresh" hidden="hidden">点我 <a th:href="@{/getSubject}">刷新</a></span></span>
-            </div>
-            <div class="dropdown pull-right hidden-md-down">
-                <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="thumbnail-wrapper d32 circular inline">
-                  <img th:src="@{/assets/img/profiles/avatar.jpg}" alt="" width="32" height="32"/>
-                  </span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
-                    <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
-                    <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
-                    <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
-                    <a th:href="@{/logout}" class="clearfix bg-master-lighter dropdown-item">
-                        <span class="pull-left">Logout</span>
-                        <span class="pull-right"><i class="pg-power"></i></span>
-                    </a>
+                    <div class="col-md-6">
+                        <!-- BEGIN Search Result Item !-->
+                        <div class="">
+                            <!-- BEGIN Search Result Item Thumbnail !-->
+                            <div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
+                                <div><i class="fa fa-facebook large-text "></i>
+                                </div>
+                            </div>
+                            <!-- END Search Result Item Thumbnail !-->
+                            <div class="p-l-10 inline p-t-5">
+                                <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on facebook</h5>
+                                <p class="hint-text">via facebook</p>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item !-->
+                        <!-- BEGIN Search Result Item !-->
+                        <div class="">
+                            <!-- BEGIN Search Result Item Thumbnail !-->
+                            <div class="thumbnail-wrapper d48 circular bg-complete text-white inline m-t-10">
+                                <div><i class="fa fa-twitter large-text "></i>
+                                </div>
+                            </div>
+                            <!-- END Search Result Item Thumbnail !-->
+                            <div class="p-l-10 inline p-t-5">
+                                <h5 class="m-b-5">Tweats on<span class="semi-bold result-name"> ice cream</span></h5>
+                                <p class="hint-text">via twitter</p>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item !-->
+                        <!-- BEGIN Search Result Item !-->
+                        <div class="">
+                            <!-- BEGIN Search Result Item Thumbnail !-->
+                            <div class="thumbnail-wrapper d48 circular text-white bg-danger inline m-t-10">
+                                <div><i class="fa fa-google-plus large-text "></i>
+                                </div>
+                            </div>
+                            <!-- END Search Result Item Thumbnail !-->
+                            <div class="p-l-10 inline p-t-5">
+                                <h5 class="m-b-5">Circles on<span class="semi-bold result-name"> ice cream</span></h5>
+                                <p class="hint-text">via google plus</p>
+                            </div>
+                        </div>
+                        <!-- END Search Result Item !-->
+                    </div>
                 </div>
             </div>
-            <!-- END User Info-->
-            <a href="#" class="header-icon pg pg-alt_menu btn-link m-l-10 sm-no-margin d-inline-block" data-toggle="quickview" data-toggle-element="#quickview"></a>
         </div>
+        <!-- END Overlay Search Results !-->
     </div>
+    <!-- END Overlay Content !-->
+</div>
 </div>
 
-<div th:fragment="sidebar">
-    <nav class="page-sidebar" data-pages="sidebar">
-        <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
-        <div class="sidebar-overlay-slide from-top" id="appMenu">
-            <div class="row">
-                <div class="col-xs-6 no-padding">
-                    <a href="#" class="p-l-40"><img th:src="@{/assets/img/demo/social_app.svg}" alt="socail"/>
-                    </a>
-                </div>
-                <div class="col-xs-6 no-padding">
-                    <a href="#" class="p-l-10"><img th:src="@{/assets/img/demo/email_app.svg}" alt="socail"/>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 m-t-20 no-padding">
-                    <a href="#" class="p-l-40"><img th:src="@{/assets/img/demo/calendar_app.svg}" alt="socail"/>
-                    </a>
-                </div>
-                <div class="col-xs-6 m-t-20 no-padding">
-                    <a href="#" class="p-l-10"><img th:src="@{/assets/img/demo/add_more.svg}" alt="socail"/>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- END SIDEBAR MENU TOP TRAY CONTENT-->
-        <!-- BEGIN SIDEBAR MENU HEADER-->
-        <div class="sidebar-header">
-            <img th:src="@{/assets/img/logo_white.png}" alt="logo" class="brand"  width="78" height="22"/>
-            <div class="sidebar-header-controls">
-                <button type="button" class="btn btn-xs sidebar-slide-toggle btn-link m-l-20 hidden-md-down" data-pages-toggle="#appMenu"><i class="fa fa-angle-down fs-16"></i>
-                </button>
-                <button type="button" class="btn btn-link hidden-md-down" data-toggle-pin="sidebar"><i class="fa fs-12"></i>
-                </button>
-            </div>
-        </div>
-        <!-- END SIDEBAR MENU HEADER-->
-        <!-- START SIDEBAR MENU -->
-        <div class="sidebar-menu">
-            <!-- BEGIN SIDEBAR MENU ITEMS-->
-            <ul class="menu-items">
-                <li class="m-t-30 ">
-                    <a th:href="@{/index}" class="detailed">
-                        <span class="title">控制台</span>
-                        <span class="details">系统主页</span>
-                    </a>
-                    <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
-                </li>
-
-                <li>
-                    <a href="javascript:;"><span class="title">新增信息</span>
-                        <span class=" arrow"></span></a>
-                    <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-                    <ul class="sub-menu">
-                        <shiro:hasRole name="county">
-                        <li class="">
-                            <a th:href="@{/power-plant/power-plant-base-info-upload}" th:target="mainFrame">信息录入</a>
-                            <span class="icon-thumbnail">录</span>
-                        </li>
-                        </shiro:hasRole>
-                        <li class="">
-                            <a href="calendar_lang.html">信息管理</a>
-                            <span class="icon-thumbnail">管</span>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;"><span class="title">电站信息报送</span>
-                        <span class=" arrow"></span></a>
-                    <span class="icon-thumbnail"><i class="pg-layouts2"></i></span>
-                    <ul class="sub-menu">
-                        <li class="">
-                            <a href="default_layout.html">在建项目</a>
-                            <span class="icon-thumbnail">在</span>
-                        </li>
-                        <li class="">
-                            <a href="secondary_layout.html">已建项目</a>
-                            <span class="icon-thumbnail">已</span>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;"><span class="title">信息审核</span>
-                        <span class=" arrow"></span></a>
-                    <span class="icon-thumbnail">审</span>
-                    <ul class="sub-menu">
-                        <li class="">
-                            <a href="color.html">项目审核</a>
-                            <span class="icon-thumbnail">项</span>
-                        </li>
-                        <li class="">
-                            <a href="typography.html">资料审核</a>
-                            <span class="icon-thumbnail">资</span>
-                        </li>
-                        <li class="">
-                            <a href="icons.html">月报审核</a>
-                            <span class="icon-thumbnail">月</span>
-                        </li>
-                        <li class="">
-                            <a href="buttons.html">年报审核</a>
-                            <span class="icon-thumbnail">年</span>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;"><span class="title">档案管理</span>
-                        <span class=" arrow"></span></a>
-                    <span class="icon-thumbnail"><i class="pg-tables"></i></span>
-                    <ul class="sub-menu">
-                        <li class="">
-                            <a href="tables.html">资料上报</a>
-                            <span class="icon-thumbnail">报</span>
-                        </li>
-                        <li class="">
-                            <a href="datatables.html">资料查询</a>
-                            <span class="icon-thumbnail">查</span>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a th:href="@{/register}" target="mainFrame"><span class="title">电站数据库</span></a>
-                    <span class="icon-thumbnail"><i class="pg-charts"></i></span>
-                </li>
-                <li>
-                    <a href="javascript:;"><span class="title">系统设置</span>
-                        <span class=" arrow"></span></a>
-                    <span class="icon-thumbnail"><i class="pg-map"></i></span>
-                    <ul class="sub-menu">
-                        <li class="">
-                            <a th:href="datatables.html">角色管理</a>
-                            <span class="icon-thumbnail">角</span>
-                        </li>
-                        <li class="">
-                            <a id="user-manage" th:href="@{/user/user-manage}" th:target="mainFrame">用户管理</a>
-                            <span class="icon-thumbnail">户</span>
-                        </li>
-                        <li class="">
-                            <a th:href="@{/druid/index.html}">性能监控</a>
-                            <span class="icon-thumbnail">控</span>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="http://changelog.pages.revox.io/" target="_blank"><span class="title">历史资料查询</span></a>
-                    <span class="icon-thumbnail">史</span>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-        </div>
-        <!-- END SIDEBAR MENU -->
-    </nav>
-</div>
-
-<div th:fragment="footer">
-    <div class=" container-fluid  container-fixed-lg footer">
-        <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-                <span class="hint-text">Copyright &copy; 2017-2018 </span>
-                <span class="font-montserrat">xx智慧水利科技股份有限公司</span>
-                <span class="hint-text"> 版权所有 </span>
-                <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> <span class="muted">|</span> <a href="#" class="m-l-10">Privacy Policy</a></span>
-            </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-                xxx水利厅<span class="hint-text">&amp; 农电局</span>
-            </p>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
 
 <div th:fragment="ppbiu-submit-cover-layer">
-    <div class="modal fade slide-up disable-scroll" id="ppbiu-submit" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal slide-up disable-scroll" id="ppbiu-submit-modal" tabindex="-1" role="dialog" aria-hidden="false">
         <div class="modal-dialog ">
             <div class="modal-content-wrapper">
                 <div class="modal-content">
@@ -468,107 +644,48 @@
         </div>
     </div>
 </div>
-
-<div th:fragment="overlay-search-results">
-    <div class="container-fluid">
-              <span>
-                    <strong>suggestions :</strong>
-                </span>
-        <span id="overlay-suggestions"></span>
-        <br />
-        <div class="search-results m-t-40">
-            <p class="bold">Pages Search Results</p>
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- BEGIN Search Result Item !-->
-                    <div class="">
-                        <!-- BEGIN Search Result Item Thumbnail !-->
-                        <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
-                            <div>
-                                <img width="50" height="50" th:src="@{/assets/img/profiles/avatar.jpg}" alt="" />
-                            </div>
-                        </div>
-                        <!-- END Search Result Item Thumbnail !-->
-                        <div class="p-l-10 inline p-t-5">
-                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on pages</h5>
-                            <p class="hint-text">via john smith</p>
-                        </div>
-                    </div>
-                    <!-- END Search Result Item !-->
-                    <!-- BEGIN Search Result Item !-->
-                    <div class="">
-                        <!-- BEGIN Search Result Item Thumbnail !-->
-                        <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
-                            <div>T</div>
-                        </div>
-                        <!-- END Search Result Item Thumbnail !-->
-                        <div class="p-l-10 inline p-t-5">
-                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> related topics</h5>
-                            <p class="hint-text">via pages</p>
-                        </div>
-                    </div>
-                    <!-- END Search Result Item !-->
-                    <!-- BEGIN Search Result Item !-->
-                    <div class="">
-                        <!-- BEGIN Search Result Item Thumbnail !-->
-                        <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
-                            <div><i class="fa fa-headphones large-text "></i>
-                            </div>
-                        </div>
-                        <!-- END Search Result Item Thumbnail !-->
-                        <div class="p-l-10 inline p-t-5">
-                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> music</h5>
-                            <p class="hint-text">via pagesmix</p>
-                        </div>
-                    </div>
-                    <!-- END Search Result Item !-->
+<div th:fragment="online-notice-cover-layer">
+<div class="modal fade stick-up" id="online-notice-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+            <div class="modal-content">
+                <div class="modal-header clearfix text-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+                    </button>
+                    <h5>您收到一条新消息！</h5>
                 </div>
-                <div class="col-md-6">
-                    <!-- BEGIN Search Result Item !-->
-                    <div class="">
-                        <!-- BEGIN Search Result Item Thumbnail !-->
-                        <div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
-                            <div><i class="fa fa-facebook large-text "></i>
-                            </div>
-                        </div>
-                        <!-- END Search Result Item Thumbnail !-->
-                        <div class="p-l-10 inline p-t-5">
-                            <h5 class="m-b-5"><span class="semi-bold result-name">ice cream</span> on facebook</h5>
-                            <p class="hint-text">via facebook</p>
-                        </div>
-                    </div>
-                    <!-- END Search Result Item !-->
-                    <!-- BEGIN Search Result Item !-->
-                    <div class="">
-                        <!-- BEGIN Search Result Item Thumbnail !-->
-                        <div class="thumbnail-wrapper d48 circular bg-complete text-white inline m-t-10">
-                            <div><i class="fa fa-twitter large-text "></i>
-                            </div>
-                        </div>
-                        <!-- END Search Result Item Thumbnail !-->
-                        <div class="p-l-10 inline p-t-5">
-                            <h5 class="m-b-5">Tweats on<span class="semi-bold result-name"> ice cream</span></h5>
-                            <p class="hint-text">via twitter</p>
-                        </div>
-                    </div>
-                    <!-- END Search Result Item !-->
-                    <!-- BEGIN Search Result Item !-->
-                    <div class="">
-                        <!-- BEGIN Search Result Item Thumbnail !-->
-                        <div class="thumbnail-wrapper d48 circular text-white bg-danger inline m-t-10">
-                            <div><i class="fa fa-google-plus large-text "></i>
-                            </div>
-                        </div>
-                        <!-- END Search Result Item Thumbnail !-->
-                        <div class="p-l-10 inline p-t-5">
-                            <h5 class="m-b-5">Circles on<span class="semi-bold result-name"> ice cream</span></h5>
-                            <p class="hint-text">via google plus</p>
-                        </div>
-                    </div>
-                    <!-- END Search Result Item !-->
+                <div class="modal-body">
+                    <p class="no-margin">您收到一条新的待审批消息，如需查看请点击“查看”按钮，忽略请点击“取消”或单击其他部分。</p>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-cons  pull-left inline" data-dismiss="modal" th:href="@{/user/base-info-approval}" th:target="mainFrame">查看</button>
+                    <button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+</div>
+<div th:fragment="approval-detail-cover-layer">
+<div class="modal fade" id="approval-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
+</div>
+<!-- END OVERLAY -->
 </html>

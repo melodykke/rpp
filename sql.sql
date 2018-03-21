@@ -263,3 +263,15 @@ insert into `region` (`region_id`, `region_name`, `region_code`, `parent_id`) va
 insert into `region` (`region_id`, `region_name`, `region_code`, `parent_id`) values(NULL,'龙里县','522730000000','10');
 insert into `region` (`region_id`, `region_name`, `region_code`, `parent_id`) values(NULL,'惠水县','522731000000','10');
 insert into `region` (`region_id`, `region_name`, `region_code`, `parent_id`) values(NULL,'三都水族自治县','522732000000','10');
+
+CREATE TABLE `application_info` (
+   `application_id` varchar(32) NOT NULL,
+   `region_code` varchar(32) COMMENT '行政区',
+   `application_type` varchar(64) NOT NULL COMMENT '申请类型',
+   `status` varchar(32) DEFAULT NULL COMMENT '审核状态',
+   `marks` varchar(32) DEFAULT NULL COMMENT '备注',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+   PRIMARY KEY (`application_id`),
+   KEY `idx_region_code` (`region_code`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8
