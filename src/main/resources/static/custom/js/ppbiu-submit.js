@@ -1,5 +1,6 @@
 /*电站基础信息录入访问后台*/
 $(document).ready(function() {
+    var targelem = window.parent.$('#loader_container');
     //根据iframe内容自适应高度
     var mf = window.parent.$('#mainFrame');//$("#mainFrame",window.parent.document);//
     mf.onload=parent.reinitIframe();
@@ -60,6 +61,8 @@ $(document).ready(function() {
         console.log('.............goaheadbutton function called..............')
         mf.attr('src', '/power-plant/power-plant-base-info-upload')
         modal.modal('hide')
+
+        targelem.css('display','block');
     })
     window.parent.$('#return-button').click(function(){
         console.log('.............returnbutton function called..............')
